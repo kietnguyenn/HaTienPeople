@@ -27,17 +27,18 @@ class EventPostingViewController: BaseViewController {
     @IBOutlet weak var coordinatesLabel: UILabel!
     
     @IBAction func showMap(_: UIButton) {
-//        let vc = MyStoryboard.main.instantiateViewController(withIdentifier: "MapViewController") as! MapViewController
-//        vc.delegate = self
-//        let nav = BaseNavigationController(rootViewController: vc)
-//        nav.modalPresentationStyle = .fullScreen
-//        self.present(nav, animated: true, completion: nil)
+        let vc = MyStoryboard.main.instantiateViewController(withIdentifier: "MapViewController") as! MapViewController
+        vc.delegate = self
+        let nav = BaseNavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .fullScreen
+        self.present(nav, animated: true, completion: nil)
 //
 //        let vc = PlaceSearchingViewController()
 //        let nav = BaseNavigationController(rootViewController: vc)
 //        nav.modalPresentationStyle = .fullScreen
 //        self.present(nav, animated: true, completion: nil)
-        self.presentAutocompleteController()
+            
+//            self.presentAutocompleteController()
     }
     
     @IBAction func post(_: UIButton) {
@@ -72,7 +73,12 @@ class EventPostingViewController: BaseViewController {
     
     var selectedEventType: EventType?
     
-    var selectedCoordinates = CLLocationCoordinate2D(latitude: MyLocation.lat, longitude: MyLocation.long)
+    var selectedCoordinates = CLLocationCoordinate2D(latitude: MyLocation.lat, longitude: MyLocation.long) {
+        didSet {
+            self.getAddress(of: selectedCoordinates)
+            coordinatesLabel.text = "Lat: \(selectedCoordinates.latitude), lng: \(selectedCoordinates.longitude)"
+        }
+    }
     
     var dropdown = DropDown()
         
@@ -172,16 +178,16 @@ class EventPostingViewController: BaseViewController {
         }
     }
     
-    func getAssetThumbnail(asset: PHAsset) -> UIImage {
-        let manager = PHImageManager.default()
-        let option = PHImageRequestOptions()
-        var thumbnail = UIImage()
-        option.isSynchronous = true
-        manager.requestImage(for: asset, targetSize: CGSize(width: 100.0, height: 100.0), contentMode: .aspectFit, options: option, resultHandler: {(result, info)->Void in
-                thumbnail = result!
-        })
-        return thumbnail
-    }
+//    func getAssetThumbnail(asset: PHAsset) -> UIImage {
+//        let manager = PHImageManager.default()
+//        let option = PHImageRequestOptions()
+//        var thumbnail = UIImage()
+//        option.isSynchronous = true
+//        manager.requestImage(for: asset, targetSize: CGSize(width: 100.0, height: 100.0), contentMode: .aspectFit, options: option, resultHandler: {(result, info)->Void in
+//                thumbnail = result!
+//        })
+//        return thumbnail
+//    }
 
     func clearData() {
         selectedImages.removeAll()
@@ -226,6 +232,21 @@ class EventPostingViewController: BaseViewController {
             }
         }
     }
+    
+    // MARK: Get address of location
+    fileprivate func getAddress(of location: CLLocationCoordinate2D) {
+        requestNonTokenResponseString(urlString: "https://maps.googleapis.com/maps/api/geocode/json?latlng=\(location.latitude),\(location.longitude)&key=\(GMSApiKey.garageKey)",
+                                      method: .post,
+                                      params: nil,
+                                      encoding: URLEncoding.default) { (response) in
+            guard let jsonString = response.value,
+                  let jsonData = jsonString.data(using: .utf8),
+                  let resultCoordinates = try? JSONDecoder().decode(CoordinateResult.self, from: jsonData)
+                  else { return }
+            let formattedAddress = resultCoordinates.results[0].formattedAddress
+            self.addressTextField.text = formattedAddress
+        }
+    }
 }
 
 extension EventPostingViewController  {
@@ -251,8 +272,8 @@ extension EventPostingViewController  {
 }
 
 extension EventPostingViewController: MapViewControllerDelegate {
-    func didPickLocation(lat: Double, lng: Double) {
-        self.coordinatesLabel.text = "\(lat), \(lng)"
+    func didPickLocation(coordinate: CLLocationCoordinate2D) {
+        self.selectedCoordinates = coordinate
     }
 }
 
@@ -281,11 +302,9 @@ extension EventPostingViewController: GMSAutocompleteViewControllerDelegate {
   }
 
   func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
-    // TODO: handle the error.
     print("Error: ", error.localizedDescription)
   }
 
-  // User canceled the operation.
   func wasCancelled(_ viewController: GMSAutocompleteViewController) {
     dismiss(animated: true, completion: nil)
   }

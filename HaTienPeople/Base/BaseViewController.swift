@@ -13,6 +13,8 @@ import Alamofire
 import AlamofireSwiftyJSON
 import SwiftyJSON
 import CoreLocation
+import AppCenter
+import AppCenterCrashes
 
 struct MyLocation {
     static var long = Double() {
@@ -221,10 +223,10 @@ extension String: ParameterEncoding {
 extension BaseViewController {
     // Response Non-token
     func requestNonTokenResponseString(urlString: String, method: HTTPMethod, params: Parameters? = nil, encoding: ParameterEncoding, headers: HTTPHeaders? = nil,  completion: @escaping (_ response: DataResponse<String>) -> Void ) {
-        let url = URL(string: urlString)!
-        self.showHUD()
+        guard let url = URL(string: urlString) else { return }
+//        self.showHUD()
         Alamofire.request(url, method: method, parameters: params, encoding: encoding).responseString { (responseString) in
-            self.hideHUD()
+//            self.hideHUD()
             guard let statusCode = responseString.response?.statusCode else { return }
             print(responseString)
             print(statusCode)

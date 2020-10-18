@@ -3,6 +3,14 @@ PODS:
   - AlamofireSwiftyJSON (1.0.2):
     - Alamofire (~> 4.0)
     - SwiftyJSON (~> 4.0)
+  - AppCenter (3.3.4):
+    - AppCenter/Analytics (= 3.3.4)
+    - AppCenter/Crashes (= 3.3.4)
+  - AppCenter/Analytics (3.3.4):
+    - AppCenter/Core
+  - AppCenter/Core (3.3.4)
+  - AppCenter/Crashes (3.3.4):
+    - AppCenter/Core
   - DropDown (2.3.13)
   - DynamicColor (4.2.0)
   - GoogleMaps (3.10.0):
@@ -25,6 +33,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire (~> 4.9.1)
   - AlamofireSwiftyJSON (~> 1.0)
+  - AppCenter
   - DropDown
   - DynamicColor (~> 4.0)
   - GoogleMaps
@@ -40,6 +49,7 @@ SPEC REPOS:
   trunk:
     - Alamofire
     - AlamofireSwiftyJSON
+    - AppCenter
     - DropDown
     - DynamicColor
     - GoogleMaps
@@ -55,6 +65,7 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
   AlamofireSwiftyJSON: 74ee3804bed06d07857daf1eeb1615c85dba3997
+  AppCenter: 0487be185c038ed2ecc5ed38219af1dcd280af23
   DropDown: 8a2116376c1981888557f72ec2ffc9a5e0e456ec
   DynamicColor: c475f66bda1cabf602f2c54ac1171c0c07148a5a
   GoogleMaps: 8c080862ff2748ece9929471b30feb56a6c5079d
@@ -67,6 +78,6 @@ SPEC CHECKSUMS:
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
 
-PODFILE CHECKSUM: 80ed7e8167cf5ecce16591fcc4e9af624a8bfee6
+PODFILE CHECKSUM: 639a4fa9c16b2209adf188831cabd8485c45f41b
 
 COCOAPODS: 1.9.3
