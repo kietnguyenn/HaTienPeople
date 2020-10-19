@@ -9,6 +9,7 @@ import UIKit
 import AppCenter
 import AppCenterAnalytics
 import AppCenterCrashes
+import IQKeyboardManagerSwift
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        self.setupKeyboardManager()
         self.setupAppCenter()
         return true
     }
@@ -42,6 +44,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
           MSAnalytics.self,
           MSCrashes.self
         ])
+    }
+    
+    func setupKeyboardManager() {
+        IQKeyboardManager.shared.enable = true
+        IQKeyboardManager.shared.shouldResignOnTouchOutside = true
     }
 }
 

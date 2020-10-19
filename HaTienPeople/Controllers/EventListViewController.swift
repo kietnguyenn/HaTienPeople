@@ -27,6 +27,8 @@ class EventListViewController: BaseViewController {
         }
     }
     
+    var completedList = [EventNew]()
+    
     let cellId = "EventCell"
     
     override func viewDidLoad() {
@@ -35,7 +37,6 @@ class EventListViewController: BaseViewController {
         setup(tableView: eventsTableView)
         self.segmentControl.addTarget(self, action: #selector(didChange(_:)), for: .valueChanged)
         self.segmentControl.selectedSegmentIndex = 0
-
     }
     
     @objc func didChange(_ segment: UISegmentedControl) {
@@ -73,8 +74,10 @@ class EventListViewController: BaseViewController {
                     for event in array {
                         if event.status == 0 {
                             self.notAcceptedList.append(event)
-                        } else {
+                        } else if event.status == 1 {
                             self.acceptedList.append(event)
+                        } else if event.status == 3 {
+                            self.completedList.append(event)
                         }
                     }
                     self.eventsTableView.reloadData()
@@ -101,11 +104,18 @@ class EventListViewController: BaseViewController {
 
 extension EventListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if self.segmentControl.selectedSegmentIndex == 0 {
+        let selectedIndex = self.segmentControl.selectedSegmentIndex
+        if selectedIndex == 0 {
             // chua tiep nhan
             return notAcceptedList.count
-        } else {
+        } else if selectedIndex == 1  {
+            // Da tiep nhan
             return acceptedList.count
+        } else if selectedIndex == 2 {
+            // Hoan thanh
+            return completedList.count
+        } else {
+            return 0
         }
     }
     

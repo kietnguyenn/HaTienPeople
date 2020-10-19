@@ -196,6 +196,13 @@ class EventPostingViewController: BaseViewController {
         addressTextField.text = ""
         eventTypeTextField.text = ""
         selectedEventType = nil
+        keyBoardResignFirstResponder([contentTextField, addressTextField])
+    }
+    
+    func keyBoardResignFirstResponder(_ textFields : [UITextField]) {
+        for textField in textFields {
+            textField.resignFirstResponder()
+        }
     }
     
     // MARK: - Upload image

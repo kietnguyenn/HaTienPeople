@@ -170,42 +170,12 @@ class BaseViewController: UIViewController {
         }
     }
     
-    // Response model
-    func requestApiResponseModel(urlString: String, method: HTTPMethod, params: Parameters? = nil, encoding: ParameterEncoding, completion: @escaping (_ response: DataResponse<JSON>) -> Void ) {
+    
+    
+    // MARK: - request Non-token, non-HUD
+    func requestApiNonTokenNonHUD() {
         
     }
-    
-    // Response T class
-    func requestModel<T: Codable>(with urlString: String, method: HTTPMethod, params: Parameters?, encoding: ParameterEncoding, completion: @escaping (_ response: T) -> Void) {
-        guard let token = UserDefaults.standard.value(forKey: "Token") as? String else { return }
-        let tokenHeader = ["Authorization" : "Bearer \(token)"]
-        let url = URL(string: urlString)!
-        self.showHUD()
-        Alamofire.request(url, method: method, parameters: params, encoding: encoding, headers: tokenHeader).responseString { (response) in
-            guard let jsonString: String = response.value else { return }
-            guard let data = jsonString.data(using: .utf8) else { return }
-            do {
-                let responseModel = try JSONDecoder().decode(T.self, from: data)
-                completion(responseModel)
-            } catch let DecodingError.dataCorrupted(context) {
-                print(context)
-            } catch let DecodingError.keyNotFound(key, context) {
-                print("Key '\(key)' not found:", context.debugDescription)
-                print("codingPath:", context.codingPath)
-            } catch let DecodingError.valueNotFound(value, context) {
-                print("Value '\(value)' not found:", context.debugDescription)
-                print("codingPath:", context.codingPath)
-            } catch let DecodingError.typeMismatch(type, context)  {
-                print("Type '\(type)' mismatch:", context.debugDescription)
-                print("codingPath:", context.codingPath)
-            } catch {
-                print("error: ", error)
-            }
-        }
-    }
-    
-    
-    // MARK: - request api response Data
     
 }
 

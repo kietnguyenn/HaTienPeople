@@ -28,6 +28,10 @@ class MapViewController: BaseViewController {
     
     weak var delegate: MapViewControllerDelegate!
     
+    @IBAction func doneButtonTapped(_:UIButton) {
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Tìm vị trí"
