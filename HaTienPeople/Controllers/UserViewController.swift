@@ -15,7 +15,11 @@ class UserViewController: BaseViewController {
     @IBOutlet weak var phoneTextField: UITextField!
     
     @IBAction func signOut(_:UIButton) {
-        
+        let signInVc = self.storyboard?.instantiateViewController(withIdentifier: "SignInViewController") as! SignInViewController
+        guard let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow }) else { return }
+        let transitionOption: UIWindow.TransitionOptions = .init(direction: .toTop, style: .easeInOut)
+        UserDefaults.standard.setValue(nil, forKey: "CurrentUser")
+        window.setRootViewController(signInVc, options: transitionOption)
     }
     
     override func viewDidLoad() {

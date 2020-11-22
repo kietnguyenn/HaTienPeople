@@ -55,7 +55,13 @@ class SignInViewController: BaseViewController {
 //        let eventPostingViewController = MyStoryboard.main.instantiateViewController(withIdentifier: "EventPostingViewController") as! EventPostingViewController
 //        let mainNav = BaseNavigationController(rootViewController: eventPostingViewController)
         
-        AppDelegate.shared.window?.rootViewController = BaseTabBarController()
-        AppDelegate.shared.window?.makeKeyAndVisible()
+//        AppDelegate.shared.window?.rootViewController = BaseTabBarController()
+//        AppDelegate.shared.window?.makeKeyAndVisible()
+        
+        let maintab = BaseTabBarController()
+        guard let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow }) else { return }
+        let transitionOption: UIWindow.TransitionOptions = .init(direction: .toBottom, style: .easeInOut)
+        window.setRootViewController(maintab, options: transitionOption)
+
     }
 }

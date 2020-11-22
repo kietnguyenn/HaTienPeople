@@ -84,11 +84,13 @@ class EventPostingViewController: BaseViewController {
         
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Báo cáo sự cố"
-        self.getEventTypes()
         self.checkCoreLocationPermission()
+        self.getEventTypes()
         self.scrollView.delegate = self
+        self.title = "Báo cáo sự cố"
     }
+    
+    
     
     func setup(scrollView: UIScrollView) {
         scrollView.showsHorizontalScrollIndicator = false
@@ -131,8 +133,7 @@ class EventPostingViewController: BaseViewController {
               let content = self.contentTextField.text,
               let address = self.addressTextField.text
               else { return }
-        self.postEvent(content: content, eventTypeId: eventType.id, lat: "", lng: "", address: address)
-        
+        self.postEvent(content: content, eventTypeId: eventType.id, lat: "\(selectedCoordinates.latitude)", lng: "\(selectedCoordinates.longitude)", address: address)
     }
     
     func postEvent(content: String, eventTypeId: String, lat: String, lng: String, address: String) {
@@ -156,7 +157,7 @@ class EventPostingViewController: BaseViewController {
             self.showAlert(title: "Thành công", message: "báo cáo sự cố thành công", style: .alert, hasTwoButton: false) { (action) in
                 self.postImage(eventLogId: eventLogId)
             }
-            self.resignFirstResponder()
+//            self.resignFirstResponder()
         }
         
     }
@@ -166,6 +167,7 @@ class EventPostingViewController: BaseViewController {
             self.uploadImage(images: self.selectedImages, eventLogId: eventLogId)
         } else {
             print("No Image selected!")
+            self.reloadViewFromNib()
         }
     }
     
@@ -178,17 +180,6 @@ class EventPostingViewController: BaseViewController {
         }
     }
     
-//    func getAssetThumbnail(asset: PHAsset) -> UIImage {
-//        let manager = PHImageManager.default()
-//        let option = PHImageRequestOptions()
-//        var thumbnail = UIImage()
-//        option.isSynchronous = true
-//        manager.requestImage(for: asset, targetSize: CGSize(width: 100.0, height: 100.0), contentMode: .aspectFit, options: option, resultHandler: {(result, info)->Void in
-//                thumbnail = result!
-//        })
-//        return thumbnail
-//    }
-
     func clearData() {
         selectedImages.removeAll()
         setup(scrollView: scrollView)
@@ -231,7 +222,7 @@ class EventPostingViewController: BaseViewController {
                 
                 upload.responseJSON { response in
                     print(response.response!.statusCode)
-                    self.clearData()
+                    self.reloadViewFromNib()
                 }
                 
             case .failure(let encodingError):
@@ -325,4 +316,14 @@ extension EventPostingViewController: GMSAutocompleteViewControllerDelegate {
     UIApplication.shared.isNetworkActivityIndicatorVisible = false
   }
 
+}
+
+
+extension UIViewController {
+    func reloadViewFromNib() {
+        let parent = view.superview
+        view.removeFromSuperview()
+        view = nil
+        parent?.addSubview(view) // This line causes the view to be reloaded
+    }
 }

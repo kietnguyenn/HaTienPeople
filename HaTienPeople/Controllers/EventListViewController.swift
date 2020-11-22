@@ -19,15 +19,23 @@ class EventListViewController: BaseViewController {
     var acceptedList = [EventNew]() {
         didSet {
 //            eventsTableView.reloadData()
+            print("Accepted list = \(acceptedList.count)")
+
         }
     }
     var notAcceptedList = [EventNew]() {
         didSet {
 //            eventsTableView.reloadData()
+            print("Not Accepted list = \(notAcceptedList.count)")
+
         }
     }
     
-    var completedList = [EventNew]()
+    var completedList = [EventNew]() {
+        didSet {
+            print("Completed list = \(completedList.count)")
+        }
+    }
     
     let cellId = "EventCell"
     
@@ -71,6 +79,7 @@ class EventListViewController: BaseViewController {
                     let array = try JSONDecoder().decode([EventNew].self, from: jsonData)
                     self.acceptedList.removeAll()
                     self.notAcceptedList.removeAll()
+                    self.completedList.removeAll()
                     for event in array {
                         if event.status == 0 {
                             self.notAcceptedList.append(event)
@@ -124,8 +133,10 @@ extension EventListViewController: UITableViewDelegate, UITableViewDataSource {
         var event: EventNew
         if self.segmentControl.selectedSegmentIndex == 0 {
             event = self.notAcceptedList[indexPath.row]
-        } else {
+        } else if self.segmentControl.selectedSegmentIndex == 1 {
             event = self.acceptedList[indexPath.row]
+        } else {
+            event = self.completedList[indexPath.row]
         }
         cell.eventTypeLabel.text = event.eventTypeName
         cell.dateTimeLabel.text = "Ngày \(MyDateFormatter.convertDateTimeStringOnServerToDevice(dateString: event.dateTime ).date) lúc \(MyDateFormatter.convertDateTimeStringOnServerToDevice(dateString: event.dateTime ).time)"
@@ -140,8 +151,10 @@ extension EventListViewController: UITableViewDelegate, UITableViewDataSource {
         var event: EventNew
         if self.segmentControl.selectedSegmentIndex == 0 {
             event = self.notAcceptedList[indexPath.row]
-        } else {
+        } else if self.segmentControl.selectedSegmentIndex == 1 {
             event = self.acceptedList[indexPath.row]
+        } else {
+            event = self.completedList[indexPath.row]
         }
         vc.event = event
         self.navigationController?.pushViewController(vc, animated: true)

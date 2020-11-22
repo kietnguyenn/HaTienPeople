@@ -19,7 +19,6 @@ pod 'GoogleMaps'
 pod 'GooglePlaces'
 pod 'Alamofire', '~> 4.9.1'
 pod 'ImagePicker'
-
 pod 'AppCenter'
 
   target 'HaTienPeopleTests' do

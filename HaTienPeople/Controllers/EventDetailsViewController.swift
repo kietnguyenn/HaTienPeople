@@ -10,18 +10,32 @@ import Foundation
 import UIKit
 import Alamofire
 import SwiftyJSON
+import CoreLocation
 
 class EventDetailsViewController: BaseViewController {
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var pageControl: UIPageControl!
-//    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var eventTypeLabel: UILabel!
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var dateTimeLabel: UILabel!
     @IBOutlet weak var employeeLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var contentLabel: UILabel!
+//    @IBOutlet weak var statusView: UIView!
+    
+    @IBAction func locationButtonTapped(_:UIButton) {
+        // present direction map view
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "DirectionMapViewController") as! DirectionMapViewController
+        let nav = BaseNavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .fullScreen
+        guard let event = self.event,
+              let lat = Double(event.latitude),
+              let lng = Double(event.longitude)
+        else { return }
+        vc.employeeLocation = CLLocationCoordinate2D(latitude: lat, longitude: lng)
+        self.present(nav, animated: true)
+    }
     
     var images = [UIImage]() {
         didSet {
@@ -46,17 +60,24 @@ class EventDetailsViewController: BaseViewController {
         guard let event = self.event else { return }
         getEventLogs(eventId: event.id)
         scrollView.delegate = self
+        self.showBackButton()
     }
     
     func setupDetailContent(eventLog: EventLog) {
         guard let event = self.event else { return }
         eventTypeLabel.text = event.eventTypeName
         if event.status == 0 {
-            statusLabel.text = "Chưa tiếp nhận"
+            statusLabel.text = "Chờ xử lí"
             employeeLabel.text = "Cán bộ: Không"
-        } else {
+            statusLabel.backgroundColor = .lightGray
+        } else if event.status == 1 {
             employeeLabel.text = "Không"
-            statusLabel.text = "Đã tiếp nhận"
+            statusLabel.text = "Đang xử lí"
+            statusLabel.backgroundColor = .orange
+        } else if event.status == 3 {
+            employeeLabel.text = "Không"
+            statusLabel.text = "Đã hoàn thành"
+            statusLabel.backgroundColor = .green
         }
         dateTimeLabel.text = "Ngày \(MyDateFormatter.convertDateTimeStringOnServerToDevice(dateString: event.dateTime ).date) lúc \(MyDateFormatter.convertDateTimeStringOnServerToDevice(dateString: event.dateTime ).time)"
         addressLabel.text = "Tại " + event.address

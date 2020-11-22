@@ -32,6 +32,9 @@ struct MyLocation {
 
 class BaseViewController: UIViewController {
     
+    // activity indicator
+    var activityIndicator = UIActivityIndicatorView()
+    
     var locationManager = CLLocationManager()
     var location: CLLocation!{
         didSet {
@@ -39,14 +42,23 @@ class BaseViewController: UIViewController {
             MyLocation.long = location.coordinate.longitude
         }
     }
+
+    func showActivityIndicatory(uiView: UIView) {
+        self.activityIndicator.frame = CGRect(x: 0.0, y: 0.0, width: 40.0, height: 40.0);
+        self.activityIndicator.center = uiView.center
+        self.activityIndicator.hidesWhenStopped = true
+        self.activityIndicator.style = .large
+        uiView.addSubview(self.activityIndicator)
+        self.activityIndicator.startAnimating()
+    }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    func hideActivityIndicator() {
+        self.activityIndicator.removeFromSuperview()
     }
     
     //MARK: Back Button
     func showBackButton() {
-        let backButton = UIBarButtonItem(image: #imageLiteral(resourceName: "back-button2").withRenderingMode(.alwaysTemplate) , style: .plain, target: self, action: #selector(popToBack))
+        let backButton = UIBarButtonItem(image: UIImage(named: "button-back")!.withRenderingMode(.alwaysTemplate) , style: .plain, target: self, action: #selector(popToBack))
         navigationItem.leftBarButtonItem = backButton
     }
     @objc func popToBack() {
@@ -72,16 +84,17 @@ class BaseViewController: UIViewController {
     // MARK:  Show/Hide HUD
     func showHUD() {
         DispatchQueue.main.async {
-            SVProgressHUD.show()
+//            SVProgressHUD.show()
+            self.showActivityIndicatory(uiView: self.view)
             self.view.isUserInteractionEnabled = false
         }
     }
     func hideHUD() {
         DispatchQueue.main.async {
-            SVProgressHUD.dismiss()
+//            SVProgressHUD.dismiss()
+            self.hideActivityIndicator()
             self.view.isUserInteractionEnabled = true
-        }
-    }
+        }    }
     
     // MARK: Show alert with error Message
     public func showAlert(errorMessage: String) {
@@ -169,14 +182,6 @@ class BaseViewController: UIViewController {
             }
         }
     }
-    
-    
-    
-    // MARK: - request Non-token, non-HUD
-    func requestApiNonTokenNonHUD() {
-        
-    }
-    
 }
 
 // MARK: - Request Body
