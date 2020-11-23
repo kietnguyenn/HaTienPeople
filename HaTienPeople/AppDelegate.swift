@@ -40,7 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func setupAppCenter() {
-        MSAppCenter.start("04ba4258-3934-4770-b7fa-83603b2d95b9", withServices:[
+        MSAppCenter.start("0aa159f5-7384-4200-9096-445bc67ccc06", withServices:[
           MSAnalytics.self,
           MSCrashes.self
         ])

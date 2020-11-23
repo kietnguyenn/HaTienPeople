@@ -59,6 +59,7 @@ class EventPostingViewController: BaseViewController {
     var selectedImages = [UIImage]() {
         didSet {
             print("Images: \(selectedImages.count)")
+            setup(scrollView: self.scrollView)
         }
     }
     
@@ -89,8 +90,6 @@ class EventPostingViewController: BaseViewController {
         self.scrollView.delegate = self
         self.title = "Báo cáo sự cố"
     }
-    
-    
     
     func setup(scrollView: UIScrollView) {
         scrollView.showsHorizontalScrollIndicator = false
@@ -167,7 +166,8 @@ class EventPostingViewController: BaseViewController {
             self.uploadImage(images: self.selectedImages, eventLogId: eventLogId)
         } else {
             print("No Image selected!")
-            self.reloadViewFromNib()
+//            self.reloadViewFromNib()
+            self.reloadData()
         }
     }
     
@@ -180,20 +180,18 @@ class EventPostingViewController: BaseViewController {
         }
     }
     
-    func clearData() {
-        selectedImages.removeAll()
-        setup(scrollView: scrollView)
-        contentTextField.text = ""
-        addressTextField.text = ""
-        eventTypeTextField.text = ""
-        selectedEventType = nil
-        keyBoardResignFirstResponder([contentTextField, addressTextField])
-    }
-    
     func keyBoardResignFirstResponder(_ textFields : [UITextField]) {
         for textField in textFields {
             textField.resignFirstResponder()
         }
+    }
+    
+    // reload data
+    func reloadData() {
+        self.reloadViewFromNib()
+        self.selectedImages.removeAll()
+        self.dropdown.reloadAllComponents()
+        self.reloadInputViews()
     }
     
     // MARK: - Upload image
@@ -222,7 +220,7 @@ class EventPostingViewController: BaseViewController {
                 
                 upload.responseJSON { response in
                     print(response.response!.statusCode)
-                    self.reloadViewFromNib()
+                    self.reloadData()
                 }
                 
             case .failure(let encodingError):
