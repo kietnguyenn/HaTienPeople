@@ -1,0 +1,986 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		13E3455B888289782B92C886 /* Pods_HaTienPeople.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F6458838A089BEAFE08F725 /* Pods_HaTienPeople.framework */; };
+		18267DE625359CA20058B6A2 /* locations.json in Resources */ = {isa = PBXBuildFile; fileRef = 18267DE525359CA20058B6A2 /* locations.json */; };
+		18267E002536E07E0058B6A2 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18267DFF2536E07E0058B6A2 /* Constant.swift */; };
+		18267E0525399CD40058B6A2 /* CoordinateResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18267E0425399CD40058B6A2 /* CoordinateResult.swift */; };
+		18334E6C2534A5ED00559CAA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18334E6B2534A5ED00559CAA /* AppDelegate.swift */; };
+		18334E6E2534A5ED00559CAA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18334E6D2534A5ED00559CAA /* SceneDelegate.swift */; };
+		18334E702534A5ED00559CAA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18334E6F2534A5ED00559CAA /* ViewController.swift */; };
+		18334E732534A5ED00559CAA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18334E712534A5ED00559CAA /* Main.storyboard */; };
+		18334E752534A5EF00559CAA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18334E742534A5EF00559CAA /* Assets.xcassets */; };
+		18334E782534A5EF00559CAA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18334E762534A5EF00559CAA /* LaunchScreen.storyboard */; };
+		18334E832534A5EF00559CAA /* HaTienPeopleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18334E822534A5EF00559CAA /* HaTienPeopleTests.swift */; };
+		18334E8E2534A5EF00559CAA /* HaTienPeopleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18334E8D2534A5EF00559CAA /* HaTienPeopleUITests.swift */; };
+		18334ED52534A87A00559CAA /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18334EB52534A87900559CAA /* SignUpViewController.swift */; };
+		18334ED62534A87A00559CAA /* ImagesSelectingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18334EB62534A87900559CAA /* ImagesSelectingViewController.swift */; };
+		18334ED72534A87A00559CAA /* EventPostingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18334EB72534A87900559CAA /* EventPostingViewController.swift */; };
+		18334ED82534A87A00559CAA /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18334EB82534A87900559CAA /* MapViewController.swift */; };
+		18334ED92534A87A00559CAA /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18334EB92534A87900559CAA /* TestViewController.swift */; };
+		18334EDA2534A87A00559CAA /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18334EBA2534A87900559CAA /* UserViewController.swift */; };
+		18334EDB2534A87A00559CAA /* EventDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18334EBB2534A87900559CAA /* EventDetailsViewController.swift */; };
+		18334EDC2534A87A00559CAA /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18334EBC2534A87900559CAA /* SignInViewController.swift */; };
+		18334EDD2534A87A00559CAA /* EventListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18334EBD2534A87900559CAA /* EventListViewController.swift */; };
+		18334EDE2534A87A00559CAA /* BaseTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18334EBF2534A87A00559CAA /* BaseTabBarController.swift */; };
+		18334EDF2534A87A00559CAA /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18334EC02534A87A00559CAA /* BaseViewController.swift */; };
+		18334EE02534A87A00559CAA /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18334EC12534A87A00559CAA /* BaseNavigationController.swift */; };
+		18334EE12534A87A00559CAA /* ImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18334EC42534A87A00559CAA /* ImageCell.xib */; };
+		18334EE22534A87A00559CAA /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18334EC52534A87A00559CAA /* ImageCell.swift */; };
+		18334EE32534A87A00559CAA /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18334EC72534A87A00559CAA /* EventCell.swift */; };
+		18334EE42534A87A00559CAA /* EventCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18334EC82534A87A00559CAA /* EventCell.xib */; };
+		18334EE52534A87A00559CAA /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18334ECA2534A87A00559CAA /* Extensions.swift */; };
+		18334EE62534A87A00559CAA /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18334ECB2534A87A00559CAA /* Api.swift */; };
+		18334EE72534A87A00559CAA /* MyStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18334ECC2534A87A00559CAA /* MyStoryboard.swift */; };
+		18334EE82534A87A00559CAA /* EventLogFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18334ECE2534A87A00559CAA /* EventLogFile.swift */; };
+		18334EE92534A87A00559CAA /* EventDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18334ECF2534A87A00559CAA /* EventDetails.swift */; };
+		18334EEA2534A87A00559CAA /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18334ED02534A87A00559CAA /* Event.swift */; };
+		18334EEB2534A87A00559CAA /* EventType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18334ED12534A87A00559CAA /* EventType.swift */; };
+		18334EEC2534A87A00559CAA /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18334ED22534A87A00559CAA /* User.swift */; };
+		18334EED2534A87A00559CAA /* EventLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18334ED32534A87A00559CAA /* EventLog.swift */; };
+		18334EEE2534A87A00559CAA /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18334ED42534A87A00559CAA /* Account.swift */; };
+		18334EF62534DE6B00559CAA /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18334EF52534DE6B00559CAA /* ImageViewController.swift */; };
+		18334F442535680C00559CAA /* PlaceSearchingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18334F432535680C00559CAA /* PlaceSearchingViewController.swift */; };
+		18709B0B25549CA80029166E /* DirectionMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18709B0A25549CA80029166E /* DirectionMapViewController.swift */; };
+		5348887D4D1B6BBD463E5BEB /* Pods_HaTienPeople_HaTienPeopleUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C731659D459FFB7BD381B18A /* Pods_HaTienPeople_HaTienPeopleUITests.framework */; };
+		C0F87717ECC70094E0E8A856 /* Pods_HaTienPeopleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FBEA1534EF7874E427451D0 /* Pods_HaTienPeopleTests.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		18334E7F2534A5EF00559CAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 18334E602534A5ED00559CAA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 18334E672534A5ED00559CAA;
+			remoteInfo = HaTienPeople;
+		};
+		18334E8A2534A5EF00559CAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 18334E602534A5ED00559CAA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 18334E672534A5ED00559CAA;
+			remoteInfo = HaTienPeople;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		015C8C90F05CD29FF83E7DBB /* Pods-HaTienPeople.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HaTienPeople.debug.xcconfig"; path = "Target Support Files/Pods-HaTienPeople/Pods-HaTienPeople.debug.xcconfig"; sourceTree = "<group>"; };
+		15F690D301DB6F8FC4B2E479 /* Pods-HaTienPeopleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HaTienPeopleTests.debug.xcconfig"; path = "Target Support Files/Pods-HaTienPeopleTests/Pods-HaTienPeopleTests.debug.xcconfig"; sourceTree = "<group>"; };
+		18267DE525359CA20058B6A2 /* locations.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = locations.json; sourceTree = "<group>"; };
+		18267DFF2536E07E0058B6A2 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		18267E0425399CD40058B6A2 /* CoordinateResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateResult.swift; sourceTree = "<group>"; };
+		18334E682534A5ED00559CAA /* HaTienPeople.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HaTienPeople.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		18334E6B2534A5ED00559CAA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		18334E6D2534A5ED00559CAA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		18334E6F2534A5ED00559CAA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		18334E722534A5ED00559CAA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		18334E742534A5EF00559CAA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		18334E772534A5EF00559CAA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		18334E792534A5EF00559CAA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		18334E7E2534A5EF00559CAA /* HaTienPeopleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HaTienPeopleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		18334E822534A5EF00559CAA /* HaTienPeopleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HaTienPeopleTests.swift; sourceTree = "<group>"; };
+		18334E842534A5EF00559CAA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		18334E892534A5EF00559CAA /* HaTienPeopleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HaTienPeopleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		18334E8D2534A5EF00559CAA /* HaTienPeopleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HaTienPeopleUITests.swift; sourceTree = "<group>"; };
+		18334E8F2534A5EF00559CAA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		18334EB52534A87900559CAA /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		18334EB62534A87900559CAA /* ImagesSelectingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesSelectingViewController.swift; sourceTree = "<group>"; };
+		18334EB72534A87900559CAA /* EventPostingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventPostingViewController.swift; sourceTree = "<group>"; };
+		18334EB82534A87900559CAA /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		18334EB92534A87900559CAA /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
+		18334EBA2534A87900559CAA /* UserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
+		18334EBB2534A87900559CAA /* EventDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailsViewController.swift; sourceTree = "<group>"; };
+		18334EBC2534A87900559CAA /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		18334EBD2534A87900559CAA /* EventListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventListViewController.swift; sourceTree = "<group>"; };
+		18334EBF2534A87A00559CAA /* BaseTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTabBarController.swift; sourceTree = "<group>"; };
+		18334EC02534A87A00559CAA /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		18334EC12534A87A00559CAA /* BaseNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
+		18334EC42534A87A00559CAA /* ImageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageCell.xib; sourceTree = "<group>"; };
+		18334EC52534A87A00559CAA /* ImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
+		18334EC72534A87A00559CAA /* EventCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
+		18334EC82534A87A00559CAA /* EventCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventCell.xib; sourceTree = "<group>"; };
+		18334ECA2534A87A00559CAA /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		18334ECB2534A87A00559CAA /* Api.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
+		18334ECC2534A87A00559CAA /* MyStoryboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyStoryboard.swift; sourceTree = "<group>"; };
+		18334ECE2534A87A00559CAA /* EventLogFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventLogFile.swift; sourceTree = "<group>"; };
+		18334ECF2534A87A00559CAA /* EventDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetails.swift; sourceTree = "<group>"; };
+		18334ED02534A87A00559CAA /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		18334ED12534A87A00559CAA /* EventType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventType.swift; sourceTree = "<group>"; };
+		18334ED22534A87A00559CAA /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		18334ED32534A87A00559CAA /* EventLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventLog.swift; sourceTree = "<group>"; };
+		18334ED42534A87A00559CAA /* Account.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
+		18334EF52534DE6B00559CAA /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
+		18334F432535680C00559CAA /* PlaceSearchingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceSearchingViewController.swift; sourceTree = "<group>"; };
+		18709B0A25549CA80029166E /* DirectionMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionMapViewController.swift; sourceTree = "<group>"; };
+		2F6458838A089BEAFE08F725 /* Pods_HaTienPeople.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HaTienPeople.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		39A8CB2EDEA49B6EEE065AD2 /* Pods-HaTienPeople-HaTienPeopleUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HaTienPeople-HaTienPeopleUITests.release.xcconfig"; path = "Target Support Files/Pods-HaTienPeople-HaTienPeopleUITests/Pods-HaTienPeople-HaTienPeopleUITests.release.xcconfig"; sourceTree = "<group>"; };
+		6BB9C50857E2843FE5E39EEA /* Pods-HaTienPeople-HaTienPeopleUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HaTienPeople-HaTienPeopleUITests.debug.xcconfig"; path = "Target Support Files/Pods-HaTienPeople-HaTienPeopleUITests/Pods-HaTienPeople-HaTienPeopleUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		7FBEA1534EF7874E427451D0 /* Pods_HaTienPeopleTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HaTienPeopleTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AF43D2884CF6D2EF252C9C7A /* Pods-HaTienPeopleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HaTienPeopleTests.release.xcconfig"; path = "Target Support Files/Pods-HaTienPeopleTests/Pods-HaTienPeopleTests.release.xcconfig"; sourceTree = "<group>"; };
+		C731659D459FFB7BD381B18A /* Pods_HaTienPeople_HaTienPeopleUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HaTienPeople_HaTienPeopleUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DCED94EC434E0F68CA38F9D7 /* Pods-HaTienPeople.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HaTienPeople.release.xcconfig"; path = "Target Support Files/Pods-HaTienPeople/Pods-HaTienPeople.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		18334E652534A5ED00559CAA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				13E3455B888289782B92C886 /* Pods_HaTienPeople.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		18334E7B2534A5EF00559CAA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C0F87717ECC70094E0E8A856 /* Pods_HaTienPeopleTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		18334E862534A5EF00559CAA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5348887D4D1B6BBD463E5BEB /* Pods_HaTienPeople_HaTienPeopleUITests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		18267DE425359C860058B6A2 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				18267DE525359CA20058B6A2 /* locations.json */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		18334E5F2534A5ED00559CAA = {
+			isa = PBXGroup;
+			children = (
+				18334E6A2534A5ED00559CAA /* HaTienPeople */,
+				18334E812534A5EF00559CAA /* HaTienPeopleTests */,
+				18334E8C2534A5EF00559CAA /* HaTienPeopleUITests */,
+				18334E692534A5ED00559CAA /* Products */,
+				3B7BEB3A078012943F95D10C /* Pods */,
+				5E03AEA8A8AB4171E0B9A713 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		18334E692534A5ED00559CAA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				18334E682534A5ED00559CAA /* HaTienPeople.app */,
+				18334E7E2534A5EF00559CAA /* HaTienPeopleTests.xctest */,
+				18334E892534A5EF00559CAA /* HaTienPeopleUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		18334E6A2534A5ED00559CAA /* HaTienPeople */ = {
+			isa = PBXGroup;
+			children = (
+				18267DE425359C860058B6A2 /* Sources */,
+				18334EBE2534A87A00559CAA /* Base */,
+				18334EC22534A87A00559CAA /* Cells */,
+				18334EB42534A87900559CAA /* Controllers */,
+				18334EC92534A87A00559CAA /* Helper */,
+				18334ECD2534A87A00559CAA /* Models */,
+				18334E6B2534A5ED00559CAA /* AppDelegate.swift */,
+				18334E6D2534A5ED00559CAA /* SceneDelegate.swift */,
+				18334E6F2534A5ED00559CAA /* ViewController.swift */,
+				18334E712534A5ED00559CAA /* Main.storyboard */,
+				18334E742534A5EF00559CAA /* Assets.xcassets */,
+				18334E762534A5EF00559CAA /* LaunchScreen.storyboard */,
+				18334E792534A5EF00559CAA /* Info.plist */,
+			);
+			path = HaTienPeople;
+			sourceTree = "<group>";
+		};
+		18334E812534A5EF00559CAA /* HaTienPeopleTests */ = {
+			isa = PBXGroup;
+			children = (
+				18334E822534A5EF00559CAA /* HaTienPeopleTests.swift */,
+				18334E842534A5EF00559CAA /* Info.plist */,
+			);
+			path = HaTienPeopleTests;
+			sourceTree = "<group>";
+		};
+		18334E8C2534A5EF00559CAA /* HaTienPeopleUITests */ = {
+			isa = PBXGroup;
+			children = (
+				18334E8D2534A5EF00559CAA /* HaTienPeopleUITests.swift */,
+				18334E8F2534A5EF00559CAA /* Info.plist */,
+			);
+			path = HaTienPeopleUITests;
+			sourceTree = "<group>";
+		};
+		18334EB42534A87900559CAA /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				18334EB52534A87900559CAA /* SignUpViewController.swift */,
+				18334EB62534A87900559CAA /* ImagesSelectingViewController.swift */,
+				18334EB72534A87900559CAA /* EventPostingViewController.swift */,
+				18334EB82534A87900559CAA /* MapViewController.swift */,
+				18334EB92534A87900559CAA /* TestViewController.swift */,
+				18334EBA2534A87900559CAA /* UserViewController.swift */,
+				18334EBB2534A87900559CAA /* EventDetailsViewController.swift */,
+				18334EBC2534A87900559CAA /* SignInViewController.swift */,
+				18334EBD2534A87900559CAA /* EventListViewController.swift */,
+				18334EF52534DE6B00559CAA /* ImageViewController.swift */,
+				18334F432535680C00559CAA /* PlaceSearchingViewController.swift */,
+				18709B0A25549CA80029166E /* DirectionMapViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		18334EBE2534A87A00559CAA /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				18334EBF2534A87A00559CAA /* BaseTabBarController.swift */,
+				18334EC02534A87A00559CAA /* BaseViewController.swift */,
+				18334EC12534A87A00559CAA /* BaseNavigationController.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		18334EC22534A87A00559CAA /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				18334EC32534A87A00559CAA /* ImageCell */,
+				18334EC62534A87A00559CAA /* EventCell */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		18334EC32534A87A00559CAA /* ImageCell */ = {
+			isa = PBXGroup;
+			children = (
+				18334EC42534A87A00559CAA /* ImageCell.xib */,
+				18334EC52534A87A00559CAA /* ImageCell.swift */,
+			);
+			path = ImageCell;
+			sourceTree = "<group>";
+		};
+		18334EC62534A87A00559CAA /* EventCell */ = {
+			isa = PBXGroup;
+			children = (
+				18334EC72534A87A00559CAA /* EventCell.swift */,
+				18334EC82534A87A00559CAA /* EventCell.xib */,
+			);
+			path = EventCell;
+			sourceTree = "<group>";
+		};
+		18334EC92534A87A00559CAA /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				18334ECA2534A87A00559CAA /* Extensions.swift */,
+				18334ECB2534A87A00559CAA /* Api.swift */,
+				18334ECC2534A87A00559CAA /* MyStoryboard.swift */,
+				18267DFF2536E07E0058B6A2 /* Constant.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		18334ECD2534A87A00559CAA /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				18334ECE2534A87A00559CAA /* EventLogFile.swift */,
+				18334ECF2534A87A00559CAA /* EventDetails.swift */,
+				18334ED02534A87A00559CAA /* Event.swift */,
+				18334ED12534A87A00559CAA /* EventType.swift */,
+				18334ED22534A87A00559CAA /* User.swift */,
+				18334ED32534A87A00559CAA /* EventLog.swift */,
+				18334ED42534A87A00559CAA /* Account.swift */,
+				18267E0425399CD40058B6A2 /* CoordinateResult.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		3B7BEB3A078012943F95D10C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				015C8C90F05CD29FF83E7DBB /* Pods-HaTienPeople.debug.xcconfig */,
+				DCED94EC434E0F68CA38F9D7 /* Pods-HaTienPeople.release.xcconfig */,
+				6BB9C50857E2843FE5E39EEA /* Pods-HaTienPeople-HaTienPeopleUITests.debug.xcconfig */,
+				39A8CB2EDEA49B6EEE065AD2 /* Pods-HaTienPeople-HaTienPeopleUITests.release.xcconfig */,
+				15F690D301DB6F8FC4B2E479 /* Pods-HaTienPeopleTests.debug.xcconfig */,
+				AF43D2884CF6D2EF252C9C7A /* Pods-HaTienPeopleTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		5E03AEA8A8AB4171E0B9A713 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2F6458838A089BEAFE08F725 /* Pods_HaTienPeople.framework */,
+				C731659D459FFB7BD381B18A /* Pods_HaTienPeople_HaTienPeopleUITests.framework */,
+				7FBEA1534EF7874E427451D0 /* Pods_HaTienPeopleTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		18334E672534A5ED00559CAA /* HaTienPeople */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 18334E922534A5EF00559CAA /* Build configuration list for PBXNativeTarget "HaTienPeople" */;
+			buildPhases = (
+				E1A22CA194AD5E43300F5ADA /* [CP] Check Pods Manifest.lock */,
+				18334E642534A5ED00559CAA /* Sources */,
+				18334E652534A5ED00559CAA /* Frameworks */,
+				18334E662534A5ED00559CAA /* Resources */,
+				1CB285FA1C9D92A927EEE5DB /* [CP] Embed Pods Frameworks */,
+				94425062E8CD43F877112744 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HaTienPeople;
+			productName = HaTienPeople;
+			productReference = 18334E682534A5ED00559CAA /* HaTienPeople.app */;
+			productType = "com.apple.product-type.application";
+		};
+		18334E7D2534A5EF00559CAA /* HaTienPeopleTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 18334E952534A5EF00559CAA /* Build configuration list for PBXNativeTarget "HaTienPeopleTests" */;
+			buildPhases = (
+				971960CE6D5993BBE3746919 /* [CP] Check Pods Manifest.lock */,
+				18334E7A2534A5EF00559CAA /* Sources */,
+				18334E7B2534A5EF00559CAA /* Frameworks */,
+				18334E7C2534A5EF00559CAA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				18334E802534A5EF00559CAA /* PBXTargetDependency */,
+			);
+			name = HaTienPeopleTests;
+			productName = HaTienPeopleTests;
+			productReference = 18334E7E2534A5EF00559CAA /* HaTienPeopleTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		18334E882534A5EF00559CAA /* HaTienPeopleUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 18334E982534A5EF00559CAA /* Build configuration list for PBXNativeTarget "HaTienPeopleUITests" */;
+			buildPhases = (
+				9CD8E6ED9239EAD2905B634D /* [CP] Check Pods Manifest.lock */,
+				18334E852534A5EF00559CAA /* Sources */,
+				18334E862534A5EF00559CAA /* Frameworks */,
+				18334E872534A5EF00559CAA /* Resources */,
+				A738D9E96A3F377B5AE7C751 /* [CP] Embed Pods Frameworks */,
+				76317DDF54D7A582E0132321 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				18334E8B2534A5EF00559CAA /* PBXTargetDependency */,
+			);
+			name = HaTienPeopleUITests;
+			productName = HaTienPeopleUITests;
+			productReference = 18334E892534A5EF00559CAA /* HaTienPeopleUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		18334E602534A5ED00559CAA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1200;
+				LastUpgradeCheck = 1200;
+				TargetAttributes = {
+					18334E672534A5ED00559CAA = {
+						CreatedOnToolsVersion = 12.0.1;
+					};
+					18334E7D2534A5EF00559CAA = {
+						CreatedOnToolsVersion = 12.0.1;
+						TestTargetID = 18334E672534A5ED00559CAA;
+					};
+					18334E882534A5EF00559CAA = {
+						CreatedOnToolsVersion = 12.0.1;
+						TestTargetID = 18334E672534A5ED00559CAA;
+					};
+				};
+			};
+			buildConfigurationList = 18334E632534A5ED00559CAA /* Build configuration list for PBXProject "HaTienPeople" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 18334E5F2534A5ED00559CAA;
+			productRefGroup = 18334E692534A5ED00559CAA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				18334E672534A5ED00559CAA /* HaTienPeople */,
+				18334E7D2534A5EF00559CAA /* HaTienPeopleTests */,
+				18334E882534A5EF00559CAA /* HaTienPeopleUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		18334E662534A5ED00559CAA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18334E782534A5EF00559CAA /* LaunchScreen.storyboard in Resources */,
+				18334EE12534A87A00559CAA /* ImageCell.xib in Resources */,
+				18334E752534A5EF00559CAA /* Assets.xcassets in Resources */,
+				18334EE42534A87A00559CAA /* EventCell.xib in Resources */,
+				18267DE625359CA20058B6A2 /* locations.json in Resources */,
+				18334E732534A5ED00559CAA /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		18334E7C2534A5EF00559CAA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		18334E872534A5EF00559CAA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1CB285FA1C9D92A927EEE5DB /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HaTienPeople/Pods-HaTienPeople-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HaTienPeople/Pods-HaTienPeople-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HaTienPeople/Pods-HaTienPeople-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		76317DDF54D7A582E0132321 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HaTienPeople-HaTienPeopleUITests/Pods-HaTienPeople-HaTienPeopleUITests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HaTienPeople-HaTienPeopleUITests/Pods-HaTienPeople-HaTienPeopleUITests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HaTienPeople-HaTienPeopleUITests/Pods-HaTienPeople-HaTienPeopleUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		94425062E8CD43F877112744 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HaTienPeople/Pods-HaTienPeople-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HaTienPeople/Pods-HaTienPeople-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HaTienPeople/Pods-HaTienPeople-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		971960CE6D5993BBE3746919 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-HaTienPeopleTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9CD8E6ED9239EAD2905B634D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-HaTienPeople-HaTienPeopleUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A738D9E96A3F377B5AE7C751 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HaTienPeople-HaTienPeopleUITests/Pods-HaTienPeople-HaTienPeopleUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HaTienPeople-HaTienPeopleUITests/Pods-HaTienPeople-HaTienPeopleUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HaTienPeople-HaTienPeopleUITests/Pods-HaTienPeople-HaTienPeopleUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E1A22CA194AD5E43300F5ADA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-HaTienPeople-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		18334E642534A5ED00559CAA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18334EDC2534A87A00559CAA /* SignInViewController.swift in Sources */,
+				18334EED2534A87A00559CAA /* EventLog.swift in Sources */,
+				18334EE52534A87A00559CAA /* Extensions.swift in Sources */,
+				18334EDD2534A87A00559CAA /* EventListViewController.swift in Sources */,
+				18334EEC2534A87A00559CAA /* User.swift in Sources */,
+				18334EE62534A87A00559CAA /* Api.swift in Sources */,
+				18334ED72534A87A00559CAA /* EventPostingViewController.swift in Sources */,
+				18334EDA2534A87A00559CAA /* UserViewController.swift in Sources */,
+				18334E702534A5ED00559CAA /* ViewController.swift in Sources */,
+				18334EE92534A87A00559CAA /* EventDetails.swift in Sources */,
+				18334EF62534DE6B00559CAA /* ImageViewController.swift in Sources */,
+				18334EEA2534A87A00559CAA /* Event.swift in Sources */,
+				18267E0525399CD40058B6A2 /* CoordinateResult.swift in Sources */,
+				18334EE32534A87A00559CAA /* EventCell.swift in Sources */,
+				18334F442535680C00559CAA /* PlaceSearchingViewController.swift in Sources */,
+				18334EDF2534A87A00559CAA /* BaseViewController.swift in Sources */,
+				18334ED92534A87A00559CAA /* TestViewController.swift in Sources */,
+				18334ED62534A87A00559CAA /* ImagesSelectingViewController.swift in Sources */,
+				18709B0B25549CA80029166E /* DirectionMapViewController.swift in Sources */,
+				18267E002536E07E0058B6A2 /* Constant.swift in Sources */,
+				18334EE02534A87A00559CAA /* BaseNavigationController.swift in Sources */,
+				18334E6C2534A5ED00559CAA /* AppDelegate.swift in Sources */,
+				18334EDB2534A87A00559CAA /* EventDetailsViewController.swift in Sources */,
+				18334EE82534A87A00559CAA /* EventLogFile.swift in Sources */,
+				18334ED52534A87A00559CAA /* SignUpViewController.swift in Sources */,
+				18334EDE2534A87A00559CAA /* BaseTabBarController.swift in Sources */,
+				18334EE72534A87A00559CAA /* MyStoryboard.swift in Sources */,
+				18334EE22534A87A00559CAA /* ImageCell.swift in Sources */,
+				18334EEE2534A87A00559CAA /* Account.swift in Sources */,
+				18334E6E2534A5ED00559CAA /* SceneDelegate.swift in Sources */,
+				18334EEB2534A87A00559CAA /* EventType.swift in Sources */,
+				18334ED82534A87A00559CAA /* MapViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		18334E7A2534A5EF00559CAA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18334E832534A5EF00559CAA /* HaTienPeopleTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		18334E852534A5EF00559CAA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18334E8E2534A5EF00559CAA /* HaTienPeopleUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		18334E802534A5EF00559CAA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 18334E672534A5ED00559CAA /* HaTienPeople */;
+			targetProxy = 18334E7F2534A5EF00559CAA /* PBXContainerItemProxy */;
+		};
+		18334E8B2534A5EF00559CAA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 18334E672534A5ED00559CAA /* HaTienPeople */;
+			targetProxy = 18334E8A2534A5EF00559CAA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		18334E712534A5ED00559CAA /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				18334E722534A5ED00559CAA /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		18334E762534A5EF00559CAA /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				18334E772534A5EF00559CAA /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		18334E902534A5EF00559CAA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		18334E912534A5EF00559CAA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		18334E932534A5EF00559CAA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 015C8C90F05CD29FF83E7DBB /* Pods-HaTienPeople.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 100;
+				DEVELOPMENT_TEAM = PSUT9HQT37;
+				INFOPLIST_FILE = HaTienPeople/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = vn.hatien.HaTienPeople;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		18334E942534A5EF00559CAA /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DCED94EC434E0F68CA38F9D7 /* Pods-HaTienPeople.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 100;
+				DEVELOPMENT_TEAM = PSUT9HQT37;
+				INFOPLIST_FILE = HaTienPeople/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = vn.hatien.HaTienPeople;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		18334E962534A5EF00559CAA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 15F690D301DB6F8FC4B2E479 /* Pods-HaTienPeopleTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = HaTienPeopleTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = bakco.HaTienPeopleTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HaTienPeople.app/HaTienPeople";
+			};
+			name = Debug;
+		};
+		18334E972534A5EF00559CAA /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AF43D2884CF6D2EF252C9C7A /* Pods-HaTienPeopleTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = HaTienPeopleTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = bakco.HaTienPeopleTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HaTienPeople.app/HaTienPeople";
+			};
+			name = Release;
+		};
+		18334E992534A5EF00559CAA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6BB9C50857E2843FE5E39EEA /* Pods-HaTienPeople-HaTienPeopleUITests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = HaTienPeopleUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = bakco.HaTienPeopleUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = HaTienPeople;
+			};
+			name = Debug;
+		};
+		18334E9A2534A5EF00559CAA /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 39A8CB2EDEA49B6EEE065AD2 /* Pods-HaTienPeople-HaTienPeopleUITests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = HaTienPeopleUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = bakco.HaTienPeopleUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = HaTienPeople;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		18334E632534A5ED00559CAA /* Build configuration list for PBXProject "HaTienPeople" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				18334E902534A5EF00559CAA /* Debug */,
+				18334E912534A5EF00559CAA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		18334E922534A5EF00559CAA /* Build configuration list for PBXNativeTarget "HaTienPeople" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				18334E932534A5EF00559CAA /* Debug */,
+				18334E942534A5EF00559CAA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		18334E952534A5EF00559CAA /* Build configuration list for PBXNativeTarget "HaTienPeopleTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				18334E962534A5EF00559CAA /* Debug */,
+				18334E972534A5EF00559CAA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		18334E982534A5EF00559CAA /* Build configuration list for PBXNativeTarget "HaTienPeopleUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				18334E992534A5EF00559CAA /* Debug */,
+				18334E9A2534A5EF00559CAA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 18334E602534A5ED00559CAA /* Project object */;
+}
