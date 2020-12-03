@@ -15,7 +15,11 @@ class SignInViewController: BaseViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     
     @IBAction func signIn( sender : UIButton) {
-        self.login()
+        if validate(username: self.usernameTextField.text!, password: self.passwordTextField.text!) {
+            self.login()
+        } else {
+            showAlert(errorMessage: "Tên đăng nhập hoặc mật khẩu không hợp lệ!")
+        }
     }
     
     @IBAction func signUp( sender: UIButton) {
@@ -31,13 +35,16 @@ class SignInViewController: BaseViewController {
     @objc func login() {
         let param: Parameters = ["userName" : self.usernameTextField.text!,
                                  "password" : self.passwordTextField.text!]
-        requestNonTokenResponseString(urlString: Api.Auth.login, method: .post, params: param, encoding: JSONEncoding.default) { (responseString) in
-            guard let jsonString = responseString.value else { return }
-            guard let jsonData = jsonString.data(using: .utf8) else { return }
+        
+        newApiRerequest_responseString(url: Api.Auth.login, method: .post, param: param, encoding: JSONEncoding.default) { (response, jsondata, status) in
             // Save user data
-            guard let currentUser = try? JSONDecoder().decode(Account.self, from: jsonData) else { return }
-            self.setCurrentUser(user: currentUser)
-            self.changeRootView()
+            if 200..<300 ~= status {
+                guard let currentUser = try? JSONDecoder().decode(Account.self, from: jsondata) else { return }
+                self.setCurrentUser(user: currentUser)
+                self.changeRootView()
+            } else {
+                print(response.debugDescription)
+            }
         }
     }
     
@@ -52,16 +59,17 @@ class SignInViewController: BaseViewController {
     }
 
     fileprivate func changeRootView() {
-//        let eventPostingViewController = MyStoryboard.main.instantiateViewController(withIdentifier: "EventPostingViewController") as! EventPostingViewController
-//        let mainNav = BaseNavigationController(rootViewController: eventPostingViewController)
-        
-//        AppDelegate.shared.window?.rootViewController = BaseTabBarController()
-//        AppDelegate.shared.window?.makeKeyAndVisible()
-        
         let maintab = BaseTabBarController()
         guard let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow }) else { return }
         let transitionOption: UIWindow.TransitionOptions = .init(direction: .toBottom, style: .easeInOut)
         window.setRootViewController(maintab, options: transitionOption)
-
+    }
+    
+    fileprivate func validate(username: String, password: String) -> Bool {
+        if username.count > 0 && password.count > 0 {
+            return true
+        } else {
+            return false
+        }
     }
 }

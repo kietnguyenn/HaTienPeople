@@ -266,3 +266,34 @@ extension BaseViewController: CLLocationManagerDelegate {
         print("Error: \(error)")
     }
 }
+
+extension BaseViewController {
+    func newApiRerequest_responseString(url: String,
+                                        method: HTTPMethod,
+                                        param: Parameters? = nil,
+                                        encoding: ParameterEncoding = JSONEncoding.default,
+                                        completion: @escaping (_ response : DataResponse<String>, _ jsonData: Data, _ statusCode: Int) -> Void) {
+        var tokenHeader: HTTPHeaders?
+        if let _token = Account.current?.access_token {
+            tokenHeader = ["Authorization" : "Bearer \(_token)"]
+        } else {
+            tokenHeader = nil
+        }
+        let urll = URL(string: url)!
+        self.showHUD()
+        Alamofire.request(urll, method: method, parameters: param, encoding: encoding, headers: tokenHeader).responseString { [weak self] (response) in
+            guard let wSelf = self else { return }
+            wSelf.hideHUD()
+            print(response.response?.statusCode ?? 0)
+            if response.response?.statusCode == 200 && response.result.isSuccess {
+                guard let jsonString = response.value,
+                      let jsonData = jsonString.data(using: .utf8),
+                      let statusCode = response.response?.statusCode
+                else { return }
+                completion(response, jsonData, statusCode)
+            } else {
+                wSelf.showAlert(errorMessage: response.debugDescription)
+            }
+        }
+    }
+}

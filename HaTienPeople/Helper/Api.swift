@@ -24,4 +24,7 @@ struct Api {
     static let eventGetByStatusId = ApiDomain.new + "/Events/GetByStatusId" // get
     static let coordinator = ApiDomain.new + "/Events/Coordinator" // POST
     static let eventPostedByUser = ApiDomain.new + "/Events/PostedByUser" // get
+    
+    static let password = ApiDomain.new + "/Users/Password"
+    static let userInfo = ApiDomain.new + "/Users/Info"
 }
