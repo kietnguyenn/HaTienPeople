@@ -225,6 +225,7 @@ class EventPostingViewController: BaseViewController {
                 
             case .failure(let encodingError):
                 print(encodingError)
+                self.showAlert(errorMessage: encodingError.localizedDescription)
             }
         }
     }

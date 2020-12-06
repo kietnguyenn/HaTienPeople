@@ -22,18 +22,32 @@ class UserViewController: BaseViewController {
     }
     
     @IBAction func updateButtonTapped(_ : UIButton) {
-        
+        guard let name = nameTextField.text, let phone = phoneTextField.text, let email = emailTextField.text else { return }
+        if name.count>0, phone.count>0, email.count>0 {
+            let param : Parameters = [  "phoneNumber": phone,
+                                        "fullName": name,
+                                        "email": email
+            ]
+            _newApiRequestWithErrorHandling(url: Api.users, method: .put, param: param, encoding: JSONEncoding.default) { (response, data, status) in
+                if status == 200 {
+                    self.showAlert(title: "Thành công!", message: "Cập nhật thông tin người dùng thành công!", style: .alert) { (ok) in
+                        //
+                        self.view.endEditing(true)
+                    }
+                } else if status == 400 {
+                    self.showAlert(errorMessage: "Mật khẩu")
+                }
+            }
+        } else {
+            self.showAlert(errorMessage: "Vui lòng điền đẩy đủ thông tin!")
+        }
     }
     
     @IBAction func signOut(_:UIButton) {
-        let signInVc = self.storyboard?.instantiateViewController(withIdentifier: "SignInViewController") as! SignInViewController
-        guard let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow }) else { return }
-        let transitionOption: UIWindow.TransitionOptions = .init(direction: .toTop, style: .easeInOut)
-        UserDefaults.standard.setValue(nil, forKey: "CurrentUser")
-        window.setRootViewController(signInVc, options: transitionOption)
+        self.signOut()
     }
     
-    var presenter = Presentr(presentationType: .bottomHalf)
+    var presenter = Presentr(presentationType: .alert)
     
     var customerInfo: CustomerInfo? {
         didSet {

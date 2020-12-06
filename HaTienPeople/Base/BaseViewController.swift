@@ -296,4 +296,48 @@ extension BaseViewController {
             }
         }
     }
+    
+    func _newApiRequestWithErrorHandling(url: String,
+                                        method: HTTPMethod,
+                                        param: Parameters? = nil,
+                                        encoding: ParameterEncoding = JSONEncoding.default,
+                                        completion: @escaping (_ response : DataResponse<String>, _ jsonData: Data, _ statusCode: Int) -> Void) {
+        var tokenHeader: HTTPHeaders?
+        if let _token = Account.current?.access_token {
+            tokenHeader = ["Authorization" : "Bearer \(_token)"]
+        } else {
+            tokenHeader = nil
+        }
+        let urll = URL(string: url)!
+        self.showHUD()
+        Alamofire.request(urll, method: method, parameters: param, encoding: encoding, headers: tokenHeader).responseString { [weak self] (response) in
+            guard let wSelf = self else { return }
+            wSelf.hideHUD()
+            print(response.response?.statusCode ?? 0)
+            if response.result.isSuccess {
+                guard let jsonString = response.value,
+                      let jsonData = jsonString.data(using: .utf8),
+                      let statusCode = response.response?.statusCode
+                else { return }
+                if statusCode == 401 {
+                    wSelf.showAlert(title: "Phiên làm việc hết hạn", message: "Vui lòng đăng nhập lại!", style: .alert) { (ok) in
+                        wSelf.signOut()
+                    }
+                } else {
+                    completion(response, jsonData, statusCode)
+                }
+            } else {
+                wSelf.showAlert(errorMessage: response.debugDescription)
+            }
+        }
+    }
+    
+    func signOut() {
+        let signInVc = self.storyboard?.instantiateViewController(withIdentifier: "SignInViewController") as! SignInViewController
+        guard let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow }) else { return }
+        let transitionOption: UIWindow.TransitionOptions = .init(direction: .toTop, style: .easeInOut)
+        UserDefaults.standard.setValue(nil, forKey: "CurrentUser")
+        window.setRootViewController(signInVc, options: transitionOption)
+    }
+
 }
