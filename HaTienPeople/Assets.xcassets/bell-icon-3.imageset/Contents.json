@@ -1,11 +1,11 @@
 {
   "images" : [
     {
-      "filename" : "photo.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "bell-icon-3.png",
       "idiom" : "universal",
       "scale" : "2x"
     },

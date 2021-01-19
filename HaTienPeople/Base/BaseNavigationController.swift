@@ -22,10 +22,11 @@ class BaseNavigationController: UINavigationController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationBar.isTranslucent = true
-        navigationBar.barTintColor = mainColor
-        navigationBar.tintColor = .black
-//        navigationBar.titleTextAttributes = textAttributes
+        navigationBar.isTranslucent = false
+        navigationBar.barTintColor = .systemBlue
+        navigationBar.tintColor = .white
+//        navigationBar.backgroundColor = .white
+        navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
     }
 
 }

@@ -91,6 +91,7 @@ extension ImagesSelectingViewController: ImageCellDelegate {
         imagesTableView.beginUpdates()
         self.imageList.remove(at: index)
         self.imagesTableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .left)
+        self.imagesTableView.reloadData()
         imagesTableView.endUpdates()
     }
 }

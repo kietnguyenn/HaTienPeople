@@ -50,6 +50,13 @@
 		186B86532578B45B00729FC7 /* UpdatePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186B86522578B45B00729FC7 /* UpdatePasswordViewController.swift */; };
 		186B86582578E00D00729FC7 /* CustomerInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186B86572578E00D00729FC7 /* CustomerInfo.swift */; };
 		18709B0B25549CA80029166E /* DirectionMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18709B0A25549CA80029166E /* DirectionMapViewController.swift */; };
+		18A55D91258C937B00A3CC9E /* NotiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A55D90258C937B00A3CC9E /* NotiViewController.swift */; };
+		18A55D96258CAA1100A3CC9E /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A55D95258CAA1100A3CC9E /* Notification.swift */; };
+		18A55D9D258CAE6F00A3CC9E /* NotiCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A55D9B258CAE6E00A3CC9E /* NotiCell.swift */; };
+		18A55D9E258CAE6F00A3CC9E /* NotiCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A55D9C258CAE6E00A3CC9E /* NotiCell.xib */; };
+		18A55DA925908FC300A3CC9E /* NotiDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A55DA825908FC300A3CC9E /* NotiDetailViewController.swift */; };
+		18A55DDF2591A7DC00A3CC9E /* FileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A55DDD2591A7DB00A3CC9E /* FileCell.swift */; };
+		18A55DE02591A7DC00A3CC9E /* FileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A55DDE2591A7DB00A3CC9E /* FileCell.xib */; };
 		5348887D4D1B6BBD463E5BEB /* Pods_HaTienPeople_HaTienPeopleUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C731659D459FFB7BD381B18A /* Pods_HaTienPeople_HaTienPeopleUITests.framework */; };
 		C0F87717ECC70094E0E8A856 /* Pods_HaTienPeopleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FBEA1534EF7874E427451D0 /* Pods_HaTienPeopleTests.framework */; };
 /* End PBXBuildFile section */
@@ -122,6 +129,13 @@
 		186B86522578B45B00729FC7 /* UpdatePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePasswordViewController.swift; sourceTree = "<group>"; };
 		186B86572578E00D00729FC7 /* CustomerInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerInfo.swift; sourceTree = "<group>"; };
 		18709B0A25549CA80029166E /* DirectionMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionMapViewController.swift; sourceTree = "<group>"; };
+		18A55D90258C937B00A3CC9E /* NotiViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotiViewController.swift; sourceTree = "<group>"; };
+		18A55D95258CAA1100A3CC9E /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		18A55D9B258CAE6E00A3CC9E /* NotiCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotiCell.swift; sourceTree = "<group>"; };
+		18A55D9C258CAE6E00A3CC9E /* NotiCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotiCell.xib; sourceTree = "<group>"; };
+		18A55DA825908FC300A3CC9E /* NotiDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotiDetailViewController.swift; sourceTree = "<group>"; };
+		18A55DDD2591A7DB00A3CC9E /* FileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileCell.swift; sourceTree = "<group>"; };
+		18A55DDE2591A7DB00A3CC9E /* FileCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FileCell.xib; sourceTree = "<group>"; };
 		2F6458838A089BEAFE08F725 /* Pods_HaTienPeople.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HaTienPeople.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		39A8CB2EDEA49B6EEE065AD2 /* Pods-HaTienPeople-HaTienPeopleUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HaTienPeople-HaTienPeopleUITests.release.xcconfig"; path = "Target Support Files/Pods-HaTienPeople-HaTienPeopleUITests/Pods-HaTienPeople-HaTienPeopleUITests.release.xcconfig"; sourceTree = "<group>"; };
 		6BB9C50857E2843FE5E39EEA /* Pods-HaTienPeople-HaTienPeopleUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HaTienPeople-HaTienPeopleUITests.debug.xcconfig"; path = "Target Support Files/Pods-HaTienPeople-HaTienPeopleUITests/Pods-HaTienPeople-HaTienPeopleUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -230,6 +244,7 @@
 		18334EB42534A87900559CAA /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				18334EBC2534A87900559CAA /* SignInViewController.swift */,
 				18334EB52534A87900559CAA /* SignUpViewController.swift */,
 				18334EB62534A87900559CAA /* ImagesSelectingViewController.swift */,
 				18334EB72534A87900559CAA /* EventPostingViewController.swift */,
@@ -237,12 +252,12 @@
 				18334EB92534A87900559CAA /* TestViewController.swift */,
 				18334EBA2534A87900559CAA /* UserViewController.swift */,
 				18334EBB2534A87900559CAA /* EventDetailsViewController.swift */,
-				18334EBC2534A87900559CAA /* SignInViewController.swift */,
 				18334EBD2534A87900559CAA /* EventListViewController.swift */,
 				18334EF52534DE6B00559CAA /* ImageViewController.swift */,
 				18334F432535680C00559CAA /* PlaceSearchingViewController.swift */,
 				18709B0A25549CA80029166E /* DirectionMapViewController.swift */,
 				186B86522578B45B00729FC7 /* UpdatePasswordViewController.swift */,
+				18A55DAD25908FCA00A3CC9E /* Notifications */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -260,6 +275,7 @@
 		18334EC22534A87A00559CAA /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				18A55D9A258CAE5000A3CC9E /* NotiCell */,
 				18334EC32534A87A00559CAA /* ImageCell */,
 				18334EC62534A87A00559CAA /* EventCell */,
 			);
@@ -307,8 +323,37 @@
 				18334ED42534A87A00559CAA /* Account.swift */,
 				18267E0425399CD40058B6A2 /* CoordinateResult.swift */,
 				186B86572578E00D00729FC7 /* CustomerInfo.swift */,
+				18A55D95258CAA1100A3CC9E /* Notification.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		18A55D9A258CAE5000A3CC9E /* NotiCell */ = {
+			isa = PBXGroup;
+			children = (
+				18A55D9B258CAE6E00A3CC9E /* NotiCell.swift */,
+				18A55D9C258CAE6E00A3CC9E /* NotiCell.xib */,
+				18A55DD92591A75F00A3CC9E /* FileCell */,
+			);
+			path = NotiCell;
+			sourceTree = "<group>";
+		};
+		18A55DAD25908FCA00A3CC9E /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				18A55D90258C937B00A3CC9E /* NotiViewController.swift */,
+				18A55DA825908FC300A3CC9E /* NotiDetailViewController.swift */,
+			);
+			path = Notifications;
+			sourceTree = "<group>";
+		};
+		18A55DD92591A75F00A3CC9E /* FileCell */ = {
+			isa = PBXGroup;
+			children = (
+				18A55DDD2591A7DB00A3CC9E /* FileCell.swift */,
+				18A55DDE2591A7DB00A3CC9E /* FileCell.xib */,
+			);
+			path = FileCell;
 			sourceTree = "<group>";
 		};
 		3B7BEB3A078012943F95D10C /* Pods */ = {
@@ -447,7 +492,9 @@
 				18334E782534A5EF00559CAA /* LaunchScreen.storyboard in Resources */,
 				18334EE12534A87A00559CAA /* ImageCell.xib in Resources */,
 				18334E752534A5EF00559CAA /* Assets.xcassets in Resources */,
+				18A55D9E258CAE6F00A3CC9E /* NotiCell.xib in Resources */,
 				18334EE42534A87A00559CAA /* EventCell.xib in Resources */,
+				18A55DE02591A7DC00A3CC9E /* FileCell.xib in Resources */,
 				18267DE625359CA20058B6A2 /* locations.json in Resources */,
 				18334E732534A5ED00559CAA /* Main.storyboard in Resources */,
 			);
@@ -616,6 +663,7 @@
 				18334EE52534A87A00559CAA /* Extensions.swift in Sources */,
 				18334EDD2534A87A00559CAA /* EventListViewController.swift in Sources */,
 				18334EEC2534A87A00559CAA /* User.swift in Sources */,
+				18A55DA925908FC300A3CC9E /* NotiDetailViewController.swift in Sources */,
 				18334EE62534A87A00559CAA /* Api.swift in Sources */,
 				18334ED72534A87A00559CAA /* EventPostingViewController.swift in Sources */,
 				18334EDA2534A87A00559CAA /* UserViewController.swift in Sources */,
@@ -623,13 +671,17 @@
 				18334EE92534A87A00559CAA /* EventDetails.swift in Sources */,
 				18334EF62534DE6B00559CAA /* ImageViewController.swift in Sources */,
 				18334EEA2534A87A00559CAA /* Event.swift in Sources */,
+				18A55D9D258CAE6F00A3CC9E /* NotiCell.swift in Sources */,
 				18267E0525399CD40058B6A2 /* CoordinateResult.swift in Sources */,
+				18A55DDF2591A7DC00A3CC9E /* FileCell.swift in Sources */,
 				18334EE32534A87A00559CAA /* EventCell.swift in Sources */,
 				18334F442535680C00559CAA /* PlaceSearchingViewController.swift in Sources */,
 				18334EDF2534A87A00559CAA /* BaseViewController.swift in Sources */,
 				18334ED92534A87A00559CAA /* TestViewController.swift in Sources */,
+				18A55D91258C937B00A3CC9E /* NotiViewController.swift in Sources */,
 				18334ED62534A87A00559CAA /* ImagesSelectingViewController.swift in Sources */,
 				18709B0B25549CA80029166E /* DirectionMapViewController.swift in Sources */,
+				18A55D96258CAA1100A3CC9E /* Notification.swift in Sources */,
 				18267E002536E07E0058B6A2 /* Constant.swift in Sources */,
 				18334EE02534A87A00559CAA /* BaseNavigationController.swift in Sources */,
 				18334E6C2534A5ED00559CAA /* AppDelegate.swift in Sources */,
@@ -831,11 +883,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.0.6;
 				PRODUCT_BUNDLE_IDENTIFIER = vn.hatien.HaTienPeople;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -856,11 +908,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.0.6;
 				PRODUCT_BUNDLE_IDENTIFIER = vn.hatien.HaTienPeople;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
@@ -881,7 +933,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = bakco.HaTienPeopleTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HaTienPeople.app/HaTienPeople";
 			};
@@ -903,7 +955,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = bakco.HaTienPeopleTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HaTienPeople.app/HaTienPeople";
 			};
@@ -923,7 +975,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = bakco.HaTienPeopleUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = HaTienPeople;
 			};
@@ -943,7 +995,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = bakco.HaTienPeopleUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = HaTienPeople;
 			};

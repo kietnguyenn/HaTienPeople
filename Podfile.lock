@@ -21,8 +21,14 @@ PODS:
   - GooglePlaces (3.10.0):
     - GoogleMaps/Base (= 3.10.0)
   - ImagePicker (3.2.0)
+  - InfiniteLayout (0.4.2):
+    - InfiniteLayout/Core (= 0.4.2)
+  - InfiniteLayout/CocoaProxy (0.4.2)
+  - InfiniteLayout/Core (0.4.2):
+    - InfiniteLayout/CocoaProxy
   - IQDropDownTextField (1.1.1)
   - IQKeyboardManagerSwift (6.5.6)
+  - PasswordTextField (1.2.0)
   - Presentr (1.9)
   - SDWebImage (4.4.8):
     - SDWebImage/Core (= 4.4.8)
@@ -39,8 +45,10 @@ DEPENDENCIES:
   - GoogleMaps
   - GooglePlaces
   - ImagePicker
+  - InfiniteLayout
   - IQDropDownTextField (~> 1.1)
   - IQKeyboardManagerSwift (~> 6.5.4)
+  - PasswordTextField
   - Presentr
   - SDWebImage (~> 4.2)
   - SVProgressHUD
@@ -55,8 +63,10 @@ SPEC REPOS:
     - GoogleMaps
     - GooglePlaces
     - ImagePicker
+    - InfiniteLayout
     - IQDropDownTextField
     - IQKeyboardManagerSwift
+    - PasswordTextField
     - Presentr
     - SDWebImage
     - SVProgressHUD
@@ -71,13 +81,15 @@ SPEC CHECKSUMS:
   GoogleMaps: 8c080862ff2748ece9929471b30feb56a6c5079d
   GooglePlaces: 9a6f5f3a0c88da2aa1bf7426a65d3e004f5e69a1
   ImagePicker: 1d950bbb2422548ed58791b4ec7f42fe42920511
+  InfiniteLayout: de51cfad9ed480a3e3a0af7d28242d3257c606d9
   IQDropDownTextField: 3d2e5728a2b83ff5dbb14cb9b497a80005124cbe
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
+  PasswordTextField: 2548de43f150fc90a014da47b0d97e31aada4b94
   Presentr: 7078d7eb5d1661ebeaae60c9e42a1e534de1b993
   SDWebImage: 783af2c3fa36291a250030c4752ee370a9a51d13
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
 
-PODFILE CHECKSUM: 68407f3d4c115fd1905daeda774502a5f92b193f
+PODFILE CHECKSUM: fb2703f231be7831ccb4e972905de9be952e837e
 
 COCOAPODS: 1.9.3

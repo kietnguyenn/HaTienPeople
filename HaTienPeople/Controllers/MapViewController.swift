@@ -88,6 +88,7 @@ class MapViewController: BaseViewController {
 
         searchController = UISearchController(searchResultsController: resultsViewController)
         searchController?.searchResultsUpdater = resultsViewController
+        searchController?.searchBar.searchTextField.backgroundColor = .white
 
         // Put the search bar in the navigation bar.
         searchController?.searchBar.sizeToFit()
@@ -100,6 +101,23 @@ class MapViewController: BaseViewController {
         // Prevent the navigation bar from being hidden when searching.
         searchController?.hidesNavigationBarDuringPresentation = false
     }
+    
+    
+    // MARK: Get address of location
+    fileprivate func setAddress(of location: CLLocationCoordinate2D) {
+        requestNonTokenResponseString(urlString: "https://maps.googleapis.com/maps/api/geocode/json?latlng=\(location.latitude),\(location.longitude)&key=\(GMSApiKey.garageKey)",
+                                      method: .post,
+                                      params: nil,
+                                      encoding: URLEncoding.default) { (response) in
+            guard let jsonString = response.value,
+                  let jsonData = jsonString.data(using: .utf8),
+                  let resultCoordinates = try? JSONDecoder().decode(CoordinateResult.self, from: jsonData)
+                  else { return }
+            let formattedAddress = resultCoordinates.results[0].formattedAddress
+            guard let searchTextField = self.searchController?.searchBar.searchTextField else { return }
+            searchTextField.text = formattedAddress
+        }
+    }
 
 }
 
@@ -107,6 +125,7 @@ extension MapViewController: GMSMapViewDelegate {
     func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
 //        print(" did tapped Lat: \(coordinate.latitude)")
 //        print(" did tapped Long: \(coordinate.longitude)")
+        self.placeMarkerOnMap(coordinate: coordinate, title: "")
     }
     
     // Place marker on map
@@ -116,8 +135,12 @@ extension MapViewController: GMSMapViewDelegate {
             self.createMarker(titleMarker: title, iconMarker: UIImage(named: "location-pin")!, latitude: coordinate.latitude, longitude: coordinate.longitude)
             self.isMarkerCreated = true
         } else {
+            CATransaction.begin()
+            CATransaction.setAnimationDuration(0.5)
             self.marker.position = coordinate
+            CATransaction.commit()
         }
+        self.setAddress(of: marker.position)
     }
 }
 
@@ -139,8 +162,6 @@ extension MapViewController: GMSAutocompleteResultsViewControllerDelegate {
         for component in placeAddressComponents {
             print(component)
         }
-//        let plusCode = self.customFormattedAddressIntoPlusCode(placeFormattedAddress)
-//        getLocationBy(plusCode)
         self.placeMarkerOnMap(coordinate: place.coordinate, title: placeName)
         
     }
@@ -165,33 +186,4 @@ extension MapViewController: GMSAutocompleteResultsViewControllerDelegate {
 //      UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
     
-//    fileprivate func getLocationBy(_ plusCode: String) {
-//        requestNonTokenResponseString(urlString: "https://maps.googleapis.com/maps/api/geocode/json?address=\(plusCode),+CA&key=\(GMSApiKey.garageKey)", method: .post, encoding: URLEncoding.default) { [weak self] (response) in
-//            guard let wself = self else { return }
-//            if let jsonString = response.value,
-//                  let jsonData = jsonString.data(using: .utf8) {
-//                do {
-//                    let coordinateResult = try JSONDecoder().decode(CoordinateResult.self, from: jsonData)
-//                    let location = coordinateResult.results[0].geometry.location
-//                    print("Lat: \(location.lat), lng: \(location.lng)")
-//
-//                } catch let DecodingError.dataCorrupted(context) {
-//                    print(context)
-//                } catch let DecodingError.keyNotFound(key, context) {
-//                    print("Key '\(key)' not found:", context.debugDescription)
-//                    print("codingPath:", context.codingPath)
-//                } catch let DecodingError.valueNotFound(value, context) {
-//                    print("Value '\(value)' not found:", context.debugDescription)
-//                    print("codingPath:", context.codingPath)
-//                } catch let DecodingError.typeMismatch(type, context)  {
-//                    print("Type '\(type)' mismatch:", context.debugDescription)
-//                    print("codingPath:", context.codingPath)
-//                } catch {
-//                    print("error: ", error)
-//                }
-//            } else {
-//                print("no jsondata & no jsonString")
-//            }
-//        }
-//    }
 }

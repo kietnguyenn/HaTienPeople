@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import Alamofire
+import PasswordTextField
 
 class SignInViewController: BaseViewController {
     @IBOutlet weak var usernameTextField: UITextField!
@@ -35,15 +36,14 @@ class SignInViewController: BaseViewController {
     @objc func login() {
         let param: Parameters = ["userName" : self.usernameTextField.text!,
                                  "password" : self.passwordTextField.text!]
-        
-        newApiRerequest_responseString(url: Api.Auth.login, method: .post, param: param, encoding: JSONEncoding.default) { (response, jsondata, status) in
+        _newApiRequestWithErrorHandling(url: Api.Auth.login, method: .post, param: param, encoding: JSONEncoding.default) { (response, jsondata, status) in
             // Save user data
             if 200..<300 ~= status {
                 guard let currentUser = try? JSONDecoder().decode(Account.self, from: jsondata) else { return }
                 self.setCurrentUser(user: currentUser)
                 self.changeRootView()
-            } else {
-                print(response.debugDescription)
+            } else if status == 400 {
+                self.showAlert(errorMessage: "Tên đăng nhập hoặc mật khẩu không đúng")
             }
         }
     }

@@ -19,6 +19,7 @@ class ImageCell: UITableViewCell {
     @IBOutlet weak var deleteButton: UIButton!
     
     @IBAction func deleteButtonTapped(_ sender: UIButton) {
+        
         self.delegate.didDelete(index: self.tag)
     }
     

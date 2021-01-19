@@ -88,7 +88,7 @@ class EventPostingViewController: BaseViewController {
         self.checkCoreLocationPermission()
         self.getEventTypes()
         self.scrollView.delegate = self
-        self.title = "Báo cáo sự cố"
+        self.title = "Báo Cáo Sự Cố"
     }
     
     func setup(scrollView: UIScrollView) {
@@ -151,7 +151,7 @@ class EventPostingViewController: BaseViewController {
             guard let jsonString = responseString.value else { return }
             let jsonData = Data(jsonString.utf8)
             guard let dict = try? JSONSerialization.jsonObject(with: jsonData, options: .allowFragments) as? [String : Any] else { return }
-            guard let eventLogId = dict["id"] as? String else { return }
+            guard let eventLogId = dict?["id"] as? String else { return }
             print(eventLogId)
             self.showAlert(title: "Thành công", message: "báo cáo sự cố thành công", style: .alert, hasTwoButton: false) { (action) in
                 self.postImage(eventLogId: eventLogId)
@@ -192,12 +192,16 @@ class EventPostingViewController: BaseViewController {
         self.selectedImages.removeAll()
         self.dropdown.reloadAllComponents()
         self.reloadInputViews()
+        // Set delay
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+            self.tabBarController?.selectedIndex = 1
+        })
     }
     
     // MARK: - Upload image
     func uploadImage(images: [UIImage], eventLogId: String) {
         self.showHUD()
-        let urlString = "https://apindashboard.vkhealth.vn/\(eventLogId)/Files"
+        let urlString = "\(ApiDomain.product)\(eventLogId)/Files"
         guard let token = Account.current?.access_token else { return }
         let headers: HTTPHeaders = ["Content-Type": "application/form-data",
                                     "Authorization" : "Bearer \(token)"]

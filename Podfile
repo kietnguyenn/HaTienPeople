@@ -20,6 +20,10 @@ pod 'GooglePlaces'
 pod 'Alamofire', '~> 4.9.1'
 pod 'ImagePicker'
 pod 'AppCenter'
+pod 'PasswordTextField'
+
+# new pods
+pod 'InfiniteLayout'
 
   target 'HaTienPeopleTests' do
     inherit! :search_paths

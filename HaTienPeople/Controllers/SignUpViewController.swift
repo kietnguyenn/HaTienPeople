@@ -10,12 +10,13 @@ import Foundation
 import UIKit
 import Alamofire
 import AlamofireSwiftyJSON
+import PasswordTextField
 
 class SignUpViewController: BaseViewController {
     
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var confirmTextField:UITextField!
+    @IBOutlet weak var confirmTextField: UITextField!
     @IBOutlet weak var fullnameTextField: UITextField!
     @IBOutlet weak var phoneTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
@@ -39,9 +40,30 @@ class SignUpViewController: BaseViewController {
                                     "fullName": fullname,
                                     "title": "",
                                     "email": email]
-        requestNonTokenResponseString(urlString: "https://apindashboard.vkhealth.vn/api/Users", method: .post, params: params, encoding: JSONEncoding.default) { (response) in
-            self.showAlert(title: "Thành công", message: "Đăng kí tài khoản thành công!", style: .alert, hasTwoButton: false) { (action) in
-                self.dismiss(animated: true)
+        _newApiRequestWithErrorHandling(url: Api.users,
+                                        method: .post,
+                                        param: params,
+                                        encoding: JSONEncoding.default) { (res, data, status) in
+            print(res)
+            if status == 200 || status == 201 {
+                self.showAlert(title: "Thành công", message: "Đăng kí tài khoản thành công!", style: .alert, hasTwoButton: false) { (action) in
+                    self.dismiss(animated: true)
+                }
+            } else if status == 400 {
+                guard let resString = res.value else { return }
+                if resString == "User name 'kiet97' is already taken." {
+                    self.showAlert(errorMessage: "Lỗi \(status) \n \(resString)")
+                } else {
+                    self.showAlert(errorMessage: "Không thể tạo tài khoản! \nCode \(status)")
+                }
+                do {
+                    let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String:Any]
+                    print(json as Any)
+                } catch {
+                    print("Something went wrong")
+                }
+            } else if status == 500 {
+                self.showAlert(errorMessage: "Lỗi server!")
             }
         }
     }

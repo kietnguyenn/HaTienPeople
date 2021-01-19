@@ -47,7 +47,7 @@ class UserViewController: BaseViewController {
         self.signOut()
     }
     
-    var presenter = Presentr(presentationType: .alert)
+    var presenter = Presentr(presentationType: .bottomHalf)
     
     var customerInfo: CustomerInfo? {
         didSet {
