@@ -22,7 +22,7 @@ class EventDetailsViewController: BaseViewController {
     @IBOutlet weak var employeeLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var contentLabel: UILabel!
-//    @IBOutlet weak var statusView: UIView!
+//    @IBOutlet weak var eventContentLabel: UILabel!
     
     @IBAction func locationButtonTapped(_:UIButton) {
         // present direction map view
@@ -65,23 +65,25 @@ class EventDetailsViewController: BaseViewController {
     
     func setupDetailContent(eventLog: EventLog) {
         guard let event = self.event else { return }
+        if let userName = eventLog.userName {
+            employeeLabel.text = "Cán bộ: " + userName
+        }
         eventTypeLabel.text = event.eventTypeName
         if event.status == 0 {
             statusLabel.text = "Chờ xử lí"
-            employeeLabel.text = "Cán bộ: Không"
+            employeeLabel.text = "Cán bộ: Chưa có cán bộ tiếp nhận"
             statusLabel.backgroundColor = .lightGray
         } else if event.status == 1 {
-            employeeLabel.text = "Không"
             statusLabel.text = "Đang xử lí"
             statusLabel.backgroundColor = .orange
         } else if event.status == 3 {
-            employeeLabel.text = "Không"
             statusLabel.text = "Đã hoàn thành"
             statusLabel.backgroundColor = .green
         }
         dateTimeLabel.text = "Ngày \(MyDateFormatter.convertDateTimeStringOnServerToDevice(dateString: event.dateTime ).date) lúc \(MyDateFormatter.convertDateTimeStringOnServerToDevice(dateString: event.dateTime ).time)"
         addressLabel.text = "Tại " + event.address
-        contentLabel.text = "Nội dung: " + eventLog.information
+//        contentLabel.text = "Nội dung: " + eventLog.information
+        contentLabel.text = "Nội dung sự kiện: " + event.decription
         
     }
     
@@ -111,8 +113,8 @@ class EventDetailsViewController: BaseViewController {
                 do {
                     let array = try JSONDecoder().decode([EventLog].self, from: jsonData)
                     self.eventLogs = array
-                    self.getImages(eventLogId: array[0].id)
-                    print(array[0].id)
+                    self.getImages(eventLogId: array.last!.id)
+                    print(array.last!.id)
                     
                 } catch let DecodingError.dataCorrupted(context) {
                     print(context)
@@ -170,7 +172,6 @@ class EventDetailsViewController: BaseViewController {
                 
             }
         }
-
     }
 }
 
