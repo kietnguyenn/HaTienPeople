@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Event: Codable, Identifiable {
+struct _Event: Codable, Identifiable {
     let id, decription: String?
     let latitude, longitude: String
     let eventTypeId: String?
@@ -26,22 +26,28 @@ struct Event: Codable, Identifiable {
 }
 
 
-struct EventNew : Codable, Identifiable {
+struct Event : Codable, Identifiable {
 //    var eventLog: EventLogInEvent?
 //    var totalTime: Int
 //    var user: User?
 //    var eventStatus: EventStatus
-    var id, decription: String
-    var emergency: Bool
-    var dateTime, latitude, longitude, eventTypeId: String
-    var eventTypeName: String
-    var status: Int
-    var address: String
-    var phoneContact: String?
-    var ward: String?
+    let id, decription: String?
+    let emergency: Bool?
+    let dateTime, latitude, longitude, eventTypeID: String?
+    let eventTypeName: String?
+    let status: Int?
+    let address: String?
+    let ward: String?
+    let phoneContact: String?
+
+    enum CodingKeys: String, CodingKey {
+        case id, decription, emergency, dateTime, latitude, longitude
+        case eventTypeID = "eventTypeId"
+        case eventTypeName, status, address, ward, phoneContact
+    }
 }
 
-extension EventNew {
+extension Event {
     
     init() {
 //        self.eventLog = EventLogInEvent(id: "", eventId: "", userId: "", dateTime: "", status: 1, information: "")
@@ -54,7 +60,7 @@ extension EventNew {
         self.dateTime = "2020-08-27'T'13:29:38"
         self.latitude = "0.1231231"
         self.longitude = "10.9812039"
-        self.eventTypeId = "sdhakj"
+        self.eventTypeID = "sdhakj"
         self.eventTypeName = "jlksjdka"
         self.status = 1
         self.address = "Địa chỉ ma"
@@ -63,7 +69,7 @@ extension EventNew {
     }
     
     init(data: Data) throws {
-        self = try newJSONDecoder().decode(EventNew.self, from: data)
+        self = try newJSONDecoder().decode(Event.self, from: data)
     }
 
     init(_ json: String, using encoding: String.Encoding = .utf8) throws {

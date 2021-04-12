@@ -52,7 +52,7 @@ class MapViewController: BaseViewController {
     fileprivate func configMapView() {
         /// Camera
         self.mapView = GMSMapView()
-        let camera = GMSCameraPosition.camera(withLatitude: MyLocation.lat, longitude: MyLocation.long, zoom: 10.0)
+        let camera = GMSCameraPosition.camera(withLatitude: CurrentLocation.latitude, longitude: CurrentLocation.longitude, zoom: 10.0)
         let mapViewFrame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
         self.mapView = GMSMapView.map(withFrame: mapViewFrame, camera: camera)
         self.mapView.isMyLocationEnabled = true
@@ -89,6 +89,7 @@ class MapViewController: BaseViewController {
         searchController = UISearchController(searchResultsController: resultsViewController)
         searchController?.searchResultsUpdater = resultsViewController
         searchController?.searchBar.searchTextField.backgroundColor = .white
+        searchController?.searchBar.searchTextField.tintColor = .black
 
         // Put the search bar in the navigation bar.
         searchController?.searchBar.sizeToFit()
@@ -101,7 +102,6 @@ class MapViewController: BaseViewController {
         // Prevent the navigation bar from being hidden when searching.
         searchController?.hidesNavigationBarDuringPresentation = false
     }
-    
     
     // MARK: Get address of location
     fileprivate func setAddress(of location: CLLocationCoordinate2D) {
@@ -118,7 +118,6 @@ class MapViewController: BaseViewController {
             searchTextField.text = formattedAddress
         }
     }
-
 }
 
 extension MapViewController: GMSMapViewDelegate {
@@ -142,6 +141,12 @@ extension MapViewController: GMSMapViewDelegate {
         }
         self.setAddress(of: marker.position)
     }
+    
+    func didTapMyLocationButton(for mapView: GMSMapView) -> Bool {
+        self.placeMarkerOnMap(coordinate: CurrentLocation, title: "Current location")
+        return true
+    }
+    
 }
 
 extension MapViewController: GMSAutocompleteResultsViewControllerDelegate {

@@ -9,39 +9,50 @@ import Foundation
 
 struct EventLog: Codable, Identifiable {
     
-    var id: String
-    var user: User
-    var event: Event?
-    var dateTime: String
-    var eventName, userName: String?
-    var eventId, information, userId: String
-    var status: Int
-    
-    init(id: String, user: User, event: Event, eventName: String?, userName: String, dateTime: String, eventId: String, information: String, userId: String) {
-        self.id = id
-        self.user = user
-        self.event = event
-        self.eventName = eventName
-        self.userName = userName
-        self.dateTime = dateTime
-        self.eventId = eventId
-        self.information = information
-        self.userId = userId
-        self.status = 1
+    let id: String
+    let user: User?
+    let taskMaster: TaskMaster?
+    let event: _Event
+    let dateTime: String
+    let eventLogType: EventLogType?
+    let eventName, userName: String?
+    let information: String?
+    let eventID, userID: String
+    let status, eventLogTypeID: Int
+
+    enum CodingKeys: String, CodingKey {
+        case id, user, taskMaster, event, dateTime, eventLogType, eventName, userName
+        case eventID = "eventId"
+        case information
+        case userID = "userId"
+        case status
+        case eventLogTypeID = "eventLogTypeId"
     }
-    
-    init() {
-        self.id = "id"
-        self.user = User()
-        self.event = Event()
-        self.eventName = "eventName"
-        self.userName = "userName"
-        self.dateTime = "dateTime"
-        self.eventId = "eventId"
-        self.information = "Sự kiện xịn"
-        self.userId = "userId"
-        self.status = 1
-    }
+//
+//    init(id: String, user: User, event: Event, eventName: String?, userName: String, dateTime: String, eventId: String, information: String, userId: String) {
+//        self.id = id
+//        self.user = user
+//        self.event = event
+//        self.eventName = eventName
+//        self.userName = userName
+//        self.dateTime = dateTime
+//        self.eventID = eventId
+//        self.information = information
+////        self.userId = userId
+//        self.status = 1
+//    }
+//
+//    init() {
+//        self.id = "id"
+//        self.user = User()
+//        self.event = Event()
+//        self.eventName = "eventName"
+//        self.userName = "userName"
+//        self.dateTime = "dateTime"
+//        self.eventID = "eventId"
+//        self.information = "Sự kiện xịn"
+//        self.status = 1
+//    }
 }
 
 // MARK: - Helper functions for creating encoders and decoders
@@ -97,4 +108,16 @@ extension URLSession {
     func eventLogRequest(url: String, method: String, param: [String: Any]?, completionHandler: @escaping ([EventLog]?, URLResponse?, Error?) -> Void) {
         self.codableTask(with: url, method: method, param: param, completionHandler: completionHandler)
     }
+}
+
+struct EventLogType: Codable {
+    var id : Int?
+    var description: String?
+}
+
+// MARK: - TaskMaster
+struct TaskMaster: Codable {
+    let id, userName, phoneNumber, fullName: String?
+    let title: String?
+    let email, phoneAddress: String?
 }

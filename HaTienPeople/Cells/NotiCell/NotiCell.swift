@@ -10,33 +10,35 @@ import UIKit
 
 class NotiCell: UITableViewCell {
     
+//    @IBOutlet weak var senderLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var typeLabel: UILabel!
     @IBOutlet weak var contentLabel: UILabel!
-    @IBOutlet weak var fileLabel: UILabel!
+    @IBOutlet weak var dateTimeLabel: UILabel!
+    @IBOutlet weak var unreadLabel: UILabel!
+
     
-    @IBOutlet weak var fileCollectionView: UICollectionView!
-    
-    var items = [File]() {
-        didSet {
-            print("items: \(items.count)")
-        }
-    }
+//    var items = [File]() {
+//        didSet {
+//            print("items: \(items.count)")
+//        }
+//    }
     
     let cellId = "FileCell"
     
-    var collectionViewCellOffset: CGFloat {
-        get {
-            return fileCollectionView.contentOffset.x
-        }
-        set {
-            fileCollectionView.contentOffset.x = newValue
-        }
-    }
+//    var collectionViewCellOffset: CGFloat {
+//        get {
+//            return fileCollectionView.contentOffset.x
+//        }
+//        set {
+//            fileCollectionView.contentOffset.x = newValue
+//        }
+//    }
 
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        self.setupCollectionView()
+//        self.setupCollectionView()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -49,16 +51,16 @@ class NotiCell: UITableViewCell {
         super.layoutSubviews()
     }
     
-    func setupCollectionView() {
-        fileCollectionView.register(UINib(nibName: cellId, bundle: nil), forCellWithReuseIdentifier: cellId)
-    }
+//    func setupCollectionView() {
+//        fileCollectionView.register(UINib(nibName: cellId, bundle: nil), forCellWithReuseIdentifier: cellId)
+//    }
     
-    func setupCollectionViewDatasourceDelegate(datasourceDelegate: UICollectionViewDelegateFlowLayout & UICollectionViewDataSource, forRow rowIndex: Int) {
-        fileCollectionView.delegate = datasourceDelegate
-        fileCollectionView.dataSource = datasourceDelegate
-        fileCollectionView.tag = rowIndex
-        fileCollectionView.alwaysBounceHorizontal = true
-        self.fileCollectionView.reloadData()
-    }
+//    func setupCollectionViewDatasourceDelegate(datasourceDelegate: UICollectionViewDelegateFlowLayout & UICollectionViewDataSource, forRow rowIndex: Int) {
+//        fileCollectionView.delegate = datasourceDelegate
+//        fileCollectionView.dataSource = datasourceDelegate
+//        fileCollectionView.tag = rowIndex
+//        fileCollectionView.alwaysBounceHorizontal = true
+//        self.fileCollectionView.reloadData()
+//    }
  }
 

@@ -10,6 +10,24 @@ import Foundation
 // MARK: - NotificationElement
 struct NotificationElement: Codable {
     let id: String?
+    let seen, starred, isDeleted: Bool?
+    let dateCreated: String?
+    let notification: NotificationClass?
+}
+
+//
+// To read values from URLs:
+//
+//   let task = URLSession.shared.notificationClassTask(with: url) { notificationClass, response, error in
+//     if let notificationClass = notificationClass {
+//       ...
+//     }
+//   }
+//   task.resume()
+
+// MARK: - NotificationClass
+struct NotificationClass: Codable {
+    let id: String?
     let files: [File]?
     let category: Category?
     let notificationDescription, title: String?
@@ -21,10 +39,19 @@ struct NotificationElement: Codable {
     }
 }
 
+//
+// To read values from URLs:
+//
+//   let task = URLSession.shared.categoryTask(with: url) { category, response, error in
+//     if let category = category {
+//       ...
+//     }
+//   }
+//   task.resume()
+
 // MARK: - Category
 struct Category: Codable {
-    let id: String?
-    let categoryDescription: Description?
+    let id, categoryDescription: String?
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -32,11 +59,15 @@ struct Category: Codable {
     }
 }
 
-enum Description: String, Codable {
-    case emergencyNoti = "Thông Báo Khẩn"
-    case newNoti = "Thông Báo Mới"
-    case fromClinicNoti = "Thông Báo Từ Sở Y Tế"
-}
+//
+// To read values from URLs:
+//
+//   let task = URLSession.shared.fileTask(with: url) { file, response, error in
+//     if let file = file {
+//       ...
+//     }
+//   }
+//   task.resume()
 
 // MARK: - File
 struct File: Codable {

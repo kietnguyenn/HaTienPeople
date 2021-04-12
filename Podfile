@@ -21,9 +21,13 @@ pod 'Alamofire', '~> 4.9.1'
 pod 'ImagePicker'
 pod 'AppCenter'
 pod 'PasswordTextField'
-
-# new pods
 pod 'InfiniteLayout'
+pod 'SwiftSignalRClient'
+pod 'Floaty', '~> 4.2.0'
+pod 'FSPagerView'
+pod 'SCLAlertView'
+pod 'ImageSlideshow', '~> 1.9.0'
+
 
   target 'HaTienPeopleTests' do
     inherit! :search_paths

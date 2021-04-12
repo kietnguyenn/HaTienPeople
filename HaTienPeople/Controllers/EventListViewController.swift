@@ -14,26 +14,37 @@ import SwiftyJSON
 class EventListViewController: BaseViewController {
     
     @IBOutlet weak var eventsTableView: UITableView!
-    @IBOutlet weak var segmentControl: UISegmentedControl!
+    @IBOutlet weak var segmentControl: UISegmentedControl! {
+        didSet {
+            let font = UIFont.boldSystemFont(ofSize: 11)
+            self.segmentControl.setTitleTextAttributes([NSAttributedString.Key.font: font], for: .normal)
+        }
+    }
     
-    var acceptedList = [EventNew]() {
+    var acceptedList = [Event]() {
         didSet {
 //            eventsTableView.reloadData()
             print("Accepted list = \(acceptedList.count)")
 
         }
     }
-    var notAcceptedList = [EventNew]() {
+    var newEventList = [Event]() {
         didSet {
 //            eventsTableView.reloadData()
-            print("Not Accepted list = \(notAcceptedList.count)")
+            print("new event List = \(newEventList.count)")
 
         }
     }
     
-    var completedList = [EventNew]() {
+    var completedList = [Event]() {
         didSet {
             print("Completed list = \(completedList.count)")
+        }
+    }
+    
+    var waitForHandlingList = [Event]() {
+        didSet {
+            print("wait for handling list = \(waitForHandlingList.count)")
         }
     }
     
@@ -76,17 +87,27 @@ class EventListViewController: BaseViewController {
             if let jsonString = responseString.value,
                   let jsonData = jsonString.data(using: .utf8) {
                 do {
-                    let array = try JSONDecoder().decode([EventNew].self, from: jsonData)
+                    let array = try JSONDecoder().decode([Event].self, from: jsonData)
                     self.acceptedList.removeAll()
-                    self.notAcceptedList.removeAll()
+                    self.newEventList.removeAll()
                     self.completedList.removeAll()
+                    self.waitForHandlingList.removeAll()
                     for event in array {
-                        if event.status == 0 {
-                            self.notAcceptedList.append(event)
-                        } else if event.status == 1 {
+                        if event.status == EventStatusId.newEvent.rawValue
+                        { // 0
+                            self.newEventList.append(event)
+                        }
+                        else if event.status == EventStatusId.handling.rawValue
+                        { // 1
                             self.acceptedList.append(event)
-                        } else if event.status == 3 {
+                        }
+                        else if event.status == EventStatusId.completed.rawValue
+                        { // 3
                             self.completedList.append(event)
+                        }
+                        else if event.status == EventStatusId.waitingForHandling.rawValue
+                        { // 7
+                            self.waitForHandlingList.append(event)
                         }
                     }
                     self.eventsTableView.reloadData()
@@ -114,15 +135,17 @@ class EventListViewController: BaseViewController {
 extension EventListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let selectedIndex = self.segmentControl.selectedSegmentIndex
-        if selectedIndex == 0 {
+        if selectedIndex == 1 {
             // chua tiep nhan
-            return notAcceptedList.count
-        } else if selectedIndex == 1  {
+            return waitForHandlingList.count
+        } else if selectedIndex == 2 {
             // Da tiep nhan
             return acceptedList.count
-        } else if selectedIndex == 2 {
+        } else if selectedIndex == 3 {
             // Hoan thanh
             return completedList.count
+        } else if selectedIndex == 0 {
+            return newEventList.count
         } else {
             return 0
         }
@@ -130,16 +153,9 @@ extension EventListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! EventCell
-        var event: EventNew
-        if self.segmentControl.selectedSegmentIndex == 0 {
-            event = self.notAcceptedList[indexPath.row]
-        } else if self.segmentControl.selectedSegmentIndex == 1 {
-            event = self.acceptedList[indexPath.row]
-        } else {
-            event = self.completedList[indexPath.row]
-        }
+        guard let event = filterEventList(with: indexPath) else { return UITableViewCell() }
         cell.eventTypeLabel.text = event.eventTypeName
-        cell.dateTimeLabel.text = "Ngày \(MyDateFormatter.convertDateTimeStringOnServerToDevice(dateString: event.dateTime ).date) lúc \(MyDateFormatter.convertDateTimeStringOnServerToDevice(dateString: event.dateTime ).time)"
+        cell.dateTimeLabel.text = "Ngày \(MyDateFormatter.convertDateTimeStringOnServerToDevice(dateString: event.dateTime! ).date) lúc \(MyDateFormatter.convertDateTimeStringOnServerToDevice(dateString: event.dateTime! ).time)"
         cell.addressLabel.text = event.address
         cell.contentLabel.text = event.decription
         cell.selectionStyle = .none
@@ -148,53 +164,52 @@ extension EventListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = MyStoryboard.main.instantiateViewController(withIdentifier: "EventDetailsViewController") as! EventDetailsViewController
-        var event: EventNew
-        if self.segmentControl.selectedSegmentIndex == 0 {
-            event = self.notAcceptedList[indexPath.row]
-        } else if self.segmentControl.selectedSegmentIndex == 1 {
+        guard let _event = filterEventList(with: indexPath) else { return }
+        vc.event = _event
+        vc.delegate = self
+        let nav = BaseNavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .fullScreen
+        self.present(nav, animated: true)
+    }
+    
+    fileprivate func filterEventList(with indexPath: IndexPath) -> Event? {
+        var event: Event?
+        switch segmentControl.selectedSegmentIndex {
+        case 0:
+            event = self.newEventList[indexPath.row]
+            break
+        case 1:
+            event = self.waitForHandlingList[indexPath.row]
+            break
+        case 2:
             event = self.acceptedList[indexPath.row]
-        } else {
+            break
+        case 3:
             event = self.completedList[indexPath.row]
+            break
+        default:
+            break
         }
-        vc.event = event
-        self.navigationController?.pushViewController(vc, animated: true)
+        return event
     }
 }
 
-// MARK: Config date/time Server to device formatter
-struct MyDateFormatter {
-    static func convertDateTimeStringOnServerToDevice(dateString: String) -> (time: String, date: String) {
-        let subTimeString = dateString.components(separatedBy: ".")
-        let myDate = subTimeString[0].convertStringToDate(with: "yyyy-MM-dd'T'HH:mm:ss")
-        let dateResult = myDate.convertDateToString(with: "dd-MM-yyyy")
-        let timeResult = myDate.convertDateToString(with: "HH:mm")
+extension EventListViewController: EventDetailsViewControllerDelegate {
+    func didAddEventInProcess() {
         
-        return (timeResult, dateResult)
     }
-}
-
-// MARK: Convert Date to String
-extension Date {
     
-    func convertDateToString(with format: String) -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = format
-        formatter.locale = Locale(identifier: "vi_VN")
-        formatter.timeZone = TimeZone.current
-        return formatter.string(from: self)
+    func didPostEventLog() {
+        
     }
-}
-
-// MARK: Convert String to date
-extension String {
     
-    func convertStringToDate(with format: String) -> Date {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = format
-        dateFormatter.locale = Locale(identifier: "vi_VN")
-//        dateFormatter.timeZone = TimeZone.current
-        guard let result = dateFormatter.date(from: self) else { return Date() }
-        return result
+    func didCancel() {
+        
     }
+    
+    func didHandle() {
+        
+    }
+    
+    
 }
-

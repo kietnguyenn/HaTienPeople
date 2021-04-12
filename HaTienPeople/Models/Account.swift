@@ -22,8 +22,8 @@ struct Account: Codable {
                 print ("Did remove current User")
                 return
             }
-            print("Token: ", current.access_token)
-            print("User ID: ", current.id)
+            print(current.access_token)
+            print(current.id)
         }
     }
 }

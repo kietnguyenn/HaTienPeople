@@ -68,13 +68,14 @@ class EventPostingViewController: BaseViewController {
     var eventTypes = [EventType]() {
         didSet {
             print(eventTypes.count)
+            Constant.eventTypes = self.eventTypes
             self.setupDropdown()
         }
     }
     
     var selectedEventType: EventType?
     
-    var selectedCoordinates = CLLocationCoordinate2D(latitude: MyLocation.lat, longitude: MyLocation.long) {
+    var selectedCoordinates = CLLocationCoordinate2D(latitude: CurrentLocation.latitude, longitude: CurrentLocation.longitude) {
         didSet {
             self.getAddress(of: selectedCoordinates)
             coordinatesLabel.text = "Lat: \(selectedCoordinates.latitude), lng: \(selectedCoordinates.longitude)"
@@ -88,7 +89,7 @@ class EventPostingViewController: BaseViewController {
         self.checkCoreLocationPermission()
         self.getEventTypes()
         self.scrollView.delegate = self
-        self.title = "Báo Cáo Sự Cố"
+        self.title = Constant.title.eventCreating
     }
     
     func setup(scrollView: UIScrollView) {
@@ -135,12 +136,13 @@ class EventPostingViewController: BaseViewController {
         self.postEvent(content: content, eventTypeId: eventType.id, lat: "\(selectedCoordinates.latitude)", lng: "\(selectedCoordinates.longitude)", address: address)
     }
     
+
     func postEvent(content: String, eventTypeId: String, lat: String, lng: String, address: String) {
         let params = [
             "decription": content,
             "latitude": lat,
             "longitude": lng,
-            "phoneContact": "0706567579",
+            "phoneContact": "",
             "emergency": false,
             "eventTypeId": eventTypeId,
             "postedByUser": Account.current!.id,
@@ -158,7 +160,6 @@ class EventPostingViewController: BaseViewController {
             }
 //            self.resignFirstResponder()
         }
-        
     }
     
     func postImage(eventLogId: String) {
@@ -172,11 +173,12 @@ class EventPostingViewController: BaseViewController {
     }
     
     func getEventTypes() {
-        requestApiResponseString(urlString: Api.eventTypes + "?pageIndex=1&pageSize=10", method: .get, encoding: JSONEncoding.default) { (responseString) in
+        _newApiRequestWithErrorHandling(url: Api.eventTypes + "?pageIndex=1&pageSize=10", method: .get) { (responseString, data, status) in
             guard let jsonString = responseString.value else { return }
             guard let data = jsonString.data(using: .utf8) else { return }
             guard let eventTypes = try? JSONDecoder().decode([EventType].self, from: data) else { return }
             self.eventTypes = eventTypes
+
         }
     }
     
@@ -201,20 +203,21 @@ class EventPostingViewController: BaseViewController {
     // MARK: - Upload image
     func uploadImage(images: [UIImage], eventLogId: String) {
         self.showHUD()
-        let urlString = "\(ApiDomain.product)\(eventLogId)/Files"
+        let urlString = "\(ApiDomain.new)\(eventLogId)/Files"
         guard let token = Account.current?.access_token else { return }
         let headers: HTTPHeaders = ["Content-Type": "application/form-data",
                                     "Authorization" : "Bearer \(token)"]
         Alamofire.upload(multipartFormData: { multipartFormData in
             for image in images {
-                guard let imgData = image.jpegData(compressionQuality: 0.2) else { return }
-                multipartFormData.append(imgData, withName: "files",fileName: "\(randomString(length: 6)).jpg", mimeType: "image/jpg")
+                guard let imgData = image.withRenderingMode(.alwaysTemplate)
+                        .jpegData(compressionQuality: 0) else { return }
+                multipartFormData.append(imgData, withName: "files",fileName: "\(randomString(length: 5)).jpeg", mimeType: "image/jpeg")
             }
         },
         to: urlString, method: .put, headers: headers)
         { (result) in
             self.hideHUD()
-            print(result)
+            print("result", result)
             switch result {
             case .success(let upload, _, _):
                 
@@ -296,9 +299,9 @@ extension EventPostingViewController: GMSAutocompleteViewControllerDelegate {
 
   // Handle the user's selection.
   func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
-    print("Place name: \(place.name)")
-    print("Place ID: \(place.placeID)")
-    print("Place attributions: \(place.attributions)")
+    print("Place name: \(place.name!)")
+    print("Place ID: \(place.placeID!)")
+    print("Place attributions: \(place.attributions!)")
     dismiss(animated: true, completion: nil)
   }
 
@@ -318,7 +321,6 @@ extension EventPostingViewController: GMSAutocompleteViewControllerDelegate {
   func didUpdateAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
     UIApplication.shared.isNetworkActivityIndicatorVisible = false
   }
-
 }
 
 

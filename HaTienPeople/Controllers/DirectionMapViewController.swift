@@ -14,7 +14,7 @@ import CoreLocation
 
 class DirectionMapViewController: BaseViewController {
     
-    var employeeLocation = CLLocationCoordinate2D()
+    var eventLocation = CLLocationCoordinate2D()
     
     var mapView = GMSMapView()
         
@@ -23,16 +23,14 @@ class DirectionMapViewController: BaseViewController {
     var isMarkerCreated = false
                         
     var polyline = GMSPolyline()
-    
-    var currentLocation = CLLocationCoordinate2D(latitude: MyLocation.lat, longitude: MyLocation.long)
-    
+        
     var directionPath = GMSPath()
     
     var directionPolyline = GMSPolyline()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Vị trí cán bộ"
+        self.title = "Vị trí sự cố"
         self.setupDoneButton()
         self.configMapView()
 //        self.setupSearchController()
@@ -50,8 +48,8 @@ class DirectionMapViewController: BaseViewController {
     fileprivate func configMapView() {
         /// Camera
         self.mapView = GMSMapView()
-        let camera = GMSCameraPosition.camera(withLatitude: MyLocation.lat, longitude: MyLocation.long, zoom: 10.0)
-        let mapViewFrame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - 35)
+        let camera = GMSCameraPosition.camera(withLatitude: CurrentLocation.latitude, longitude: CurrentLocation.longitude, zoom: 15.0)
+        let mapViewFrame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - 20)
         self.mapView = GMSMapView.map(withFrame: mapViewFrame, camera: camera)
         self.mapView.isMyLocationEnabled = true
         self.mapView.settings.myLocationButton = true
@@ -62,10 +60,10 @@ class DirectionMapViewController: BaseViewController {
         
         // Draw direction path
         DispatchQueue.main.async {
-            self.createMarker(titleMarker: "Cán bộ", iconMarker: UIImage(named: "employee-icon")!,
-                              latitude: CLLocationDegrees(self.employeeLocation.latitude), longitude: CLLocationDegrees(self.employeeLocation.longitude))
+            self.createMarker(titleMarker: "Vị trí sự cố", iconMarker: UIImage(named: "employee-icon")!,
+                              latitude: CLLocationDegrees(self.eventLocation.latitude), longitude: CLLocationDegrees(self.eventLocation.longitude))
 //            self.ambulanceMarker.position = CLLocationCoordinate2D(latitude: lat, longitude: long)
-            self.drawPath(startLocation: (self.employeeLocation), endLocation: (self.currentLocation))
+            self.drawPath(startLocation: (self.currentLocation.coordinate), endLocation: (self.eventLocation))
         }
 
     }
@@ -127,7 +125,7 @@ class DirectionMapViewController: BaseViewController {
                 self.directionPolyline = GMSPolyline()
                 self.directionPath = GMSPath(fromEncodedPath: points!)!
                 self.directionPolyline = GMSPolyline.init(path: self.directionPath)
-                self.directionPolyline.strokeWidth = 4.0
+                self.directionPolyline.strokeWidth = 3.0
                 self.directionPolyline.strokeColor = UIColor.red
                 self.directionPolyline.geodesic = true
                 self.directionPolyline.map = self.mapView

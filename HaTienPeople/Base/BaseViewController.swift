@@ -16,17 +16,23 @@ import CoreLocation
 import AppCenter
 import AppCenterCrashes
 
-struct MyLocation {
-    static var long = Double() {
-        didSet {
-            print("Long: \(long)")
-        }
-    }
-    
-    static var lat = Double() {
-        didSet {
-            print("Lat: \(lat)")
-        }
+//struct CurrentLocation {
+//    static var long: Double =  106.649500 {
+//        didSet {
+//            print("Long: \(long)")
+//        }
+//    }
+//
+//    static var lat: Double = 10.752620  {
+//        didSet {
+//            print("Lat: \(lat)")
+//        }
+//    }
+//}
+
+public var CurrentLocation = CLLocationCoordinate2D(latitude: 10.752620, longitude: 106.649500) {
+    didSet {
+        print("currentLocation:", CurrentLocation)
     }
 }
 
@@ -36,10 +42,10 @@ class BaseViewController: UIViewController {
     var activityIndicator = UIActivityIndicatorView()
     
     var locationManager = CLLocationManager()
-    var location: CLLocation!{
+    var currentLocation: CLLocation!{
         didSet {
-            MyLocation.lat = location.coordinate.latitude
-            MyLocation.long = location.coordinate.longitude
+            CurrentLocation.latitude = currentLocation.coordinate.latitude
+            CurrentLocation.longitude = currentLocation.coordinate.longitude
         }
     }
 
@@ -67,18 +73,25 @@ class BaseViewController: UIViewController {
     
     // MARK: Dimiss Button
     func showDismissButton(title: String) {
-        let dismissButton = UIBarButtonItem(title: title, style: .plain, target: self, action: #selector(dissmissButtonTapped(_:)))
+        let dismissButton = UIBarButtonItem(title: title, style: .plain, target: self, action: #selector(dismissButtonTapped(_:)))
         navigationItem.leftBarButtonItem = dismissButton
     }
-    @objc func dissmissButtonTapped(_ button: UIBarButtonItem) {
+    @objc func dismissButtonTapped(_ button: UIBarButtonItem) {
         self.dismiss(animated: true, completion: nil)
     }
     
     //MARK: Right Bar button with Image
     func showRightBarButtonWithImage(image: String, action: Selector?, isEnable: Bool = false) {
-        let barButton = UIBarButtonItem(image: UIImage(named: image)!.withRenderingMode(.alwaysTemplate), style: .plain, target: self, action: action)
+        guard let uiimage = UIImage(named: image) else { return }
+        let barButton = UIBarButtonItem(image: uiimage.withRenderingMode(.alwaysTemplate), style: .plain, target: self, action: action)
         navigationItem.rightBarButtonItem = barButton
         barButton.isEnabled = isEnable
+    }
+    
+    func showLeftBarButton(with image: String) {
+        guard let uiimage = UIImage(named: image) else { return }
+        let barButton = UIBarButtonItem(image: uiimage.withRenderingMode(.alwaysTemplate), style: .plain, target: self, action: #selector(dismissButtonTapped(_:)))
+        navigationItem.leftBarButtonItem = barButton
     }
     
     // MARK:  Show/Hide HUD
@@ -105,7 +118,7 @@ class BaseViewController: UIViewController {
     }
     
     // MARK: - Show Alert
-    open func showAlert(title: String, message: String, style: UIAlertController.Style, hasTwoButton: Bool = false, okAction: @escaping (_ action: UIAlertAction) -> Void ) {
+    open func showAlert(title: String, message: String, style: UIAlertController.Style, hasTwoButton: Bool = false, actionButtonTitle: String = "Ok", okAction: @escaping (_ action: UIAlertAction) -> Void ) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: style)
         let ok = UIAlertAction(title: "Ok", style: .default, handler: okAction)
         alert.addAction(ok)
@@ -158,6 +171,9 @@ class BaseViewController: UIViewController {
             if responseString.result.isSuccess {
                 if 200..<300 ~= statusCode {
                     completion(responseString)
+                } else if statusCode == 401 {
+                    // Unauthorize
+                    
                 }
             } else {
                 self.showAlert(errorMessage: responseString.error.debugDescription)
@@ -182,6 +198,29 @@ class BaseViewController: UIViewController {
             }
         }
     }
+    
+    //MARK: Default Alert
+    func showAlert(title: String, mess: String, style: UIAlertController.Style, isSimpleAlert: Bool = true) {
+        let alertController = UIAlertController(title: title, message: mess, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default) { [weak self] (action) in
+            self?.okAction()
+        }
+        alertController.addAction(okAction)
+
+        if !isSimpleAlert { ///simple alert
+            let cancelAction = UIAlertAction(title: "Huỷ", style: .cancel, handler: nil)
+            alertController.addAction(cancelAction)
+        }
+        present(alertController, animated: true)
+    }
+    
+    func okAction() {
+        
+    }
+    
+    func presentWithNav(_ controller: UIViewController) {
+        self.present(UINavigationController(rootViewController: controller), animated: true, completion: nil)
+    }
 }
 
 // MARK: - Request Body
@@ -199,9 +238,9 @@ extension BaseViewController {
     // Response Non-token
     func requestNonTokenResponseString(urlString: String, method: HTTPMethod, params: Parameters? = nil, encoding: ParameterEncoding, headers: HTTPHeaders? = nil,  completion: @escaping (_ response: DataResponse<String>) -> Void ) {
         guard let url = URL(string: urlString) else { return }
-//        self.showHUD()
+        self.showHUD()
         Alamofire.request(url, method: method, parameters: params, encoding: encoding).responseString { (responseString) in
-//            self.hideHUD()
+            self.hideHUD()
             guard let statusCode = responseString.response?.statusCode else { return }
             print(responseString)
             print(statusCode)
@@ -221,16 +260,22 @@ extension BaseViewController {
 extension BaseViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        location = (locations ).last
+        currentLocation = (locations ).last
+//        currentLocation = manager.location
 //        locationManager.stopUpdatingLocation()
+//        guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
+//        print("locations = \(locValue.latitude) \(locValue.longitude)")
+//        MyLocation.lat = locValue.latitude
+//        MyLocation.long = locValue.longitude
     }
     
+    /// GPS on
     func checkCoreLocationPermission(){
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestAlwaysAuthorization()
         locationManager.distanceFilter = 50
-        locationManager.startUpdatingLocation()
         locationManager.delegate = self
+        locationManager.startUpdatingLocation()
         
         if CLLocationManager.authorizationStatus() == .authorizedWhenInUse{
             self.locationManager.startUpdatingLocation()
@@ -284,7 +329,8 @@ extension BaseViewController {
         Alamofire.request(urll, method: method, parameters: param, encoding: encoding, headers: tokenHeader).responseString { [weak self] (response) in
             guard let wSelf = self else { return }
             wSelf.hideHUD()
-            print(response.response?.statusCode ?? 0)
+            guard let statusCode = response.response?.statusCode else { return }
+            print("statusCode",  statusCode)
             if response.response?.statusCode == 200 && response.result.isSuccess {
                 guard let jsonString = response.value,
                       let jsonData = jsonString.data(using: .utf8),
@@ -292,7 +338,7 @@ extension BaseViewController {
                 else { return }
                 completion(response, jsonData, statusCode)
             } else {
-                wSelf.showAlert(errorMessage: response.debugDescription)
+                wSelf.showAlert(title: "Lỗi", mess: "Không thể kết nối đến server! status code : \(statusCode)", style: .alert)
             }
         }
     }
@@ -313,7 +359,7 @@ extension BaseViewController {
         Alamofire.request(urll, method: method, parameters: param, encoding: encoding, headers: tokenHeader).responseString { [weak self] (response) in
             guard let wSelf = self else { return }
             wSelf.hideHUD()
-            print(response.response?.statusCode ?? 0)
+            print("statusCode: ", response.response?.statusCode ?? 0)
             if response.result.isSuccess {
                 guard let jsonString = response.value,
                       let jsonData = jsonString.data(using: .utf8),
@@ -330,6 +376,34 @@ extension BaseViewController {
                 wSelf.showAlert(errorMessage: response.debugDescription)
             }
         }
+    }
+    
+    
+    func newApiRequest_responseDict(url: String,
+                                    method: HTTPMethod,
+                                    param: Parameters? = nil,
+                                    encoding: ParameterEncoding = JSONEncoding.default,
+                                    completion: @escaping (_ response : DataResponse<JSON>, _ dict: [String: Any], _ statusCode: Int) -> Void) {
+        var tokenHeader: HTTPHeaders?
+        if let _token = Account.current?.access_token {
+            tokenHeader = ["Authorization" : "Bearer \(_token)"]
+        } else {
+            tokenHeader = nil
+        }
+        let urll = URL(string: url)!
+        self.showHUD()
+        Alamofire.request(urll, method: method, parameters: param, encoding: encoding, headers: tokenHeader).responseSwiftyJSON(completionHandler: { [weak self] (response) in
+            guard let wSelf = self else { return }
+            wSelf.hideHUD()
+            guard let statusCode = response.response?.statusCode else { return }
+            print("statusCode",  statusCode)
+            if response.response?.statusCode == 200 && response.result.isSuccess {
+//                guard let dict = response.value?.dictionaryObject else { return }
+                completion(response, [:], statusCode)
+            } else {
+                wSelf.showAlert(title: "Lỗi", mess: "Không thể kết nối đến server! status code : \(statusCode)", style: .alert)
+            }
+        })
     }
     
     func signOut() {

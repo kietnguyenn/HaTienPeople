@@ -1,14 +1,17 @@
 //
 //  Extensions.swift
-//  HaTienEmployeeLast
+//  HTEmployee
 //
-//  Created by Apple on 10/4/20.
-//  Copyright © 2020 MacBook. All rights reserved.
+//  Created by Apple on 12/04/2021.
 //
 
 import Foundation
 import Alamofire
 import PhotosUI
+import UIKit
+import DynamicColor
+
+
 
 //func newJSONDecoder() -> JSONDecoder {
 //    let decoder = JSONDecoder()
@@ -25,7 +28,6 @@ import PhotosUI
 //    }
 //    return encoder
 //}
-
 extension PHAsset {
     var image : UIImage {
         var thumbnail = UIImage()
@@ -212,4 +214,82 @@ extension UIImage {
 
     return newImage!
   }
+}
+
+extension UIColor {
+    static func rgb(red: CGFloat, green: CGFloat, blue: CGFloat) -> UIColor {
+        return UIColor(red: red/255, green: green/255, blue: blue/255, alpha: 1)
+    }
+    
+    static func specialGreenColor() -> UIColor {
+        let color = DynamicColor(hexString: "4095A3")
+        return color
+    }
+    
+    static let mainColor = DynamicColor(hexString: "009DAF")
+}
+
+extension UIView {
+    
+    func addContraintsWithFormat(format: String, views: UIView...) {
+        var viewsDictionary = [String:UIView]()
+        for (index, view) in views.enumerated() {
+            let key = "v\(index)"
+            viewsDictionary[key] = view
+            view.translatesAutoresizingMaskIntoConstraints = false
+        }
+        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: format,
+                                                      options: NSLayoutConstraint.FormatOptions(),
+                                                      metrics: nil,
+                                                      views: viewsDictionary))
+    }
+}
+
+
+
+// MARK: Convert String to Dictionary
+public func convertStringToDictionary(text: String) -> [String: Any]? {
+    if let data = text.data(using: .utf8) {
+        do {
+            return try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    return nil
+}
+
+
+// MARK: Config date/time Server to device formatter
+public func configDateTimeStringOnServerToDevice(dateString: String) -> (time: String, date: String) {
+    let subTimeString = dateString.components(separatedBy: ".")
+    let myDate = subTimeString[0].convertStringToDate(with: "yyyy-MM-dd'T'HH:mm:ss")
+    let dateResult = myDate.convertDateToString(with: "dd-MM-yyyy")
+    let timeResult = myDate.convertDateToString(with: "HH:mm:ss")
+    
+    return (timeResult, dateResult)
+}
+
+
+public func covertDateTimeToDeviceWithoutZ(_ dateString: String) -> (time: String, date: String) {
+//    let subTimeString = dateString.components(separatedBy: ".")
+    let myDate = dateString.convertStringToDate(with: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+    let dateResult = myDate.convertDateToString(with: "dd-MM-yyyy")
+    let timeResult = myDate.convertDateToString(with: "HH:mm:ss")
+    
+    return (timeResult, dateResult)
+}
+
+// read JSON File
+public func readJSONFile(forName name: String) -> Data? {
+    do {
+        if let bundlePath = Bundle.main.path(forResource: name,
+                                             ofType: "json"),
+            let jsonData = try String(contentsOfFile: bundlePath).data(using: .utf8) {
+            return jsonData
+        }
+    } catch {
+        print(error)
+    }
+    return nil
 }

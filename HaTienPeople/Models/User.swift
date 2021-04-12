@@ -10,8 +10,8 @@ import Foundation
 import Combine
 
 struct User: Codable {
-    var id, userName, fullName: String
-    var title: String
+    var id, userName, fullName: String?
+    var title: String?
     var email, phoneAddress: String?
     var phoneNumber: String?
     

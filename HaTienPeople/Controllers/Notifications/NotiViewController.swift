@@ -8,7 +8,6 @@
 import Foundation
 import UIKit
 import Alamofire
-import InfiniteLayout
 
 class NotiViewController: BaseViewController {
     
@@ -16,13 +15,13 @@ class NotiViewController: BaseViewController {
     
     let cellId = "NotiCell"
     
-    var notiList = Notification() {
+    var notiList = [NotificationElement]() {
         didSet {
             print("NotiList.count = \(notiList.count)")
         }
     }
     
-    var storeOffsets = [Int: CGFloat]()
+//    var storeOffsets = [Int: CGFloat]()
     
     var destinationURL: URL? {
         didSet {
@@ -37,11 +36,11 @@ class NotiViewController: BaseViewController {
         super.viewDidLoad()
         self.title = "Thông báo"
         self.setup(notiListTableView)
-        self.loadNotiList()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        self.loadNotiList("", "", "", false)
     }
     
     func setup(_ tableView: UITableView) {
@@ -50,13 +49,24 @@ class NotiViewController: BaseViewController {
         tableView.register(UINib(nibName: cellId, bundle: nil), forCellReuseIdentifier: cellId)
         tableView.tableFooterView = UIView()
         tableView.separatorStyle = .singleLine
+        tableView.rowHeight = 100.0
+        tableView.contentInset.top = 20.0
+        tableView.contentInset.bottom = 20.0
     }
     
-    fileprivate func loadNotiList() {
-        newApiRerequest_responseString(url: Api.notifications,
+    fileprivate func loadNotiList(_ title: String, _ from: String, _ to: String, _ dateDescending: Bool) {
+        let param : Parameters = [
+//            "title": title,
+//            "fromDate" : from,
+//            "toDate" : to,
+            "dateDescending": dateDescending,
+            "pageIndex": 1,
+            "pageSize": 20]
+        newApiRerequest_responseString(url: Api.notificationFilter,
                                        method: .get,
                                        param: nil,
                                        encoding: URLEncoding.default) { (res, data, status) in
+            print(res)
             guard let notiList = try? JSONDecoder().decode(Notification.self, from: data) else { return }
             self.notiList = notiList
             self.notiListTableView.reloadData()
@@ -99,8 +109,6 @@ class NotiViewController: BaseViewController {
                 print("Progress: ", progress.fractionCompleted*100)
             }
     }
-
-
 }
 
 // MARK: UITABLEVIEW DELEGATE & DATASOURCES
@@ -112,63 +120,91 @@ extension NotiViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! NotiCell
         cell.selectionStyle = .none
-        cell.fileLabel.text = "Tệp đính kèm: "
         let notiItem = notiList[indexPath.row]
-        if let title = notiItem.title {
+        
+        if let category = notiItem.notification?.category?.categoryDescription {
+            cell.typeLabel.text = category
+        }
+
+        if let title = notiItem.notification?.title {
             cell.titleLabel.text = title
         }
-        if let description = notiItem.category?.categoryDescription?.rawValue {
-            cell.contentLabel.text = "Nội dung: " + description
+        if let description = notiItem.notification?.notificationDescription {
+            cell.contentLabel.text = description
         }
-        if let files = notiItem.files {
-            cell.items = files
+        if let date = notiItem.dateCreated {
+            let date_ = configDateTimeStringOnServerToDevice(dateString: date)
+            cell.dateTimeLabel.text = date_.date
+        }
+        if let seen = notiItem.seen {
+            cell.unreadLabel.isHidden = seen
         }
         return cell
     }
     
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        guard let notiCell = cell as? NotiCell else { return }
-        notiCell.collectionViewCellOffset = storeOffsets[indexPath.row] ?? 0
-        notiCell.setupCollectionViewDatasourceDelegate(datasourceDelegate: self, forRow: indexPath.row)
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let delAction = makeDeleteContextualAction(forRowAt: indexPath)
+        
+        return UISwipeActionsConfiguration(actions: [delAction])
     }
+    
+    //MARK: - Contextual Actions
+    private func makeDeleteContextualAction(forRowAt indexPath: IndexPath) -> UIContextualAction {
+        return UIContextualAction(style: .destructive, title: "Xóa") { (action, swipeButtonView, completion) in
+            print("DELETE HERE")
 
-    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        guard let notiCell = cell as? NotiCell else { return }
-        storeOffsets[indexPath.row] = notiCell.collectionViewCellOffset
+            completion(true)
+        }
+    }
+    
+//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        guard let notiCell = cell as? NotiCell else { return }
+//        notiCell.collectionViewCellOffset = storeOffsets[indexPath.row] ?? 0
+//        notiCell.setupCollectionViewDatasourceDelegate(datasourceDelegate: self, forRow: indexPath.row)
+//    }
+//
+//    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        guard let notiCell = cell as? NotiCell else { return }
+//        storeOffsets[indexPath.row] = notiCell.collectionViewCellOffset
+//    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        let selectedItem = notiList[indexPath.row]
+//        let vc = self.storyboard?.instantiateViewController(withIdentifier: "NotificationDetailsViewController") as! NotificationDetailsViewController
+//        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 
 // MARK: UICollectionView Delegate & Datasource
-extension NotiViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FileCell", for: indexPath) as! FileCell
-        guard let files = notiList[collectionView.tag].files else { return cell }
-        if files.count > 0 {
-            let file = files[indexPath.item]
-            cell.updateUI(index: indexPath.item, item: file)
-        }
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard let files = notiList[collectionView.tag].files else { return 0 }
-        return files.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 120, height: 40)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let selectedFile = self.getSelectedFile(collectionView.tag, indexPath.item)
-        self.downloadFileWithAlamofire(with: selectedFile)
-    }
-    
-    fileprivate func getSelectedFile(_ tag: Int, _ index: Int) -> File {
-        guard let files = notiList[tag].files else { return File(id: nil, fileName: nil) }
-        return files[index]
-    }
-}
+//extension NotiViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FileCell", for: indexPath) as! FileCell
+//        guard let files = notiList[collectionView.tag].files else { return cell }
+//        if files.count > 0 {
+//            let file = files[indexPath.item]
+//            cell.updateUI(index: indexPath.item, item: file)
+//        }
+//        return cell
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        guard let files = notiList[collectionView.tag].files else { return 0 }
+//        return files.count
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        return CGSize(width: 120, height: 40)
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        let selectedFile = self.getSelectedFile(collectionView.tag, indexPath.item)
+//        self.downloadFileWithAlamofire(with: selectedFile)
+//    }
+//
+//    fileprivate func getSelectedFile(_ tag: Int, _ index: Int) -> File {
+//        guard let files = notiList[tag].files else { return File(id: nil, fileName: nil) }
+//        return files[index]
+//    }
+//}
 
 // MARK: - UIDocumentInteractionControllerDelegate
 extension NotiViewController: UIDocumentInteractionControllerDelegate {
@@ -176,3 +212,4 @@ extension NotiViewController: UIDocumentInteractionControllerDelegate {
         self
     }
 }
+
