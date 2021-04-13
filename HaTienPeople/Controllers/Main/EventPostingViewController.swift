@@ -15,6 +15,7 @@ import CoreLocation
 import Photos
 import PhotosUI
 import GooglePlaces
+import SwiftSignalRClient
 
 class EventPostingViewController: BaseViewController {
     
@@ -90,6 +91,16 @@ class EventPostingViewController: BaseViewController {
         self.getEventTypes()
         self.scrollView.delegate = self
         self.title = Constant.title.eventCreating
+        self.setupSocket()
+    }
+    
+    fileprivate func setupSocket() {
+        let connection = SignalRCoreService.shared.connection
+        connection.delegate = self
+        connection.start()
+        connection.on(method: "ReceivedLatLong") { (lat: String, long: String, eventId: String) in
+            SocketMessage.shared.`init`(lat, long, eventId)
+        }
     }
     
     func setup(scrollView: UIScrollView) {
@@ -323,12 +334,54 @@ extension EventPostingViewController: GMSAutocompleteViewControllerDelegate {
   }
 }
 
+extension EventPostingViewController: HubConnectionDelegate {
+    func connectionDidOpen(hubConnection: HubConnection) {
+        print("Connection did Open")
+//        self.send(location: self.currentLocation, connection: hubConnection)
+    }
+    
+    func connectionDidFailToOpen(error: Error) {
+        print("Fail To Open")
+    }
+    
+    func connectionDidClose(error: Error?) {
+        print("Did Close")
+    }
+    
+    func connectionDidReconnect() {
+        print("Did Reconnect")
+    }
 
-extension UIViewController {
-    func reloadViewFromNib() {
-        let parent = view.superview
-        view.removeFromSuperview()
-        view = nil
-        parent?.addSubview(view) // This line causes the view to be reloaded
+}
+
+protocol SocketMessageDelegate: class {
+    func didReceiveMessage()
+}
+
+class SocketMessage: NSObject {
+    static let shared = SocketMessage()
+    var lat = String() {
+        didSet {
+            print("Socket message lat:", lat)
+        }
+    }
+    var lng = String(){
+        didSet {
+            print("Socket message lng:", lat)
+        }
+    }
+    var eventId = String(){
+        didSet {
+            print("Socket message guid:", lat)
+        }
+    }
+    weak var delegate : SocketMessageDelegate?
+    
+    func `init`(_ lat: String, _ lng: String, _ eventId: String) {
+        self.lat = lat
+        self.lng = lng
+        self.eventId = eventId
+        guard let delegate = self.delegate else { return }
+        delegate.didReceiveMessage()
     }
 }

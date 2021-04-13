@@ -59,6 +59,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 }
 
+@available(iOS 13.0, *)
 extension SceneDelegate {
     func setupFirstScreen() -> UIViewController? {
         if let currentUserData = UserDefaults.standard.value(forKey: "CurrentUser") as? Data {

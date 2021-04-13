@@ -11,7 +11,7 @@ import SwiftSignalRClient
 public class SignalRCoreService {
     static let shared = SignalRCoreService(urlString: "https://apindashboard.vkhealth.vn/centerhub")
     
-    @Published var connection: HubConnection
+    var connection: HubConnection
     
     private init(urlString: String) {
         let url = URL(string: urlString)!

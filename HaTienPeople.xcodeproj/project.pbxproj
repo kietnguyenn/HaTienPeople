@@ -11,7 +11,6 @@
 		18267DE625359CA20058B6A2 /* locations.json in Resources */ = {isa = PBXBuildFile; fileRef = 18267DE525359CA20058B6A2 /* locations.json */; };
 		18334E6C2534A5ED00559CAA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18334E6B2534A5ED00559CAA /* AppDelegate.swift */; };
 		18334E6E2534A5ED00559CAA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18334E6D2534A5ED00559CAA /* SceneDelegate.swift */; };
-		18334E702534A5ED00559CAA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18334E6F2534A5ED00559CAA /* ViewController.swift */; };
 		18334E732534A5ED00559CAA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18334E712534A5ED00559CAA /* Main.storyboard */; };
 		18334E752534A5EF00559CAA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18334E742534A5EF00559CAA /* Assets.xcassets */; };
 		18334E782534A5EF00559CAA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18334E762534A5EF00559CAA /* LaunchScreen.storyboard */; };
@@ -36,11 +35,10 @@
 		18334EF62534DE6B00559CAA /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18334EF52534DE6B00559CAA /* ImageViewController.swift */; };
 		18334F442535680C00559CAA /* PlaceSearchingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18334F432535680C00559CAA /* PlaceSearchingViewController.swift */; };
 		186B86532578B45B00729FC7 /* UpdatePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186B86522578B45B00729FC7 /* UpdatePasswordViewController.swift */; };
-		18709B0B25549CA80029166E /* DirectionMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18709B0A25549CA80029166E /* DirectionMapViewController.swift */; };
+		18709B0B25549CA80029166E /* EmployeeLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18709B0A25549CA80029166E /* EmployeeLocationViewController.swift */; };
 		18A55D91258C937B00A3CC9E /* NotiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A55D90258C937B00A3CC9E /* NotiViewController.swift */; };
 		18A55D9D258CAE6F00A3CC9E /* NotiCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A55D9B258CAE6E00A3CC9E /* NotiCell.swift */; };
 		18A55D9E258CAE6F00A3CC9E /* NotiCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A55D9C258CAE6E00A3CC9E /* NotiCell.xib */; };
-		18A55DA925908FC300A3CC9E /* NotiDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A55DA825908FC300A3CC9E /* NotiDetailViewController.swift */; };
 		18A55DDF2591A7DC00A3CC9E /* FileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A55DDD2591A7DB00A3CC9E /* FileCell.swift */; };
 		18A55DE02591A7DC00A3CC9E /* FileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A55DDE2591A7DB00A3CC9E /* FileCell.xib */; };
 		18E1B3A02622F528006C0002 /* CurrentLocation.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 18E1B39F2622F528006C0002 /* CurrentLocation.gpx */; };
@@ -76,6 +74,7 @@
 		18E1B4532623844C006C0002 /* EventLogRow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18E1B44B2623844C006C0002 /* EventLogRow.xib */; };
 		18E1B47126242581006C0002 /* EventLogsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E1B47026242581006C0002 /* EventLogsViewController.swift */; };
 		18E1B476262425AB006C0002 /* EventLogDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E1B475262425AA006C0002 /* EventLogDetailsViewController.swift */; };
+		18E1B4E926255CAF006C0002 /* NotificationDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E1B4E826255CAF006C0002 /* NotificationDetailsViewController.swift */; };
 		5348887D4D1B6BBD463E5BEB /* Pods_HaTienPeople_HaTienPeopleUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C731659D459FFB7BD381B18A /* Pods_HaTienPeople_HaTienPeopleUITests.framework */; };
 		C0F87717ECC70094E0E8A856 /* Pods_HaTienPeopleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FBEA1534EF7874E427451D0 /* Pods_HaTienPeopleTests.framework */; };
 /* End PBXBuildFile section */
@@ -104,7 +103,6 @@
 		18334E682534A5ED00559CAA /* HaTienPeople.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HaTienPeople.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18334E6B2534A5ED00559CAA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		18334E6D2534A5ED00559CAA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		18334E6F2534A5ED00559CAA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		18334E722534A5ED00559CAA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		18334E742534A5EF00559CAA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		18334E772534A5EF00559CAA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -134,11 +132,10 @@
 		18334EF52534DE6B00559CAA /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		18334F432535680C00559CAA /* PlaceSearchingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceSearchingViewController.swift; sourceTree = "<group>"; };
 		186B86522578B45B00729FC7 /* UpdatePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePasswordViewController.swift; sourceTree = "<group>"; };
-		18709B0A25549CA80029166E /* DirectionMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionMapViewController.swift; sourceTree = "<group>"; };
+		18709B0A25549CA80029166E /* EmployeeLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeLocationViewController.swift; sourceTree = "<group>"; };
 		18A55D90258C937B00A3CC9E /* NotiViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotiViewController.swift; sourceTree = "<group>"; };
 		18A55D9B258CAE6E00A3CC9E /* NotiCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotiCell.swift; sourceTree = "<group>"; };
 		18A55D9C258CAE6E00A3CC9E /* NotiCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotiCell.xib; sourceTree = "<group>"; };
-		18A55DA825908FC300A3CC9E /* NotiDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotiDetailViewController.swift; sourceTree = "<group>"; };
 		18A55DDD2591A7DB00A3CC9E /* FileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileCell.swift; sourceTree = "<group>"; };
 		18A55DDE2591A7DB00A3CC9E /* FileCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FileCell.xib; sourceTree = "<group>"; };
 		18E1B39F2622F528006C0002 /* CurrentLocation.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = CurrentLocation.gpx; sourceTree = "<group>"; };
@@ -174,6 +171,7 @@
 		18E1B44B2623844C006C0002 /* EventLogRow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventLogRow.xib; sourceTree = "<group>"; };
 		18E1B47026242581006C0002 /* EventLogsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventLogsViewController.swift; sourceTree = "<group>"; };
 		18E1B475262425AA006C0002 /* EventLogDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventLogDetailsViewController.swift; sourceTree = "<group>"; };
+		18E1B4E826255CAF006C0002 /* NotificationDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationDetailsViewController.swift; sourceTree = "<group>"; };
 		2F6458838A089BEAFE08F725 /* Pods_HaTienPeople.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HaTienPeople.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		39A8CB2EDEA49B6EEE065AD2 /* Pods-HaTienPeople-HaTienPeopleUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HaTienPeople-HaTienPeopleUITests.release.xcconfig"; path = "Target Support Files/Pods-HaTienPeople-HaTienPeopleUITests/Pods-HaTienPeople-HaTienPeopleUITests.release.xcconfig"; sourceTree = "<group>"; };
 		6BB9C50857E2843FE5E39EEA /* Pods-HaTienPeople-HaTienPeopleUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HaTienPeople-HaTienPeopleUITests.debug.xcconfig"; path = "Target Support Files/Pods-HaTienPeople-HaTienPeopleUITests/Pods-HaTienPeople-HaTienPeopleUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -253,7 +251,6 @@
 				18334ECD2534A87A00559CAA /* Models */,
 				18334E6B2534A5ED00559CAA /* AppDelegate.swift */,
 				18334E6D2534A5ED00559CAA /* SceneDelegate.swift */,
-				18334E6F2534A5ED00559CAA /* ViewController.swift */,
 				18334E712534A5ED00559CAA /* Main.storyboard */,
 				18334E742534A5EF00559CAA /* Assets.xcassets */,
 				18334E762534A5EF00559CAA /* LaunchScreen.storyboard */,
@@ -295,7 +292,7 @@
 				18334EBD2534A87900559CAA /* EventListViewController.swift */,
 				18334EF52534DE6B00559CAA /* ImageViewController.swift */,
 				18334F432535680C00559CAA /* PlaceSearchingViewController.swift */,
-				18709B0A25549CA80029166E /* DirectionMapViewController.swift */,
+				18709B0A25549CA80029166E /* EmployeeLocationViewController.swift */,
 				186B86522578B45B00729FC7 /* UpdatePasswordViewController.swift */,
 				18A55DAD25908FCA00A3CC9E /* Notifications */,
 			);
@@ -394,7 +391,7 @@
 			isa = PBXGroup;
 			children = (
 				18A55D90258C937B00A3CC9E /* NotiViewController.swift */,
-				18A55DA825908FC300A3CC9E /* NotiDetailViewController.swift */,
+				18E1B4E826255CAF006C0002 /* NotificationDetailsViewController.swift */,
 			);
 			path = Notifications;
 			sourceTree = "<group>";
@@ -776,11 +773,10 @@
 				18E1B3EC26237689006C0002 /* Employee.swift in Sources */,
 				18E1B3F126237689006C0002 /* Account.swift in Sources */,
 				18334EDD2534A87A00559CAA /* EventListViewController.swift in Sources */,
-				18A55DA925908FC300A3CC9E /* NotiDetailViewController.swift in Sources */,
 				18334ED72534A87A00559CAA /* EventPostingViewController.swift in Sources */,
 				18334EDA2534A87A00559CAA /* UserViewController.swift in Sources */,
+				18E1B4E926255CAF006C0002 /* NotificationDetailsViewController.swift in Sources */,
 				18E1B3EA26237689006C0002 /* EventDetails.swift in Sources */,
-				18334E702534A5ED00559CAA /* ViewController.swift in Sources */,
 				18E1B4522623844C006C0002 /* EventLogRow.swift in Sources */,
 				18334EF62534DE6B00559CAA /* ImageViewController.swift in Sources */,
 				18A55D9D258CAE6F00A3CC9E /* NotiCell.swift in Sources */,
@@ -799,7 +795,7 @@
 				18A55D91258C937B00A3CC9E /* NotiViewController.swift in Sources */,
 				18334ED62534A87A00559CAA /* ImagesSelectingViewController.swift in Sources */,
 				18E1B3ED26237689006C0002 /* AdminstrativeViolationRecords03.swift in Sources */,
-				18709B0B25549CA80029166E /* DirectionMapViewController.swift in Sources */,
+				18709B0B25549CA80029166E /* EmployeeLocationViewController.swift in Sources */,
 				18334EE02534A87A00559CAA /* BaseNavigationController.swift in Sources */,
 				18334E6C2534A5ED00559CAA /* AppDelegate.swift in Sources */,
 				18E1B44C2623844C006C0002 /* CustomerCell.swift in Sources */,
@@ -1002,7 +998,7 @@
 				CURRENT_PROJECT_VERSION = 100;
 				DEVELOPMENT_TEAM = PSUT9HQT37;
 				INFOPLIST_FILE = HaTienPeople/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1027,7 +1023,7 @@
 				CURRENT_PROJECT_VERSION = 100;
 				DEVELOPMENT_TEAM = PSUT9HQT37;
 				INFOPLIST_FILE = HaTienPeople/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

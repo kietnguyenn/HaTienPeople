@@ -264,7 +264,7 @@ public func convertStringToDictionary(text: String) -> [String: Any]? {
 public func configDateTimeStringOnServerToDevice(dateString: String) -> (time: String, date: String) {
     let subTimeString = dateString.components(separatedBy: ".")
     let myDate = subTimeString[0].convertStringToDate(with: "yyyy-MM-dd'T'HH:mm:ss")
-    let dateResult = myDate.convertDateToString(with: "dd-MM-yyyy")
+    let dateResult = myDate.convertDateToString(with: "dd/MM/yyyy")
     let timeResult = myDate.convertDateToString(with: "HH:mm:ss")
     
     return (timeResult, dateResult)
@@ -292,4 +292,13 @@ public func readJSONFile(forName name: String) -> Data? {
         print(error)
     }
     return nil
+}
+
+extension UIViewController {
+    func reloadViewFromNib() {
+        let parent = view.superview
+        view.removeFromSuperview()
+        view = nil
+        parent?.addSubview(view) // This line causes the view to be reloaded
+    }
 }

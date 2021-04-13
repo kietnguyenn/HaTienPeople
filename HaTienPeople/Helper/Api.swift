@@ -33,7 +33,7 @@ struct Api {
     static let userInfo = ApiDomain.new + "api/Users/Info"
     static let files = ApiDomain.new + "api/Notification/File"
     static let notifications = ApiDomain.new + "api/Notification"
-    static let notificationFilter = ApiDomain.new + "api/NotificationUser/Filter?dateDescending=true&pageIndex=1&pageSize=10"
+    static let notificationFilter = ApiDomain.new + "api/NotificationUser/Filter?pageIndex=1&pageSize=100"
     static let eventsRelatedUser = ApiDomain.new + "api/Events/RelatedUsers"
     static let notificationsForUser = ApiDomain.new + "api/NotificationUser/Filter"
     static let addEmpToEvent = ApiDomain.new + "api/EventsAd/SetEventToUser"

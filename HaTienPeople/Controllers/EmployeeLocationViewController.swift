@@ -11,15 +11,14 @@ import GoogleMaps
 import GooglePlaces
 import Alamofire
 import CoreLocation
+import Floaty
 
-class DirectionMapViewController: BaseViewController {
+class EmployeeLocationViewController: BaseViewController {
     
     var eventLocation = CLLocationCoordinate2D()
     
     var mapView = GMSMapView()
         
-    let marker = GMSMarker()
-    
     var isMarkerCreated = false
                         
     var polyline = GMSPolyline()
@@ -41,7 +40,6 @@ class DirectionMapViewController: BaseViewController {
         self.navigationItem.leftBarButtonItem = button
     }
     @objc func doneAction(_: UIBarButtonItem) {
-//        self.delegate.didPickLocation(coordinate: marker.position)
         self.dismiss(animated: true)
     }
     
@@ -52,7 +50,7 @@ class DirectionMapViewController: BaseViewController {
         let mapViewFrame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - 20)
         self.mapView = GMSMapView.map(withFrame: mapViewFrame, camera: camera)
         self.mapView.isMyLocationEnabled = true
-        self.mapView.settings.myLocationButton = true
+//        self.mapView.settings.myLocationButton = true
 //        self.mapView.settings.compassButton = true
         self.mapView.settings.zoomGestures = true
         self.mapView.delegate = self
@@ -60,12 +58,14 @@ class DirectionMapViewController: BaseViewController {
         
         // Draw direction path
         DispatchQueue.main.async {
-            self.createMarker(titleMarker: "Vị trí sự cố", iconMarker: UIImage(named: "employee-icon")!,
-                              latitude: CLLocationDegrees(self.eventLocation.latitude), longitude: CLLocationDegrees(self.eventLocation.longitude))
-//            self.ambulanceMarker.position = CLLocationCoordinate2D(latitude: lat, longitude: long)
-            self.drawPath(startLocation: (self.currentLocation.coordinate), endLocation: (self.eventLocation))
+            self.createMarker(titleMarker: "Vị trí sự cố", location: self.eventLocation)
+            guard let lat = Double(SocketMessage.shared.lat), let lng = Double(SocketMessage.shared.lng) else { return }
+            let empLocation = CLLocationCoordinate2D(latitude: lat, longitude: lng)
+            self.createMarker(titleMarker: "Vị trí cán bộ", iconMarker: UIImage(named: "employee-icon")!.resizeImage(targetSize: CGSize(width: 40, height: 40)), location: empLocation)
+            let bounds = GMSCoordinateBounds(coordinate: self.eventLocation, coordinate: empLocation)
+            let update = GMSCameraUpdate.fit(bounds, withPadding: 50)
+            self.mapView.animate(with: update)
         }
-
     }
     
     // Setup camera view
@@ -75,12 +75,17 @@ class DirectionMapViewController: BaseViewController {
     }
     
     // Mark: Create Marker
-    func createMarker(titleMarker: String, iconMarker: UIImage, latitude: CLLocationDegrees, longitude: CLLocationDegrees) {
-        marker.position = CLLocationCoordinate2DMake(latitude, longitude)
+    func createMarker(titleMarker: String, iconMarker: UIImage? = nil, location: CLLocationCoordinate2D) {
+        let marker = GMSMarker()
+        marker.position = location
         marker.title = titleMarker
         marker.map = mapView
         marker.appearAnimation = .pop
         marker.snippet = ""
+        if let icon = iconMarker {
+            marker.icon = icon
+        }
+
     }
     
     var resultsViewController: GMSAutocompleteResultsViewController?
@@ -132,28 +137,38 @@ class DirectionMapViewController: BaseViewController {
             }
         }
     }
+    
+    func setupFloatingButton() {
+        let floaty = Floaty()
+        floaty.paddingY = 40
+        guard let image = UIImage(named: "handle")?.resizeImage(targetSize: CGSize(width: 40, height: 40)) else { return }
+        floaty.buttonImage = image
+        floaty.buttonColor = .systemBlue
+        self.view.addSubview(floaty)
+
+    }
 
 }
 
-extension DirectionMapViewController: GMSMapViewDelegate {
+extension EmployeeLocationViewController: GMSMapViewDelegate {
     func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
 //        print(" did tapped Lat: \(coordinate.latitude)")
 //        print(" did tapped Long: \(coordinate.longitude)")
     }
     
     // Place marker on map
-    func placeMarkerOnMap(coordinate: CLLocationCoordinate2D, title: String) {
-        self.setupCamera(lat: coordinate.latitude, lng: coordinate.longitude)
-        if !isMarkerCreated {
-            self.createMarker(titleMarker: title, iconMarker: UIImage(named: "location-pin")!, latitude: coordinate.latitude, longitude: coordinate.longitude)
-            self.isMarkerCreated = true
-        } else {
-            self.marker.position = coordinate
-        }
-    }
+//    func placeMarkerOnMap(coordinate: CLLocationCoordinate2D, title: String) {
+//        self.setupCamera(lat: coordinate.latitude, lng: coordinate.longitude)
+//        if !isMarkerCreated {
+//            self.createMarker(titleMarker: title, iconMarker: UIImage(named: "location-pin")!, latitude: coordinate.latitude, longitude: coordinate.longitude)
+//            self.isMarkerCreated = true
+//        } else {
+//            self.marker.position = coordinate
+//        }
+//    }
 }
 
-extension DirectionMapViewController: GMSAutocompleteResultsViewControllerDelegate {
+extension EmployeeLocationViewController: GMSAutocompleteResultsViewControllerDelegate {
     func resultsController(_ resultsController: GMSAutocompleteResultsViewController,
                            didAutocompleteWith place: GMSPlace) {
         searchController?.isActive = false
@@ -173,7 +188,7 @@ extension DirectionMapViewController: GMSAutocompleteResultsViewControllerDelega
         }
 //        let plusCode = self.customFormattedAddressIntoPlusCode(placeFormattedAddress)
 //        getLocationBy(plusCode)
-        self.placeMarkerOnMap(coordinate: place.coordinate, title: placeName)
+//        self.placeMarkerOnMap(coordinate: place.coordinate, title: placeName)
         
     }
 

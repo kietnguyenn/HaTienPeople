@@ -56,6 +56,7 @@ class EventListViewController: BaseViewController {
         setup(tableView: eventsTableView)
         self.segmentControl.addTarget(self, action: #selector(didChange(_:)), for: .valueChanged)
         self.segmentControl.selectedSegmentIndex = 0
+        SocketMessage.shared.delegate = self
     }
     
     @objc func didChange(_ segment: UISegmentedControl) {
@@ -158,6 +159,11 @@ extension EventListViewController: UITableViewDelegate, UITableViewDataSource {
         cell.dateTimeLabel.text = "Ngày \(MyDateFormatter.convertDateTimeStringOnServerToDevice(dateString: event.dateTime! ).date) lúc \(MyDateFormatter.convertDateTimeStringOnServerToDevice(dateString: event.dateTime! ).time)"
         cell.addressLabel.text = event.address
         cell.contentLabel.text = event.decription
+        if event.status! == EventStatusId.handling.rawValue {
+            if SocketMessage.shared.eventId == event.id {
+                cell.isGoingImage.isHidden = false
+            }
+        }
         cell.selectionStyle = .none
         return cell
     }
@@ -212,4 +218,10 @@ extension EventListViewController: EventDetailsViewControllerDelegate {
     }
     
     
+}
+
+extension EventListViewController: SocketMessageDelegate {
+    func didReceiveMessage() {
+        self.eventsTableView.reloadData()
+    }
 }

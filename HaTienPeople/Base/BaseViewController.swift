@@ -53,7 +53,11 @@ class BaseViewController: UIViewController {
         self.activityIndicator.frame = CGRect(x: 0.0, y: 0.0, width: 40.0, height: 40.0);
         self.activityIndicator.center = uiView.center
         self.activityIndicator.hidesWhenStopped = true
-        self.activityIndicator.style = .large
+        if #available(iOS 13.0, *) {
+            self.activityIndicator.style = .large
+        } else {
+            // Fallback on earlier versions
+        }
         uiView.addSubview(self.activityIndicator)
         self.activityIndicator.startAnimating()
     }
@@ -97,15 +101,15 @@ class BaseViewController: UIViewController {
     // MARK:  Show/Hide HUD
     func showHUD() {
         DispatchQueue.main.async {
-//            SVProgressHUD.show()
-            self.showActivityIndicatory(uiView: self.view)
+            SVProgressHUD.show()
+//            self.showActivityIndicatory(uiView: self.view)
             self.view.isUserInteractionEnabled = false
         }
     }
     func hideHUD() {
         DispatchQueue.main.async {
-//            SVProgressHUD.dismiss()
-            self.hideActivityIndicator()
+            SVProgressHUD.dismiss()
+//            self.hideActivityIndicator()
             self.view.isUserInteractionEnabled = true
         }    }
     

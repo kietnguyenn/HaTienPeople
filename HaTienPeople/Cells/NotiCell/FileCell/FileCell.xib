@@ -18,18 +18,35 @@
                 <rect key="frame" x="0.0" y="0.0" width="339" height="123"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="X" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8w8-5r-DWY">
-                        <rect key="frame" x="10" y="53.5" width="319" height="16.5"/>
-                        <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="12"/>
-                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <nil key="highlightedColor"/>
-                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fVZ-uG-2Pf">
+                        <rect key="frame" x="30" y="0.0" width="279" height="123"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="X" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8w8-5r-DWY">
+                                <rect key="frame" x="0.0" y="53.5" width="279" height="16.5"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="12"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemTealColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="8w8-5r-DWY" secondAttribute="trailing" id="E7y-zR-m1X"/>
+                            <constraint firstItem="8w8-5r-DWY" firstAttribute="leading" secondItem="fVZ-uG-2Pf" secondAttribute="leading" id="Q27-yO-gyi"/>
+                            <constraint firstItem="8w8-5r-DWY" firstAttribute="centerY" secondItem="fVZ-uG-2Pf" secondAttribute="centerY" id="wLV-Cz-oH9"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="10"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
                 </subviews>
-                <color key="backgroundColor" systemColor="systemTealColor"/>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
-                    <constraint firstItem="8w8-5r-DWY" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="PXp-gO-hoJ"/>
-                    <constraint firstItem="8w8-5r-DWY" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="hjl-qW-U2A"/>
-                    <constraint firstAttribute="trailing" secondItem="8w8-5r-DWY" secondAttribute="trailing" constant="10" id="pRe-8a-Ru6"/>
+                    <constraint firstItem="fVZ-uG-2Pf" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="2xb-nc-GoY"/>
+                    <constraint firstAttribute="bottom" secondItem="fVZ-uG-2Pf" secondAttribute="bottom" id="KfE-1T-FhS"/>
+                    <constraint firstAttribute="trailing" secondItem="fVZ-uG-2Pf" secondAttribute="trailing" constant="30" id="OUg-ao-aDs"/>
+                    <constraint firstItem="fVZ-uG-2Pf" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="30" id="i3W-Lf-ye1"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

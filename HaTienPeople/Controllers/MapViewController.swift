@@ -88,8 +88,13 @@ class MapViewController: BaseViewController {
 
         searchController = UISearchController(searchResultsController: resultsViewController)
         searchController?.searchResultsUpdater = resultsViewController
-        searchController?.searchBar.searchTextField.backgroundColor = .white
-        searchController?.searchBar.searchTextField.tintColor = .black
+        if #available(iOS 13.0, *) {
+            searchController?.searchBar.searchTextField.backgroundColor = .white
+            searchController?.searchBar.searchTextField.tintColor = .black
+        } else {
+            // Fallback on earlier versions
+            
+        }
 
         // Put the search bar in the navigation bar.
         searchController?.searchBar.sizeToFit()
@@ -114,8 +119,15 @@ class MapViewController: BaseViewController {
                   let resultCoordinates = try? JSONDecoder().decode(CoordinateResult.self, from: jsonData)
                   else { return }
             let formattedAddress = resultCoordinates.results[0].formattedAddress
-            guard let searchTextField = self.searchController?.searchBar.searchTextField else { return }
-            searchTextField.text = formattedAddress
+            
+            if #available(iOS 13.0, *) {
+                guard let searchTextField = self.searchController?.searchBar.searchTextField else { return }
+                searchTextField.text = formattedAddress
+            } else {
+                // Fallback on earlier versions
+                guard let textField = self.searchController?.searchBar.value(forKey: "searchField") as? UITextField else { return }
+                textField.text = formattedAddress
+            }
         }
     }
 }

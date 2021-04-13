@@ -10,6 +10,8 @@ import AppCenter
 import AppCenterAnalytics
 import AppCenterCrashes
 import IQKeyboardManagerSwift
+import GoogleMaps
+import GooglePlaces
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -21,17 +23,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         self.setupKeyboardManager()
         self.setupAppCenter()
+        self.setupGGMapApis()
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        self.window?.rootViewController = setupFirstScreen()
+        self.window?.makeKeyAndVisible()
+
+
         return true
     }
 
     // MARK: UISceneSession Lifecycle
 
+    @available(iOS 13.0, *)
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
         // Called when a new scene session is being created.
         // Use this method to select a configuration to create the new scene with.
         return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
     }
 
+    @available(iOS 13.0, *)
     func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
         // Called when the user discards a scene session.
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
@@ -50,5 +60,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
     }
+    
+    func setupFirstScreen() -> UIViewController? {
+        if let currentUserData = UserDefaults.standard.value(forKey: "CurrentUser") as? Data {
+            guard let currentUser = try? JSONDecoder().decode(Account.self, from: currentUserData) else { return nil }
+            Account.current = currentUser
+//            return  BaseNavigationController(rootViewController: vc)
+            return BaseTabBarController()
+        } else {
+            return  MyStoryboard.main.instantiateViewController(withIdentifier: "SignInViewController") as! SignInViewController
+        }
+
+    }
+    
+    func setupGGMapApis() {
+        GMSServices.provideAPIKey(GMSApiKey.garageKey)
+        GMSPlacesClient.provideAPIKey(GMSApiKey.garageKey)
+    }
+
 }
 

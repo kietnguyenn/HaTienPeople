@@ -272,14 +272,24 @@ class EventDetailsViewController: BaseViewController {
     
     // Floaty
     func setupFloatingButton() {
-//        let floaty = Floaty()
-//        floaty.paddingY = 40
-//        guard let image = UIImage(named: "handle")?.resizeImage(targetSize: CGSize(width: 40, height: 40)) else { return }
-//        floaty.buttonImage = image
-//        floaty.buttonColor = .systemBlue
-//        guard let event = self.event else { return }
-//        
-//        self.view.addSubview(floaty)
+        let floaty = Floaty()
+        floaty.paddingY = 40
+        guard let image = UIImage(named: "handle")?.resizeImage(targetSize: CGSize(width: 40, height: 40)) else { return }
+        floaty.buttonImage = image
+        floaty.buttonColor = .systemBlue
+        guard let event = self.event else { return }
+
+        let showEmpLocation = FloatyItem()
+        showEmpLocation.makeFloatingItem(imageName: "handle", color: .systemGreen, title: "Theo dõi cán bộ") { (floaty) in
+            self.showEventLocation()
+        }
+        
+        if event.status! == EventStatusId.handling.rawValue {
+            if SocketMessage.shared.eventId == event.id {
+                floaty.addItem(item: showEmpLocation)
+            }
+        }
+        self.view.addSubview(floaty)
     }
     
     
@@ -417,7 +427,7 @@ class EventDetailsViewController: BaseViewController {
     // MARK: - Show directions
     fileprivate func showEventLocation() {
         // present direction map view
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "DirectionMapViewController") as! DirectionMapViewController
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "DirectionMapViewController") as! EmployeeLocationViewController
         let nav = BaseNavigationController(rootViewController: vc)
         nav.modalPresentationStyle = .fullScreen
         guard let event = self.event,

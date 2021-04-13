@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FileCell: UICollectionViewCell {
+class FileCell: UITableViewCell {
     
     @IBOutlet weak var fileNameLabel: UILabel!
 
@@ -32,5 +32,6 @@ class FileCell: UICollectionViewCell {
         self.contentView.layer.cornerRadius = 8.0
         self.contentView.clipsToBounds = true
         self.contentView.frame.size = CGSize(width: 30, height: 30)
+        self.selectionStyle = .none
     }
 }
