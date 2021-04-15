@@ -24,6 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.setupKeyboardManager()
         self.setupAppCenter()
         self.setupGGMapApis()
+        self.turnOffDarkMode()
         self.window = UIWindow(frame: UIScreen.main.bounds)
         self.window?.rootViewController = setupFirstScreen()
         self.window?.makeKeyAndVisible()
@@ -76,6 +77,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func setupGGMapApis() {
         GMSServices.provideAPIKey(GMSApiKey.garageKey)
         GMSPlacesClient.provideAPIKey(GMSApiKey.garageKey)
+    }
+    
+    func turnOffDarkMode() {
+        if #available(iOS 13.0, *) {
+            self.window?.overrideUserInterfaceStyle = .light
+        }
     }
 
 }

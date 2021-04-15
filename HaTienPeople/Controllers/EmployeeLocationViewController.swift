@@ -18,14 +18,14 @@ class EmployeeLocationViewController: BaseViewController {
     var eventLocation = CLLocationCoordinate2D()
     
     var mapView = GMSMapView()
-        
-    var isMarkerCreated = false
-                        
+                                
     var polyline = GMSPolyline()
         
     var directionPath = GMSPath()
     
     var directionPolyline = GMSPolyline()
+    
+    var empMarker = GMSMarker()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +33,7 @@ class EmployeeLocationViewController: BaseViewController {
         self.setupDoneButton()
         self.configMapView()
 //        self.setupSearchController()
+        SocketMessage.shared.delegate = self
     }
     
     fileprivate func setupDoneButton() {
@@ -85,7 +86,10 @@ class EmployeeLocationViewController: BaseViewController {
         if let icon = iconMarker {
             marker.icon = icon
         }
-
+    }
+    
+    fileprivate func createEmpMarker(_ title: String, _ icon: UIImage? = nil, _ location: CLLocationCoordinate2D) {
+        
     }
     
     var resultsViewController: GMSAutocompleteResultsViewController?
@@ -241,4 +245,9 @@ extension EmployeeLocationViewController: GMSAutocompleteResultsViewControllerDe
 //            }
 //        }
 //    }
+}
+extension EmployeeLocationViewController: SocketMessageDelegate {
+    func didReceiveMessage() {
+        
+    }
 }

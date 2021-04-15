@@ -11,6 +11,10 @@ import UIKit
 import Alamofire
 import PasswordTextField
 
+let _customer = "Customer"
+let _employee = "Employee"
+let _admin = "Admin"
+
 class SignInViewController: BaseViewController {
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -40,8 +44,12 @@ class SignInViewController: BaseViewController {
             // Save user data
             if 200..<300 ~= status {
                 guard let currentUser = try? JSONDecoder().decode(Account.self, from: jsondata) else { return }
-                self.setCurrentUser(user: currentUser)
-                self.changeRootView()
+                if currentUser.roles == _customer {
+                    self.setCurrentUser(user: currentUser)
+                    self.changeRootView()
+                } else {
+                    self.showAlert(errorMessage: "Tên đăng nhập hoặc mật khẩu không đúng")
+                }
             } else if status == 400 {
                 self.showAlert(errorMessage: "Tên đăng nhập hoặc mật khẩu không đúng")
             }

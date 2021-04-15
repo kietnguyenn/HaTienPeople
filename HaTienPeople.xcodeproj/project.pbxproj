@@ -444,8 +444,8 @@
 		18E1B47B262425BC006C0002 /* EventLogVc */ = {
 			isa = PBXGroup;
 			children = (
-				18E1B475262425AA006C0002 /* EventLogDetailsViewController.swift */,
 				18E1B47026242581006C0002 /* EventLogsViewController.swift */,
+				18E1B475262425AA006C0002 /* EventLogDetailsViewController.swift */,
 			);
 			path = EventLogVc;
 			sourceTree = "<group>";
@@ -1003,7 +1003,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.6;
+				MARKETING_VERSION = 1.0.7;
 				PRODUCT_BUNDLE_IDENTIFIER = vn.hatien.HaTienPeople;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1028,7 +1028,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.6;
+				MARKETING_VERSION = 1.0.7;
 				PRODUCT_BUNDLE_IDENTIFIER = vn.hatien.HaTienPeople;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

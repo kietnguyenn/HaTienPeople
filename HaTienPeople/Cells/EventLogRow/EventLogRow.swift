@@ -12,7 +12,7 @@ class EventLogRow: UITableViewCell {
     @IBOutlet var usernameLabel: UILabel!
     @IBOutlet var informationLabel: UILabel!
     @IBOutlet var dateTimeLabel: UILabel!
-
+    @IBOutlet var eventLogTypeLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

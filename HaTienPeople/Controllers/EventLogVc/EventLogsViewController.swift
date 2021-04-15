@@ -83,13 +83,14 @@ extension EventLogsViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! EventLogRow
         let eventLog = eventLogs[indexPath.row]
         print(eventLog.id)
-        if let taskMasterName = eventLog.taskMaster?.fullName {
-            cell.usernameLabel.text = taskMasterName
+        if let userName = eventLog.userName {
+            cell.usernameLabel.text = userName
         }
         
         if let content = eventLog.information, let eventLogType = eventLog.eventLogType?.description {
 //            cell.informationLabel.text = eventLogType + " với nội dung: " + content
             cell.informationLabel.text = content
+            cell.eventLogTypeLabel.text = eventLogType
         }
         
         let dateTimeString = eventLog.dateTime
