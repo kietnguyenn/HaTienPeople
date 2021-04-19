@@ -12,6 +12,7 @@ import Alamofire
 import SwiftyJSON
 import CoreLocation
 import Floaty
+import FSPagerView
 
 enum Directions: String {
     case invitation = "Mời"
@@ -34,8 +35,8 @@ protocol EventDetailsViewControllerDelegate: class {
 class EventDetailsViewController: BaseViewController {
     
     @IBOutlet weak var tableView : UITableView!
-    @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var pageControl: UIPageControl!
+//    @IBOutlet weak var scrollView: UIScrollView!
+//    @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var eventTypeLabel: UILabel!
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var dateTimeLabel: UILabel!
@@ -43,6 +44,12 @@ class EventDetailsViewController: BaseViewController {
     @IBOutlet weak var contentLabel: UILabel!
     @IBOutlet weak var postedByUserLabel: UILabel!
     @IBOutlet weak var acceptedEmployeeLabel: UILabel!
+    
+    @IBOutlet weak var pagerView: FSPagerView!{
+        didSet {
+            self.pagerView.register(FSPagerViewCell.self, forCellWithReuseIdentifier: "cell")
+        }
+    }
         
     var delegate: EventDetailsViewControllerDelegate!
     
@@ -61,7 +68,8 @@ class EventDetailsViewController: BaseViewController {
     var images = [UIImage]() {
         didSet {
             print("Images: \(images.count)")
-            self.setup(scrollView: self.scrollView)
+//            self.setup(scrollView: self.scrollView)
+            self.pagerView.reloadData()
         }
     }
     
@@ -89,13 +97,26 @@ class EventDetailsViewController: BaseViewController {
     
     let cellId = "EventHandlingUserCell"
 
+    // MARK: - View did load
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Chi tiết"
+        self.setup(self.pagerView)
         self.setup(tableView: self.tableView)
         self.showDismissButton(title: "Xong")
         self.showRightBarButtonWithImage(image: "history", action: #selector(showEventLogs), isEnable: true)
         self.loadData()
+    }
+    
+    // MARK: Setup pager View
+    func setup(_ pagerView: FSPagerView) {
+        pagerView.delegate = self
+        pagerView.dataSource = self
+        pagerView.automaticSlidingInterval = 3.0
+        pagerView.decelerationDistance = 2
+        pagerView.itemSize = CGSize(width: 340, height: 200)
+        pagerView.interitemSpacing = 10
+        pagerView.transformer = FSPagerViewTransformer(type: .linear)
     }
     
     @objc func showEventLogs() {
@@ -116,25 +137,25 @@ class EventDetailsViewController: BaseViewController {
         self.setupFloatingButton()
     }
     
-    func setup(scrollView: UIScrollView) {
-        scrollView.delegate = self
-        scrollView.showsHorizontalScrollIndicator = false
-        scrollView.showsVerticalScrollIndicator = false
-        scrollView.alwaysBounceVertical = false
-        scrollView.isPagingEnabled = true
-        
-        for index in 0..<images.count {
-            frame.origin.x = scrollView.frame.size.width * CGFloat(index)
-            frame.size = scrollView.frame.size
-            
-            let imageView = UIImageView(frame: frame)
-            imageView.contentMode = .scaleAspectFit
-            imageView.image = images[index]
-            self.scrollView.addSubview(imageView)
-        }
-        scrollView.contentSize = CGSize(width: scrollView.frame.size.width * CGFloat(images.count), height: scrollView.frame.size.height)
-        self.pageControl.numberOfPages = images.count
-    }
+//    func setup(scrollView: UIScrollView) {
+//        scrollView.delegate = self
+//        scrollView.showsHorizontalScrollIndicator = false
+//        scrollView.showsVerticalScrollIndicator = false
+//        scrollView.alwaysBounceVertical = false
+//        scrollView.isPagingEnabled = true
+//
+//        for index in 0..<images.count {
+//            frame.origin.x = scrollView.frame.size.width * CGFloat(index)
+//            frame.size = scrollView.frame.size
+//
+//            let imageView = UIImageView(frame: frame)
+//            imageView.contentMode = .scaleAspectFit
+//            imageView.image = images[index]
+//            self.scrollView.addSubview(imageView)
+//        }
+//        scrollView.contentSize = CGSize(width: scrollView.frame.size.width * CGFloat(images.count), height: scrollView.frame.size.height)
+//        self.pageControl.numberOfPages = images.count
+//    }
     
     func setupDetailContent() {
         guard let event = self.event,
@@ -402,27 +423,7 @@ class EventDetailsViewController: BaseViewController {
         // canceling -> eventLogId = 5
         self.updateEventLog(0, content: content, eventLogType: EventLogTypeId.empCancel.rawValue)
     }
-    
-    // MARK: start going
-    fileprivate func startGoing() {
-        guard let event = self.event, let currentAcc = Account.current
-        else { return }
-        let params: [String: Any] = [
-            "eventId": event.id!,
-            "information": "Cán bộ bắt đầu di chuyển",
-            "userId": currentAcc.id,
-            "status": EventStatusId.handling.rawValue,
-            "eventLogTypeId": EventLogTypeId.empStartHandle.rawValue
-        ]
-        newApiRerequest_responseString(url: Api.eventLogs, method: .post, param: params, encoding: JSONEncoding.default) { [weak self] (response, jsonData, status) in
-//            guard let wSelf = self else { return }
-//            let vc = wSelf.storyboard?.instantiateViewController(withIdentifier: "InProgressViewController") as! InProgressViewController
-//            let nav = BaseNavigationController(rootViewController: vc)
-//            vc.event = wSelf.event
-//            nav.modalPresentationStyle = .fullScreen
-//            wSelf.present(nav, animated: true, completion: nil)
-        }
-    }
+
     
     // MARK: - Show directions
     fileprivate func showEventLocation() {
@@ -437,36 +438,7 @@ class EventDetailsViewController: BaseViewController {
         vc.eventLocation = CLLocationCoordinate2D(latitude: Double(lat)!, longitude: Double(lng)!)
         self.present(nav, animated: true)
     }
-    
-    // MARK: - update more eventlog
-    func postEventLog(with status: Int) {
-//        let vc = MyStoryboard.main.instantiateViewController(withIdentifier: "ImageUpdatingForEventLogViewController") as! ImageUpdatingForEventLogViewController
-//        guard let eventID = self.event?.id else { return }
-//        vc.status = status
-//        vc.eventId = eventID
-//        vc.delegate = self
-//        self.present(vc, animated: true, completion: nil)
-    }
-    
-    // MARK: Forward event
-    func showEmployeeList(_ direction : Directions) {
-//        let vc = self.storyboard?.instantiateViewController(withIdentifier: "EmployeeListViewController") as! EmployeeListViewController
-//        vc.delegate = self
-//        vc.handlingEmpList = self.empList
-//        vc.eventId = self.event!.id!
-//        vc.direction = direction
-//        let nav = BaseNavigationController(rootViewController: vc)
-//        self.present(nav, animated: true, completion: nil)
-    }
-    
-    func showCancelingView() {
-//        let vc = MyStoryboard.main.instantiateViewController(withIdentifier: "CancelingEventViewController") as! CancelingEventViewController
-//        guard let eventID = self.event?.id else { return }
-//        vc.eventId = eventID
-//        vc.delegate = self
-//        self.present(vc, animated: true, completion: nil)
-    }
-    
+        
     // MARK:  Get event Handling by id
     func getHandlingEmployee(id: String) {
         _newApiRequestWithErrorHandling(url: Api.eventsRelatedUser + "/\(id)",
@@ -518,11 +490,26 @@ class EventDetailsViewController: BaseViewController {
     }
 }
 
-extension EventDetailsViewController: UIScrollViewDelegate {
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        let page = scrollView.contentOffset.x/scrollView.frame.size.width
-            pageControl.currentPage = Int(page)
-        }
+// MARK: - FSpager view delegate & datasource
+extension EventDetailsViewController: FSPagerViewDelegate, FSPagerViewDataSource {
+    func numberOfItems(in pagerView: FSPagerView) -> Int {
+        return images.count
+    }
+    
+    func pagerView(_ pagerView: FSPagerView, cellForItemAt index: Int) -> FSPagerViewCell {
+        let cell = pagerView.dequeueReusableCell(withReuseIdentifier: "cell", at: index)
+        cell.imageView?.image = images[index]
+        cell.imageView?.contentMode = .scaleAspectFit
+        cell.selectedBackgroundView = UIView()
+        return cell
+    }
+    
+    func pagerView(_ pagerView: FSPagerView, didSelectItemAt index: Int) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "ImageViewController") as! ImageViewController
+        vc.image = self.images[index]
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true)
+    }
 }
 
 extension EventDetailsViewController: UITableViewDelegate, UITableViewDataSource {
@@ -546,23 +533,6 @@ extension EventDetailsViewController: UITableViewDelegate, UITableViewDataSource
         
     }
 }
-//
-//extension EventDetailsViewController: ImageUpdatingForEventLogViewControllerDelegate {
-//    func didUpdate() {
-//        self.loadData()
-//    }
-//}
-
-//extension EventDetailsViewController :  EmployeeListViewControllerDelegate {
-//    func didForward() {
-//        // reload data
-//        self.loadData()
-//    }
-//
-//    func didInvite() {
-//        self.loadData()
-//    }
-//}
 
 extension EventDetailsViewController : EventHandlingUserCellDelegate {
     func didTapCallButton(with index: Int) {
@@ -570,15 +540,6 @@ extension EventDetailsViewController : EventHandlingUserCellDelegate {
     }
 }
 
-//extension EventDetailsViewController : CancelingEventViewControllerDelegate {
-//    func didCancel() {
-//        // set timer to put back
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-//            self.delegate.didCancel()
-//            self.navigationController?.dismiss(animated: true, completion: nil)
-//        }
-//    }
-//}
 
 
 extension FloatyItem {

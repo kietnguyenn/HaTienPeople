@@ -23,6 +23,7 @@ PODS:
   - GooglePlaces (3.10.0):
     - GoogleMaps/Base (= 3.10.0)
   - ImagePicker (3.2.0)
+  - ImageScrollView (1.9.2)
   - ImageSlideshow (1.9.2):
     - ImageSlideshow/Core (= 1.9.2)
   - ImageSlideshow/Core (1.9.2)
@@ -54,6 +55,7 @@ DEPENDENCIES:
   - GoogleMaps
   - GooglePlaces
   - ImagePicker
+  - ImageScrollView
   - ImageSlideshow (~> 1.9.0)
   - InfiniteLayout
   - IQDropDownTextField (~> 1.1)
@@ -77,6 +79,7 @@ SPEC REPOS:
     - GoogleMaps
     - GooglePlaces
     - ImagePicker
+    - ImageScrollView
     - ImageSlideshow
     - InfiniteLayout
     - IQDropDownTextField
@@ -100,6 +103,7 @@ SPEC CHECKSUMS:
   GoogleMaps: 8c080862ff2748ece9929471b30feb56a6c5079d
   GooglePlaces: 9a6f5f3a0c88da2aa1bf7426a65d3e004f5e69a1
   ImagePicker: 1d950bbb2422548ed58791b4ec7f42fe42920511
+  ImageScrollView: 329f63d29b22f21594250d31536aa83e018571ed
   ImageSlideshow: be305b54eaf2b2cfc7a7141c7c734605d44dc07d
   InfiniteLayout: de51cfad9ed480a3e3a0af7d28242d3257c606d9
   IQDropDownTextField: 3d2e5728a2b83ff5dbb14cb9b497a80005124cbe
@@ -112,6 +116,6 @@ SPEC CHECKSUMS:
   SwiftSignalRClient: fcdfa9141dd191b5c219df87adbfc58f6f1f5554
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
 
-PODFILE CHECKSUM: 05ecb5eff3a22705bd006f9ba3dbe326f4ce955e
+PODFILE CHECKSUM: bbeabb66141d54f6ce9888166319ce9e23f67463
 
 COCOAPODS: 1.9.3

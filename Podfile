@@ -27,6 +27,7 @@ pod 'Floaty', '~> 4.2.0'
 pod 'FSPagerView'
 pod 'SCLAlertView'
 pod 'ImageSlideshow', '~> 1.9.0'
+pod 'ImageScrollView'
 
 
   target 'HaTienPeopleTests' do
