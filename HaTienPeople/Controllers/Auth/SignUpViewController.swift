@@ -51,11 +51,7 @@ class SignUpViewController: BaseViewController {
                 }
             } else if status == 400 {
                 guard let resString = res.value else { return }
-                if resString == "User name 'kiet97' is already taken." {
-                    self.showAlert(errorMessage: "Lỗi \(status) \n \(resString)")
-                } else {
-                    self.showAlert(errorMessage: "Không thể tạo tài khoản! \nCode \(status)")
-                }
+                self.showAlert(errorMessage: "Không thể tạo tài khoản! \(resString)")
                 do {
                     let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String:Any]
                     print(json as Any)
@@ -75,25 +71,55 @@ class SignUpViewController: BaseViewController {
               let phone = phoneTextField.text,
               let fullname = fullnameTextField.text,
               let email = emailTextField.text
-              else { return }
+              else { return  }
         
         if password == confirm {
-            if email.isEmail {
-                self.signUp(username: username, password: password, phone: phone, fullname: fullname, email: email)
-            } else {
-                self.showAlert(errorMessage: "Email không hợp lệ!")
+            // Check username
+            self._newApiRequestWithErrorHandling(url: "https://apindashboard.vkhealth.vn/api/Users/ExistedUsername?username=\(username)&roleName=Customer", method: .get, param: nil, encoding: URLEncoding.default) { (responseString, data, status) in
+                if status == 200 {
+                    self.showAlert(errorMessage: "Tên đăng nhập đã tồn tại!")
+                }
+                else if status == 400 {
+                    // CHeck phone Number
+                    self._newApiRequestWithErrorHandling(url: "https://apindashboard.vkhealth.vn/api/Users/ExistedPhone?username=\(phone)&roleName=Customer", method: .get, param: nil, encoding: URLEncoding.default) { (responseString, data, status) in
+                        if status == 200 {
+                            self.showAlert(errorMessage: "Số điện thoại đã tồn tại")
+                        } else if status == 400 {
+                            if email.isEmail {
+                                self.signUp(username: username, password: password, phone: phone, fullname: fullname, email: email)
+                            } else {
+                                self.showAlert(errorMessage: "Email không hợp lệ!")
+                            }
+                        }
+                    }
+                }
             }
         } else {
             self.showAlert(errorMessage: "Xác nhận mật khẩu không thành công!")
         }
-        
     }
-}
-
-extension String {
-    var isEmail: Bool {
-        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}"
-        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
-        return emailTest.evaluate(with: self)
-    }
+    
+//    func existedUserName(_ userName: String) -> Bool {
+//        var result = Bool()
+//        _newApiRequestWithErrorHandling(url: "https://apindashboard.vkhealth.vn/api/Users/ExistedUsername?username=\(userName)&roleName=Customer", method: .get, param: nil, encoding: URLEncoding.default) { (responseString, data, status) in
+//            if status == 200 {
+//                result = false
+//            } else if status == 400 {
+//                result = true
+//            }
+//        }
+//        return true
+//    }
+//
+//    func existedPhone(_ phone: String) -> Bool {
+//        var result = Bool()
+//        _newApiRequestWithErrorHandling(url: "https://apindashboard.vkhealth.vn/api/Users/ExistedPhone?username=\(phone)&roleName=Customer", method: .get, param: nil, encoding: URLEncoding.default) { (responseString, data, status) in
+//            if status == 200 {
+//                result = false
+//            } else if status == 400 {
+//                result = true
+//            }
+//        }
+//        return true
+//    }
 }

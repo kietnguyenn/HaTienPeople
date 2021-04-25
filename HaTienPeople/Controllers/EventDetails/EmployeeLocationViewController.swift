@@ -29,7 +29,7 @@ class EmployeeLocationViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Vị trí sự cố"
+        self.title = "Vị trí sự kiện"
         self.setupDoneButton()
         self.configMapView()
 //        self.setupSearchController()
@@ -59,7 +59,7 @@ class EmployeeLocationViewController: BaseViewController {
         
         // Draw direction path
         DispatchQueue.main.async {
-            self.createMarker(titleMarker: "Vị trí sự cố", location: self.eventLocation)
+            self.createMarker(titleMarker: "Vị trí sự kiện", location: self.eventLocation)
             guard let lat = Double(SocketMessage.shared.lat), let lng = Double(SocketMessage.shared.lng) else { return }
             let empLocation = CLLocationCoordinate2D(latitude: lat, longitude: lng)
             self.createMarker(titleMarker: "Vị trí cán bộ", iconMarker: UIImage(named: "employee-icon")!.resizeImage(targetSize: CGSize(width: 40, height: 40)), location: empLocation)

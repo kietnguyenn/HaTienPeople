@@ -20,7 +20,6 @@
 		18334ED62534A87A00559CAA /* ImagesSelectingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18334EB62534A87900559CAA /* ImagesSelectingViewController.swift */; };
 		18334ED72534A87A00559CAA /* EventPostingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18334EB72534A87900559CAA /* EventPostingViewController.swift */; };
 		18334ED82534A87A00559CAA /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18334EB82534A87900559CAA /* MapViewController.swift */; };
-		18334ED92534A87A00559CAA /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18334EB92534A87900559CAA /* TestViewController.swift */; };
 		18334EDA2534A87A00559CAA /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18334EBA2534A87900559CAA /* UserViewController.swift */; };
 		18334EDB2534A87A00559CAA /* EventDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18334EBB2534A87900559CAA /* EventDetailsViewController.swift */; };
 		18334EDC2534A87A00559CAA /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18334EBC2534A87900559CAA /* SignInViewController.swift */; };
@@ -75,6 +74,8 @@
 		18E1B47126242581006C0002 /* EventLogsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E1B47026242581006C0002 /* EventLogsViewController.swift */; };
 		18E1B476262425AB006C0002 /* EventLogDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E1B475262425AA006C0002 /* EventLogDetailsViewController.swift */; };
 		18E1B4E926255CAF006C0002 /* NotificationDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E1B4E826255CAF006C0002 /* NotificationDetailsViewController.swift */; };
+		18ED464F262E068800859951 /* EmployeeInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18ED464E262E068800859951 /* EmployeeInfoViewController.swift */; };
+		18ED46C22635F67700859951 /* SocketMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18ED46C12635F67700859951 /* SocketMessage.swift */; };
 		5348887D4D1B6BBD463E5BEB /* Pods_HaTienPeople_HaTienPeopleUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C731659D459FFB7BD381B18A /* Pods_HaTienPeople_HaTienPeopleUITests.framework */; };
 		C0F87717ECC70094E0E8A856 /* Pods_HaTienPeopleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FBEA1534EF7874E427451D0 /* Pods_HaTienPeopleTests.framework */; };
 /* End PBXBuildFile section */
@@ -117,7 +118,6 @@
 		18334EB62534A87900559CAA /* ImagesSelectingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesSelectingViewController.swift; sourceTree = "<group>"; };
 		18334EB72534A87900559CAA /* EventPostingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventPostingViewController.swift; sourceTree = "<group>"; };
 		18334EB82534A87900559CAA /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
-		18334EB92534A87900559CAA /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		18334EBA2534A87900559CAA /* UserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		18334EBB2534A87900559CAA /* EventDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailsViewController.swift; sourceTree = "<group>"; };
 		18334EBC2534A87900559CAA /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
@@ -172,6 +172,8 @@
 		18E1B47026242581006C0002 /* EventLogsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventLogsViewController.swift; sourceTree = "<group>"; };
 		18E1B475262425AA006C0002 /* EventLogDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventLogDetailsViewController.swift; sourceTree = "<group>"; };
 		18E1B4E826255CAF006C0002 /* NotificationDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationDetailsViewController.swift; sourceTree = "<group>"; };
+		18ED464E262E068800859951 /* EmployeeInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeInfoViewController.swift; sourceTree = "<group>"; };
+		18ED46C12635F67700859951 /* SocketMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketMessage.swift; sourceTree = "<group>"; };
 		2F6458838A089BEAFE08F725 /* Pods_HaTienPeople.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HaTienPeople.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		39A8CB2EDEA49B6EEE065AD2 /* Pods-HaTienPeople-HaTienPeopleUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HaTienPeople-HaTienPeopleUITests.release.xcconfig"; path = "Target Support Files/Pods-HaTienPeople-HaTienPeopleUITests/Pods-HaTienPeople-HaTienPeopleUITests.release.xcconfig"; sourceTree = "<group>"; };
 		6BB9C50857E2843FE5E39EEA /* Pods-HaTienPeople-HaTienPeopleUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HaTienPeople-HaTienPeopleUITests.debug.xcconfig"; path = "Target Support Files/Pods-HaTienPeople-HaTienPeopleUITests/Pods-HaTienPeople-HaTienPeopleUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -280,20 +282,12 @@
 		18334EB42534A87900559CAA /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				18ED46AB26327F8400859951 /* UserInfo */,
+				18ED46AA26327F7300859951 /* EventDetails */,
+				18ED469E2631730800859951 /* Auth */,
+				18ED464D262E065B00859951 /* Users */,
 				18E1B4B82624B757006C0002 /* Main */,
 				18E1B47B262425BC006C0002 /* EventLogVc */,
-				18334EBC2534A87900559CAA /* SignInViewController.swift */,
-				18334EB52534A87900559CAA /* SignUpViewController.swift */,
-				18334EB62534A87900559CAA /* ImagesSelectingViewController.swift */,
-				18334EB82534A87900559CAA /* MapViewController.swift */,
-				18334EB92534A87900559CAA /* TestViewController.swift */,
-				18334EBA2534A87900559CAA /* UserViewController.swift */,
-				18334EBB2534A87900559CAA /* EventDetailsViewController.swift */,
-				18334EBD2534A87900559CAA /* EventListViewController.swift */,
-				18334EF52534DE6B00559CAA /* ImageViewController.swift */,
-				18334F432535680C00559CAA /* PlaceSearchingViewController.swift */,
-				18709B0A25549CA80029166E /* EmployeeLocationViewController.swift */,
-				186B86522578B45B00729FC7 /* UpdatePasswordViewController.swift */,
 				18A55DAD25908FCA00A3CC9E /* Notifications */,
 			);
 			path = Controllers;
@@ -373,6 +367,7 @@
 				18E1B3E026237686006C0002 /* EventType.swift */,
 				18E1B3E526237688006C0002 /* Notification.swift */,
 				18E1B3E126237687006C0002 /* User.swift */,
+				18ED46C12635F67700859951 /* SocketMessage.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -453,9 +448,49 @@
 		18E1B4B82624B757006C0002 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				18334EB62534A87900559CAA /* ImagesSelectingViewController.swift */,
 				18334EB72534A87900559CAA /* EventPostingViewController.swift */,
+				18334EB82534A87900559CAA /* MapViewController.swift */,
+				18334F432535680C00559CAA /* PlaceSearchingViewController.swift */,
 			);
 			path = Main;
+			sourceTree = "<group>";
+		};
+		18ED464D262E065B00859951 /* Users */ = {
+			isa = PBXGroup;
+			children = (
+				18ED464E262E068800859951 /* EmployeeInfoViewController.swift */,
+			);
+			path = Users;
+			sourceTree = "<group>";
+		};
+		18ED469E2631730800859951 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				18334EBC2534A87900559CAA /* SignInViewController.swift */,
+				18334EB52534A87900559CAA /* SignUpViewController.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		18ED46AA26327F7300859951 /* EventDetails */ = {
+			isa = PBXGroup;
+			children = (
+				18709B0A25549CA80029166E /* EmployeeLocationViewController.swift */,
+				18334EBD2534A87900559CAA /* EventListViewController.swift */,
+				18334EF52534DE6B00559CAA /* ImageViewController.swift */,
+				18334EBB2534A87900559CAA /* EventDetailsViewController.swift */,
+			);
+			path = EventDetails;
+			sourceTree = "<group>";
+		};
+		18ED46AB26327F8400859951 /* UserInfo */ = {
+			isa = PBXGroup;
+			children = (
+				186B86522578B45B00729FC7 /* UpdatePasswordViewController.swift */,
+				18334EBA2534A87900559CAA /* UserViewController.swift */,
+			);
+			path = UserInfo;
 			sourceTree = "<group>";
 		};
 		3B7BEB3A078012943F95D10C /* Pods */ = {
@@ -787,11 +822,12 @@
 				18E1B4512623844C006C0002 /* EmployeeCell.swift in Sources */,
 				18334F442535680C00559CAA /* PlaceSearchingViewController.swift in Sources */,
 				18E1B4232623772C006C0002 /* EventLogTypeId.swift in Sources */,
+				18ED46C22635F67700859951 /* SocketMessage.swift in Sources */,
+				18ED464F262E068800859951 /* EmployeeInfoViewController.swift in Sources */,
 				18334EDF2534A87A00559CAA /* BaseViewController.swift in Sources */,
 				18E1B4212623772C006C0002 /* MyDateFormatter.swift in Sources */,
 				18E1B3EF26237689006C0002 /* User.swift in Sources */,
 				18E1B47126242581006C0002 /* EventLogsViewController.swift in Sources */,
-				18334ED92534A87A00559CAA /* TestViewController.swift in Sources */,
 				18A55D91258C937B00A3CC9E /* NotiViewController.swift in Sources */,
 				18334ED62534A87A00559CAA /* ImagesSelectingViewController.swift in Sources */,
 				18E1B3ED26237689006C0002 /* AdminstrativeViolationRecords03.swift in Sources */,
@@ -1003,7 +1039,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.8;
+				MARKETING_VERSION = 1.0.9;
 				PRODUCT_BUNDLE_IDENTIFIER = vn.hatien.HaTienPeople;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1028,7 +1064,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.8;
+				MARKETING_VERSION = 1.0.9;
 				PRODUCT_BUNDLE_IDENTIFIER = vn.hatien.HaTienPeople;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

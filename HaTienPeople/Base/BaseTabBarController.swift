@@ -19,7 +19,7 @@ class BaseTabBarController: UITabBarController {
         
         // Main Vieww
         guard let camImage = UIImage(named: "camera-icon")  else { return }
-        let homeItem = UITabBarItem(title: "Báo Cáo Sự Cố",
+        let homeItem = UITabBarItem(title: "Báo cáo sự kiện",
                                     image: camImage,
                                     selectedImage: nil)
         let homeVc = MyStoryboard.main.instantiateViewController(withIdentifier: "EventPostingViewController") as! EventPostingViewController
@@ -28,7 +28,7 @@ class BaseTabBarController: UITabBarController {
 //        
         // event líst
         guard let eventListImage = UIImage(named: "task-list-icon")  else { return }
-        let eventListItem = UITabBarItem(title: "Sự cố đã đăng",
+        let eventListItem = UITabBarItem(title: "Sự kiện đã đăng",
                                          image: eventListImage,
                                          selectedImage: nil)
         let eventListVc = MyStoryboard.main.instantiateViewController(withIdentifier: "EventListViewController") as! EventListViewController

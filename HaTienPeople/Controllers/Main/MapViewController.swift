@@ -61,6 +61,7 @@ class MapViewController: BaseViewController {
         self.mapView.settings.zoomGestures = true
         self.mapView.delegate = self
         self.view.addSubview(self.mapView)
+        self.placeMarkerOnMap(coordinate: CurrentLocation, title: "Current location")
     }
     
     // Setup camera view
@@ -155,7 +156,6 @@ extension MapViewController: GMSMapViewDelegate {
     }
     
     func didTapMyLocationButton(for mapView: GMSMapView) -> Bool {
-        self.placeMarkerOnMap(coordinate: CurrentLocation, title: "Current location")
         return true
     }
     

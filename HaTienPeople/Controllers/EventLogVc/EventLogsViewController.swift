@@ -26,7 +26,7 @@ class EventLogsViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup(tableView: tableView)
-        title = "Lịch sử cập nhật sự cố"
+        title = "Lịch sử cập nhật sự kiện"
         self.showBackButton()
         self.getEventLogs(by: eventId)
     }
@@ -88,7 +88,6 @@ extension EventLogsViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         if let content = eventLog.information, let eventLogType = eventLog.eventLogType?.description {
-//            cell.informationLabel.text = eventLogType + " với nội dung: " + content
             cell.informationLabel.text = content
             cell.eventLogTypeLabel.text = eventLogType
         }
@@ -101,9 +100,9 @@ extension EventLogsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let details = self.storyboard?.instantiateViewController(withIdentifier: "EventLogDetailsViewController") as! EventLogDetailsViewController
-        let log = eventLogs[indexPath.row]
-        details.eventLog = log
-        self.navigationController?.pushViewController(details, animated: true)
+//        let details = self.storyboard?.instantiateViewController(withIdentifier: "EventLogDetailsViewController") as! EventLogDetailsViewController
+//        let log = eventLogs[indexPath.row]
+//        details.eventLog = log
+//        self.navigationController?.pushViewController(details, animated: true)
     }
 }

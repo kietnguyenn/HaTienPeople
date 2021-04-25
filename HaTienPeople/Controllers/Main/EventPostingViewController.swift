@@ -166,7 +166,7 @@ class EventPostingViewController: BaseViewController {
             guard let dict = try? JSONSerialization.jsonObject(with: jsonData, options: .allowFragments) as? [String : Any] else { return }
             guard let eventLogId = dict?["id"] as? String else { return }
             print(eventLogId)
-            self.showAlert(title: "Thành công", message: "báo cáo sự cố thành công", style: .alert, hasTwoButton: false) { (action) in
+            self.showAlert(title: "Thành công", message: "báo cáo sự kiện thành công", style: .alert, hasTwoButton: false) { (action) in
                 self.postImage(eventLogId: eventLogId)
             }
 //            self.resignFirstResponder()
@@ -214,40 +214,40 @@ class EventPostingViewController: BaseViewController {
     // MARK: - Upload image
     func uploadImage(images: [UIImage], eventLogId: String) {
         self.showHUD()
-        let urlString = "\(ApiDomain.new)\(eventLogId)/Files"
-        guard let token = Account.current?.access_token else { return }
-        let headers: HTTPHeaders = ["Content-Type": "application/form-data",
-                                    "Authorization" : "Bearer \(token)"]
-        Alamofire.upload(multipartFormData: { multipartFormData in
-            for image in images {
+        for image in images {
+            let urlString = "\(ApiDomain.new)\(eventLogId)/Files"
+            guard let token = Account.current?.access_token else { return }
+            let headers: HTTPHeaders = ["Content-Type": "application/form-data",
+                                        "Authorization" : "Bearer \(token)"]
+            Alamofire.upload(multipartFormData: { multipartFormData in
                 guard let imgData = image.withRenderingMode(.alwaysTemplate)
                         .jpegData(compressionQuality: 0) else { return }
                 multipartFormData.append(imgData, withName: "files",fileName: "\(randomString(length: 5)).jpeg", mimeType: "image/jpeg")
-            }
-        },
-        to: urlString, method: .put, headers: headers)
-        { (result) in
-            self.hideHUD()
-            print("result", result)
-            switch result {
-            case .success(let upload, _, _):
-                
-                upload.uploadProgress(closure: { (progress) in
-                    print("Upload Progress: \(progress.fractionCompleted)")
-                })
-                
-                upload.responseJSON { response in
-                    print(response.response!.statusCode)
-                    self.reloadData()
+            },
+            to: urlString, method: .put, headers: headers)
+            { (result) in
+                print("result", result)
+                switch result {
+                case .success(let upload, _, _):
+                    
+                    upload.uploadProgress(closure: { (progress) in
+                        print("Upload Progress: \(progress.fractionCompleted)")
+                    })
+                    
+                    upload.responseJSON { response in
+                        print(response.response!.statusCode)
+                        self.reloadData()
+                    }
+                    
+                case .failure(let encodingError):
+                    print(encodingError)
+                    self.showAlert(errorMessage: encodingError.localizedDescription)
                 }
-                
-            case .failure(let encodingError):
-                print(encodingError)
-                self.showAlert(errorMessage: encodingError.localizedDescription)
             }
         }
+        self.hideHUD()
     }
-    
+
     // MARK: Get address of location
     fileprivate func getAddress(of location: CLLocationCoordinate2D) {
         requestNonTokenResponseString(urlString: "https://maps.googleapis.com/maps/api/geocode/json?latlng=\(location.latitude),\(location.longitude)&key=\(GMSApiKey.garageKey)",
@@ -356,32 +356,4 @@ extension EventPostingViewController: HubConnectionDelegate {
 
 protocol SocketMessageDelegate: class {
     func didReceiveMessage()
-}
-
-class SocketMessage: NSObject {
-    static let shared = SocketMessage()
-    var lat = String() {
-        didSet {
-            print("Socket message lat:", lat)
-        }
-    }
-    var lng = String(){
-        didSet {
-            print("Socket message lng:", lat)
-        }
-    }
-    var eventId = String(){
-        didSet {
-            print("Socket message guid:", lat)
-        }
-    }
-    weak var delegate : SocketMessageDelegate?
-    
-    func `init`(_ lat: String, _ lng: String, _ eventId: String) {
-        self.lat = lat
-        self.lng = lng
-        self.eventId = eventId
-        guard let delegate = self.delegate else { return }
-        delegate.didReceiveMessage()
-    }
 }

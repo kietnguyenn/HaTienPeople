@@ -14,7 +14,7 @@ struct EventLog: Codable, Identifiable {
     let taskMaster: TaskMaster?
     let event: _Event
     let dateTime: String
-    let eventLogType: EventLogType?
+    let eventLogType: EventLogTypeInEventLog?
     let eventName, userName: String?
     let information: String?
     let eventID, userID: String
@@ -110,7 +110,7 @@ extension URLSession {
     }
 }
 
-struct EventLogType: Codable {
+struct EventLogTypeInEventLog: Codable {
     var id : Int?
     var description: String?
 }

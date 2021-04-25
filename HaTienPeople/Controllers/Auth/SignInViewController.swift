@@ -43,15 +43,16 @@ class SignInViewController: BaseViewController {
         _newApiRequestWithErrorHandling(url: Api.Auth.login, method: .post, param: param, encoding: JSONEncoding.default) { (response, jsondata, status) in
             // Save user data
             if 200..<300 ~= status {
-                guard let currentUser = try? JSONDecoder().decode(Account.self, from: jsondata) else { return }
-                if currentUser.roles == _customer {
+                if let currentUser = try? JSONDecoder().decode(Account.self, from: jsondata) {
                     self.setCurrentUser(user: currentUser)
                     self.changeRootView()
-                } else {
-                    self.showAlert(errorMessage: "Tên đăng nhập hoặc mật khẩu không đúng")
+                } else if let error = try? JSONDecoder().decode(LogInErrorResponse.self, from: jsondata) {
+                    guard let loginFailure = error.value?.loginFailure?[0] else { return }
+                    self.showAlert(errorMessage: loginFailure)
                 }
+                
             } else if status == 400 {
-                self.showAlert(errorMessage: "Tên đăng nhập hoặc mật khẩu không đúng")
+                self.showAlert(errorMessage: "Lỗi kết nối vui lòng thử lại sau ít phút")
             }
         }
     }
@@ -79,5 +80,23 @@ class SignInViewController: BaseViewController {
         } else {
             return false
         }
+    }
+}
+
+import Foundation
+// MARK: - Login error response
+struct LogInErrorResponse: Codable {
+    let value: Value?
+    let formatters, contentTypes: [JSONNull]?
+    let declaredType: JSONNull?
+    let statusCode: Int?
+}
+
+// MARK: - Value
+struct Value: Codable {
+    let loginFailure: [String]?
+
+    enum CodingKeys: String, CodingKey {
+        case loginFailure = "login_failure"
     }
 }

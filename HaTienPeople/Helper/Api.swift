@@ -15,7 +15,7 @@ struct ApiDomain {
 
 struct Api {
     struct Auth {
-        static let login = ApiDomain.new + "api/Auth/login" // POST
+        static let login = ApiDomain.new + "api/Auth/Customer/Login" // POST
     }
     static let employee = ApiDomain.new + "api/Employees" // post
     static let users = ApiDomain.new + "api/Users" // POST, GET

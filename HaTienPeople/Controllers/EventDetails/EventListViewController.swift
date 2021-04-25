@@ -52,7 +52,7 @@ class EventListViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Sự cố đã đăng"
+        self.title = "Sự kiện đã đăng"
         setup(tableView: eventsTableView)
         self.segmentControl.addTarget(self, action: #selector(didChange(_:)), for: .valueChanged)
         self.segmentControl.selectedSegmentIndex = 0

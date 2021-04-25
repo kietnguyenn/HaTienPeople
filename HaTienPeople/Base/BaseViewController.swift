@@ -44,8 +44,7 @@ class BaseViewController: UIViewController {
     var locationManager = CLLocationManager()
     var currentLocation: CLLocation!{
         didSet {
-            CurrentLocation.latitude = currentLocation.coordinate.latitude
-            CurrentLocation.longitude = currentLocation.coordinate.longitude
+            CurrentLocation = currentLocation.coordinate
         }
     }
 
@@ -101,17 +100,27 @@ class BaseViewController: UIViewController {
     // MARK:  Show/Hide HUD
     func showHUD() {
         DispatchQueue.main.async {
-            SVProgressHUD.show()
 //            self.showActivityIndicatory(uiView: self.view)
-            self.view.isUserInteractionEnabled = false
+            SVProgressHUD.show()
+            if let tabbarController = self.tabBarController {
+                tabbarController.view.isUserInteractionEnabled = false
+            } else if let navController = self.navigationController {
+                navController.view.isUserInteractionEnabled = false
+            }
         }
     }
     func hideHUD() {
         DispatchQueue.main.async {
             SVProgressHUD.dismiss()
 //            self.hideActivityIndicator()
-            self.view.isUserInteractionEnabled = true
-        }    }
+            if let tabbarController = self.tabBarController {
+                tabbarController.view.isUserInteractionEnabled = true
+            } else if let navController = self.navigationController {
+                navController.view.isUserInteractionEnabled = true
+            }
+        }
+    }
+    
     
     // MARK: Show alert with error Message
     public func showAlert(errorMessage: String) {
