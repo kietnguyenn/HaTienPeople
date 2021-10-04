@@ -26,7 +26,6 @@ class EventPostingViewController: BaseViewController {
     @IBOutlet weak var eventTypeTextField: UITextField!
     @IBOutlet weak var addressTextField: UITextField!
     @IBOutlet weak var coordinatesLabel: UILabel!
-//    @IBOutlet weak var scrollViewBackgroundImageView: UIImageView!
     
     @IBAction func showMap(_: UIButton) {
         let vc = MyStoryboard.main.instantiateViewController(withIdentifier: "MapViewController") as! MapViewController
@@ -45,13 +44,6 @@ class EventPostingViewController: BaseViewController {
     
     @IBAction func post(_: UIButton) {
         self.postEvent()
-    }
-    
-    @IBAction func selectImage(_: UIButton) {
-        let vc = MyStoryboard.main.instantiateViewController(withIdentifier: "ImagesSelectingViewController") as! ImagesSelectingViewController
-        vc.delegate = self
-        vc.imageList = self.selectedImages
-        present(vc, animated: true)
     }
     
     @IBAction func showDropdown(_: UIButton) {
@@ -77,12 +69,15 @@ class EventPostingViewController: BaseViewController {
     
     var selectedEventType: EventType?
     
+    var scrollviewBackgroundImage = UIImage()
+    
     var selectedCoordinates = CLLocationCoordinate2D(latitude: CurrentLocation.latitude, longitude: CurrentLocation.longitude) {
         didSet {
             self.getAddress(of: selectedCoordinates)
             coordinatesLabel.text = "Lat: \(selectedCoordinates.latitude), lng: \(selectedCoordinates.longitude)"
         }
     }
+    
     
     var dropdown = DropDown()
     let scrollviewBackground = UIImage(named: "scroll-view-background")!
@@ -91,13 +86,37 @@ class EventPostingViewController: BaseViewController {
         super.viewDidLoad()
         self.checkCoreLocationPermission()
         self.getEventTypes()
-        self.scrollView.delegate = self
         self.title = Constant.title.eventCreating
         self.showBackButton()
         self.navigationController?.navigationBar.isHidden = false
+        self.configSrollView()
+    }
+    
+    func configSrollView() {
+        self.scrollView.delegate = self
+        guard let image = UIImage(named: "add-image-button-image") else { return }
+        self.scrollviewBackgroundImage = image.resizeImage(targetSize: scrollView.bounds.size)
+        self.scrollView.backgroundColor = UIColor(patternImage: self.scrollviewBackgroundImage)
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.addImage(_:)))
+        self.scrollView.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc func addImage(_ : UIScrollView) {
+        let vc = MyStoryboard.main.instantiateViewController(withIdentifier: "ImagesSelectingViewController") as! ImagesSelectingViewController
+        vc.delegate = self
+        vc.imageList = self.selectedImages
+        present(vc, animated: true)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        if selectedImages.count > 0 {
+            self.scrollView.backgroundColor = UIColor.lightGray
+        } else {
+            self.scrollView.backgroundColor = UIColor(patternImage: self.scrollviewBackgroundImage)
+        }
     }
 
-    
     func setup(scrollView: UIScrollView) {
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.showsVerticalScrollIndicator = false
@@ -164,7 +183,7 @@ class EventPostingViewController: BaseViewController {
             self.showAlert(title: "Thành công", message: "báo cáo sự kiện thành công", style: .alert, hasTwoButton: false) { (action) in
                 self.postImage(eventLogId: eventLogId)
             }
-            //            self.resignFirstResponder()
+//            self.resignFirstResponder()
         }
     }
     
@@ -173,7 +192,7 @@ class EventPostingViewController: BaseViewController {
             self.uploadImage(images: self.selectedImages, eventLogId: eventLogId)
         } else {
             print("No Image selected!")
-            //            self.reloadViewFromNib()
+//            self.reloadViewFromNib()
             self.reloadData()
         }
     }

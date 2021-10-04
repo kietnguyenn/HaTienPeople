@@ -24,6 +24,7 @@ class BaseNavigationController: UINavigationController {
         // text and content color
         navigationBar.tintColor = accentColor
         
+        
         if #available(iOS 13.0, *) {
             let navBarAppearance = UINavigationBarAppearance()
             navBarAppearance.configureWithOpaqueBackground()

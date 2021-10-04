@@ -47,7 +47,7 @@ class MainViewController: BaseViewController {
     
     @IBAction func showNotification(_ sender: UIButton) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "NotiViewController") as! NotiViewController
-        self.navigationController?.pushViewController(true, animated: nil)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     // First get user info
