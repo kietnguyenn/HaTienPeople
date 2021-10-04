@@ -29,7 +29,7 @@
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Cho phép quyền truy cập vị trí để định vị chính xác vị trí sự kiện xảy ra</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>...</string>
+	<string>Cho phép truy cập Thư viện để có thể đăng tải hình ảnh sự kiện!</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Cho phép truy cập Thư viện để có thể đăng tải hình ảnh sự kiện!</string>
 	<key>UIApplicationSceneManifest</key>

@@ -40,8 +40,10 @@ class SignInViewController: BaseViewController {
     @objc func login() {
         let param: Parameters = ["userName" : self.usernameTextField.text!,
                                  "password" : self.passwordTextField.text!]
-        _newApiRequestWithErrorHandling(url: Api.Auth.login, method: .post, param: param, encoding: JSONEncoding.default) { (response, jsondata, status) in
-            // Save user data
+        _newApiRequestWithErrorHandling(url: Api.Auth.login,
+                                        method: .post,
+                                        param: param,
+                                        encoding: JSONEncoding.default) { (response, jsondata, status) in
             if 200..<300 ~= status {
                 if let currentUser = try? JSONDecoder().decode(Account.self, from: jsondata) {
                     self.setCurrentUser(user: currentUser)
@@ -50,7 +52,6 @@ class SignInViewController: BaseViewController {
                     guard let loginFailure = error.value?.loginFailure?[0] else { return }
                     self.showAlert(errorMessage: loginFailure)
                 }
-                
             } else if status == 400 {
                 self.showAlert(errorMessage: "Lỗi kết nối vui lòng thử lại sau ít phút")
             }
@@ -66,7 +67,7 @@ class SignInViewController: BaseViewController {
             print("Can not encode User object")
         }
     }
-
+    
     fileprivate func changeRootView() {
         let maintab = BaseTabBarController()
         guard let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow }) else { return }
@@ -95,7 +96,7 @@ struct LogInErrorResponse: Codable {
 // MARK: - Value
 struct Value: Codable {
     let loginFailure: [String]?
-
+    
     enum CodingKeys: String, CodingKey {
         case loginFailure = "login_failure"
     }

@@ -75,7 +75,7 @@ extension SceneDelegate {
     }
 
     func setupGGMapApis() {
-        GMSServices.provideAPIKey(GMSApiKey.garageKey)
-        GMSPlacesClient.provideAPIKey(GMSApiKey.garageKey)
+        GMSServices.provideAPIKey(GMSApiKey.iosKey)
+        GMSPlacesClient.provideAPIKey(GMSApiKey.iosKey)
     }
 }

@@ -3,34 +3,33 @@ PODS:
   - AlamofireSwiftyJSON (1.0.2):
     - Alamofire (~> 4.0)
     - SwiftyJSON (~> 4.0)
-  - AppCenter (3.3.4):
-    - AppCenter/Analytics (= 3.3.4)
-    - AppCenter/Crashes (= 3.3.4)
-  - AppCenter/Analytics (3.3.4):
+  - AppCenter (4.3.0):
+    - AppCenter/Analytics (= 4.3.0)
+    - AppCenter/Crashes (= 4.3.0)
+  - AppCenter/Analytics (4.3.0):
     - AppCenter/Core
-  - AppCenter/Core (3.3.4)
-  - AppCenter/Crashes (3.3.4):
+  - AppCenter/Core (4.3.0)
+  - AppCenter/Crashes (4.3.0):
     - AppCenter/Core
   - DropDown (2.3.13)
   - DynamicColor (4.2.0)
   - Floaty (4.2.0)
   - FSPagerView (0.8.3)
-  - GoogleMaps (3.10.0):
-    - GoogleMaps/Maps (= 3.10.0)
-  - GoogleMaps/Base (3.10.0)
-  - GoogleMaps/Maps (3.10.0):
+  - GoogleMaps (5.1.0):
+    - GoogleMaps/Maps (= 5.1.0)
+  - GoogleMaps/Base (5.1.0)
+  - GoogleMaps/Maps (5.1.0):
     - GoogleMaps/Base
-  - GooglePlaces (3.10.0):
-    - GoogleMaps/Base (= 3.10.0)
+  - GooglePlaces (5.1.0)
   - ImagePicker (3.2.0)
-  - ImageScrollView (1.9.2)
+  - ImageScrollView (1.9.3)
   - ImageSlideshow (1.9.2):
     - ImageSlideshow/Core (= 1.9.2)
   - ImageSlideshow/Core (1.9.2)
-  - InfiniteLayout (0.4.2):
-    - InfiniteLayout/Core (= 0.4.2)
-  - InfiniteLayout/CocoaProxy (0.4.2)
-  - InfiniteLayout/Core (0.4.2):
+  - InfiniteLayout (0.5):
+    - InfiniteLayout/Core (= 0.5)
+  - InfiniteLayout/CocoaProxy (0.5)
+  - InfiniteLayout/Core (0.5):
     - InfiniteLayout/CocoaProxy
   - IQDropDownTextField (1.1.1)
   - IQKeyboardManagerSwift (6.5.6)
@@ -95,17 +94,17 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
   AlamofireSwiftyJSON: 74ee3804bed06d07857daf1eeb1615c85dba3997
-  AppCenter: 0487be185c038ed2ecc5ed38219af1dcd280af23
+  AppCenter: 883369ab78427b0561c688158d689dfe1f993ea9
   DropDown: 8a2116376c1981888557f72ec2ffc9a5e0e456ec
   DynamicColor: c475f66bda1cabf602f2c54ac1171c0c07148a5a
   Floaty: e2bd5a0f6f7f70899e26ff2da31081c8bee8d1b0
   FSPagerView: 670405b2f18e2a87fa37f20b00de783e562c25a8
-  GoogleMaps: 8c080862ff2748ece9929471b30feb56a6c5079d
-  GooglePlaces: 9a6f5f3a0c88da2aa1bf7426a65d3e004f5e69a1
+  GoogleMaps: 086ae1dab659eaa7339bdb30fc88e2f44e7c597c
+  GooglePlaces: c57cd5aa7e91d10fa5106c792de74f3bd6436260
   ImagePicker: 1d950bbb2422548ed58791b4ec7f42fe42920511
-  ImageScrollView: 329f63d29b22f21594250d31536aa83e018571ed
+  ImageScrollView: d3ce8371e0d44299b2b638410db45387e18aa83f
   ImageSlideshow: be305b54eaf2b2cfc7a7141c7c734605d44dc07d
-  InfiniteLayout: de51cfad9ed480a3e3a0af7d28242d3257c606d9
+  InfiniteLayout: 2c55b0fc14b6a9d924fbe13c0e2d88b1cbf5423d
   IQDropDownTextField: 3d2e5728a2b83ff5dbb14cb9b497a80005124cbe
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
   PasswordTextField: 2548de43f150fc90a014da47b0d97e31aada4b94
@@ -118,4 +117,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: bbeabb66141d54f6ce9888166319ce9e23f67463
 
-COCOAPODS: 1.9.3
+COCOAPODS: 1.11.2

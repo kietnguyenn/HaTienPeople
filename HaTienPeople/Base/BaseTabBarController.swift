@@ -12,22 +12,18 @@ import DynamicColor
 class BaseTabBarController: UITabBarController {
 
     override func viewDidLoad() {
-        super.viewDidLoad()
-        tabBar.tintColor = UIColor.black
-        tabBar.backgroundColor = .white
-        tabBar.unselectedItemTintColor = .lightGray
-        
+        super.viewDidLoad()        
         // Main Vieww
-        guard let camImage = UIImage(named: "camera-icon")  else { return }
-        let homeItem = UITabBarItem(title: "Báo cáo sự kiện",
+        guard let camImage = UIImage(named: "icon-tab-home")  else { return }
+        let homeItem = UITabBarItem(title: "Trang chủ",
                                     image: camImage,
                                     selectedImage: nil)
-        let homeVc = MyStoryboard.main.instantiateViewController(withIdentifier: "EventPostingViewController") as! EventPostingViewController
+        let homeVc = MyStoryboard.main.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
         let homeNav = BaseNavigationController(rootViewController: homeVc)
         homeNav.tabBarItem = homeItem
 //        
         // event líst
-        guard let eventListImage = UIImage(named: "task-list-icon")  else { return }
+        guard let eventListImage = UIImage(named: "icon-tab-calendar")  else { return }
         let eventListItem = UITabBarItem(title: "Sự kiện đã đăng",
                                          image: eventListImage,
                                          selectedImage: nil)
@@ -43,20 +39,25 @@ class BaseTabBarController: UITabBarController {
         notiNav.tabBarItem = notiItem
         
         // user info
-        guard let userImage = UIImage(named: "account-icon")  else { return }
+        guard let userImage = UIImage(named: "icon-tab-account")  else { return }
         let accountItem = UITabBarItem(title: "Tài khoản",
                                          image: userImage,
                                          selectedImage: nil)
-        let userVc = MyStoryboard.main.instantiateViewController(withIdentifier: "UserViewController") as! UserViewController
+        let userVc = MyStoryboard.main.instantiateViewController(withIdentifier: "ProfileOptionsViewController") as! ProfileOptionsViewController
         let userNav = BaseNavigationController(rootViewController: userVc)
         userNav.tabBarItem = accountItem
         
-        tabBar.tintColor = UIColor.systemBlue
+        tabBar.tintColor = accentColor
         tabBar.backgroundColor = .white
         tabBar.unselectedItemTintColor = .lightGray
+        
+        tabBar.layer.shadowOffset = CGSize(width: 0, height: 0)
+        tabBar.layer.shadowRadius = 2
+        tabBar.layer.shadowColor = UIColor.black.cgColor
+        tabBar.layer.shadowOpacity = 0.3
         tabBarItem.imageInsets = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
  
-        self.viewControllers = [homeNav, eventListNav, notiNav, userNav]
+        self.viewControllers = [homeNav, eventListNav, userNav]
     }
     
     func resizeImage(_ uiImage: UIImage) -> UIImage {

@@ -6,9 +6,16 @@
 //
 
 import Foundation
+import UIKit
+
+let accentColorName = "AccentColor"
+let accentColor = UIColor(named: accentColorName)
 
 struct GMSApiKey {
-    static let garageKey = "AIzaSyBXZQStB98vcE6Lzkrm4qxAqyknKKRPIgo"
+//    static let iosKey = "AIzaSyA8o9zr__FemrWZ_xyVFQdPQFC03Uqlbhw"
+    static let iosKey = "AIzaSyCMbslNBmuqgVsJXXyYHS7CI5RdwUdkZZw"
+//    static let iosKey = "AIzaSyCSqne0SIdhxLVnPqn51P48DKTUSRFoA9s"
+    
 }
 
 struct Constant {
@@ -34,6 +41,12 @@ struct Constant {
         static let taskList = "Công việc"
         static let notifications = "Thông báo"
         static let account = "Tài khoản"
+    }
+    
+    struct AlertContent {
+        static let serverError = "Hệ thống đang gặp sự cố, xin thử lại trong giây lát!"
+        static let api400 = ""
+        static let phoneNumberDidVerified = "Số điện thoại đang dùng đã được xác thực"
     }
 
 }

@@ -6,9 +6,6 @@
 //
 
 import UIKit
-import AppCenter
-import AppCenterAnalytics
-import AppCenterCrashes
 import IQKeyboardManagerSwift
 import GoogleMaps
 import GooglePlaces
@@ -22,7 +19,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         self.setupKeyboardManager()
-        self.setupAppCenter()
         self.setupGGMapApis()
         self.turnOffDarkMode()
         self.window = UIWindow(frame: UIScreen.main.bounds)
@@ -48,14 +44,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
-
-
-    func setupAppCenter() {
-        MSAppCenter.start("0aa159f5-7384-4200-9096-445bc67ccc06", withServices:[
-          MSAnalytics.self,
-          MSCrashes.self
-        ])
-    }
     
     func setupKeyboardManager() {
         IQKeyboardManager.shared.enable = true
@@ -75,8 +63,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func setupGGMapApis() {
-        GMSServices.provideAPIKey(GMSApiKey.garageKey)
-        GMSPlacesClient.provideAPIKey(GMSApiKey.garageKey)
+        GMSServices.provideAPIKey(GMSApiKey.iosKey)
+        GMSPlacesClient.provideAPIKey(GMSApiKey.iosKey)
     }
     
     func turnOffDarkMode() {

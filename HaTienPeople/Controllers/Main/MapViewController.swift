@@ -21,7 +21,7 @@ protocol MapViewControllerDelegate: class {
 class MapViewController: BaseViewController {
     
     var mapView = GMSMapView()
-        
+    
     let marker = GMSMarker()
     
     var isMarkerCreated = false
@@ -86,7 +86,7 @@ class MapViewController: BaseViewController {
     fileprivate func setupSearchController() {
         resultsViewController = GMSAutocompleteResultsViewController()
         resultsViewController?.delegate = self
-
+        
         searchController = UISearchController(searchResultsController: resultsViewController)
         searchController?.searchResultsUpdater = resultsViewController
         if #available(iOS 13.0, *) {
@@ -96,47 +96,49 @@ class MapViewController: BaseViewController {
             // Fallback on earlier versions
             
         }
-
+        
         // Put the search bar in the navigation bar.
         searchController?.searchBar.sizeToFit()
         navigationItem.titleView = searchController?.searchBar
-
+        
         // When UISearchController presents the results view, present it in
         // this view controller, not one further up the chain.
         definesPresentationContext = true
-
+        
         // Prevent the navigation bar from being hidden when searching.
         searchController?.hidesNavigationBarDuringPresentation = false
     }
     
     // MARK: Get address of location
     fileprivate func setAddress(of location: CLLocationCoordinate2D) {
-        requestNonTokenResponseString(urlString: "https://maps.googleapis.com/maps/api/geocode/json?latlng=\(location.latitude),\(location.longitude)&key=\(GMSApiKey.garageKey)",
+        requestNonTokenResponseString(urlString: "https://maps.googleapis.com/maps/api/geocode/json?latlng=\(location.latitude),\(location.longitude)&key=\(GMSApiKey.iosKey)",
                                       method: .post,
                                       params: nil,
                                       encoding: URLEncoding.default) { (response) in
             guard let jsonString = response.value,
                   let jsonData = jsonString.data(using: .utf8),
                   let resultCoordinates = try? JSONDecoder().decode(CoordinateResult.self, from: jsonData)
-                  else { return }
-            let formattedAddress = resultCoordinates.results[0].formattedAddress
-            
-            if #available(iOS 13.0, *) {
-                guard let searchTextField = self.searchController?.searchBar.searchTextField else { return }
-                searchTextField.text = formattedAddress
-            } else {
-                // Fallback on earlier versions
-                guard let textField = self.searchController?.searchBar.value(forKey: "searchField") as? UITextField else { return }
-                textField.text = formattedAddress
+            else { return }
+            if resultCoordinates.results.count > 0 {
+                let formattedAddress = resultCoordinates.results[0].formattedAddress
+                if #available(iOS 13.0, *) {
+                    guard let searchTextField = self.searchController?.searchBar.searchTextField else { return }
+                    searchTextField.text = formattedAddress
+                } else {
+                    // Fallback on earlier versions
+                    guard let textField = self.searchController?.searchBar.value(forKey: "searchField") as? UITextField else { return }
+                    textField.text = formattedAddress
+                }
             }
+            
         }
     }
 }
 
 extension MapViewController: GMSMapViewDelegate {
     func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
-//        print(" did tapped Lat: \(coordinate.latitude)")
-//        print(" did tapped Long: \(coordinate.longitude)")
+        //        print(" did tapped Lat: \(coordinate.latitude)")
+        //        print(" did tapped Long: \(coordinate.longitude)")
         self.placeMarkerOnMap(coordinate: coordinate, title: "")
     }
     
@@ -168,9 +170,9 @@ extension MapViewController: GMSAutocompleteResultsViewControllerDelegate {
         // Do something with the selected place.
         
         guard let placeName = place.name,
-            let placeFormattedAddress = place.formattedAddress,
+              let placeFormattedAddress = place.formattedAddress,
               let placeAddressComponents = place.addressComponents
-//              let placeAttribution = place.attributions
+                //              let placeAttribution = place.attributions
         else { return }
         print("Place name: \(placeName)")
         print("Place placeAddressComponents: \(placeAddressComponents)")
@@ -182,10 +184,10 @@ extension MapViewController: GMSAutocompleteResultsViewControllerDelegate {
         self.placeMarkerOnMap(coordinate: place.coordinate, title: placeName)
         
     }
-
+    
     func resultsController(_ resultsController: GMSAutocompleteResultsViewController,
                            didFailAutocompleteWithError error: Error){
-      print("Error: ", error.localizedDescription)
+        print("Error: ", error.localizedDescription)
     }
     
     func customFormattedAddressIntoPlusCode(_ formattedAddress: String) -> String {
@@ -193,14 +195,14 @@ extension MapViewController: GMSAutocompleteResultsViewControllerDelegate {
         print("plusCode: " + plusCode)
         return plusCode
     }
-
+    
     // Turn the network activity indicator on and off again.
     func didRequestAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
-//      UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        //      UIApplication.shared.isNetworkActivityIndicatorVisible = true
     }
-
+    
     func didUpdateAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
-//      UIApplication.shared.isNetworkActivityIndicatorVisible = false
+        //      UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
     
 }

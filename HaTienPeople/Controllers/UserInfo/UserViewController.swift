@@ -43,10 +43,6 @@ class UserViewController: BaseViewController {
         }
     }
     
-    @IBAction func signOut(_:UIButton) {
-        self.signOut()
-    }
-    
     var presenter = Presentr(presentationType: .bottomHalf)
     
     var customerInfo: CustomerInfo? {
@@ -57,9 +53,10 @@ class UserViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Tài khoản"
+        title = "Cập nhật thông tin cá nhân"
         self.setupUI()
         self.getInfo()
+        self.showBackButton()
     }
     
     func setupUI() {

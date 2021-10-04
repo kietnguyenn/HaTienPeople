@@ -47,6 +47,11 @@ class BaseViewController: UIViewController {
             CurrentLocation = currentLocation.coordinate
         }
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+    }
 
     func showActivityIndicatory(uiView: UIView) {
         self.activityIndicator.frame = CGRect(x: 0.0, y: 0.0, width: 40.0, height: 40.0);
@@ -91,7 +96,7 @@ class BaseViewController: UIViewController {
         barButton.isEnabled = isEnable
     }
     
-    func showLeftBarButton(with image: String) {
+    func showLeftBarDismissButton(with image: String) {
         guard let uiimage = UIImage(named: image) else { return }
         let barButton = UIBarButtonItem(image: uiimage.withRenderingMode(.alwaysTemplate), style: .plain, target: self, action: #selector(dismissButtonTapped(_:)))
         navigationItem.leftBarButtonItem = barButton
@@ -343,15 +348,15 @@ extension BaseViewController {
             guard let wSelf = self else { return }
             wSelf.hideHUD()
             guard let statusCode = response.response?.statusCode else { return }
-            print("statusCode",  statusCode)
-            if response.response?.statusCode == 200 && response.result.isSuccess {
+            print("code",  statusCode)
+            if 200..<300 ~= statusCode && response.result.isSuccess {
                 guard let jsonString = response.value,
                       let jsonData = jsonString.data(using: .utf8),
                       let statusCode = response.response?.statusCode
                 else { return }
                 completion(response, jsonData, statusCode)
             } else {
-                wSelf.showAlert(title: "Lỗi", mess: "Không thể kết nối đến server! status code : \(statusCode)", style: .alert)
+                wSelf.showAlert(title: "Lỗi", mess: "Không thể kết nối đến server! \ncode \(statusCode)", style: .alert)
             }
         }
     }

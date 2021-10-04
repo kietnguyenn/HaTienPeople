@@ -19,7 +19,7 @@ class PlaceSearchingViewController: BaseViewController {
         
         // Specify the place data types to return.
         let fields: GMSPlaceField = GMSPlaceField(rawValue: UInt(GMSPlaceField.name.rawValue) |
-                                                  UInt(GMSPlaceField.placeID.rawValue))!
+                                                  UInt(GMSPlaceField.placeID.rawValue))
         self.placeClient.findPlaceLikelihoodsFromCurrentLocation(withPlaceFields: fields, callback: {
           (placeLikelihoodList: Array<GMSPlaceLikelihood>?, error: Error?) in
           if let error = error {

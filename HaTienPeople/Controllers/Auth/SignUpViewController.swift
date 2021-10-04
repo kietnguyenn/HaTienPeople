@@ -22,7 +22,10 @@ class SignUpViewController: BaseViewController {
     @IBOutlet weak var emailTextField: UITextField!
     
     @IBAction func signUpButtonTapped(_: UIButton) {
-        self.validate()
+//        let vc = self.storyboard?.instantiateViewController(withIdentifier: "OTPAuthViewController") as! OTPAuthViewController
+//        vc.delegate = self
+//        self.presentWithNav(vc)
+        validate()
     }
     
     @IBAction func cancel(_: UIButton) {
@@ -45,7 +48,7 @@ class SignUpViewController: BaseViewController {
                                         param: params,
                                         encoding: JSONEncoding.default) { (res, data, status) in
             print(res)
-            if status == 200 || status == 201 {
+            if status == 200 || status == 201 || status == 204 {
                 self.showAlert(title: "Thành công", message: "Đăng kí tài khoản thành công!", style: .alert, hasTwoButton: false) { (action) in
                     self.dismiss(animated: true)
                 }
@@ -75,13 +78,13 @@ class SignUpViewController: BaseViewController {
         
         if password == confirm {
             // Check username
-            self._newApiRequestWithErrorHandling(url: "https://apindashboard.vkhealth.vn/api/Users/ExistedUsername?username=\(username)&roleName=Customer", method: .get, param: nil, encoding: URLEncoding.default) { (responseString, data, status) in
+            self._newApiRequestWithErrorHandling(url: "\(Api.existedUsername)?username=\(username)&roleName=Customer", method: .get, param: nil, encoding: URLEncoding.default) { (responseString, data, status) in
                 if status == 200 {
                     self.showAlert(errorMessage: "Tên đăng nhập đã tồn tại!")
                 }
                 else if status == 400 {
                     // CHeck phone Number
-                    self._newApiRequestWithErrorHandling(url: "https://apindashboard.vkhealth.vn/api/Users/ExistedPhone?username=\(phone)&roleName=Customer", method: .get, param: nil, encoding: URLEncoding.default) { (responseString, data, status) in
+                    self._newApiRequestWithErrorHandling(url: "\(Api.existedPhone)?phoneNumber=\(phone)&roleName=Customer", method: .get, param: nil, encoding: URLEncoding.default) { (responseString, data, status) in
                         if status == 200 {
                             self.showAlert(errorMessage: "Số điện thoại đã tồn tại")
                         } else if status == 400 {
@@ -122,4 +125,10 @@ class SignUpViewController: BaseViewController {
 //        }
 //        return true
 //    }
+}
+
+extension SignUpViewController: OTPAuthViewControllerDelegate {
+    func didVerifyOTP() {
+        self.validate()
+    }
 }

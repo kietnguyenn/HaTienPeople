@@ -23,7 +23,7 @@ class ImagesSelectingViewController: BaseViewController, PHPhotoLibraryChangeObs
     
     @IBOutlet weak var imagesTableView: UITableView!
     @IBAction func addButtonTapped(_ button: UIButton) {
-        let configuration = Configuration()
+        let configuration = ImagePickerConfiguration()
         configuration.doneButtonTitle = "Xong"
         configuration.noImagesTitle = "Sorry! There are no images here!"
         configuration.recordLocation = false

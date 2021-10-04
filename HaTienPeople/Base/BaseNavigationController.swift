@@ -11,22 +11,37 @@ import UIKit
 import DynamicColor
 
 class BaseNavigationController: UINavigationController {
-    let mainColor = UIColor.white
-    
-//    let textAttributes = [NSAttributedString.Key.font: UIFont(name: "AvenirNext-Medium", size: 18.0),
-//                          NSAttributedString.Key.foregroundColor: UIColor.systemBlue]
     
     let textAttributes: [NSAttributedString.Key : Any] = [NSAttributedString.Key.font: UIFont.systemFontSize,
-                                                          NSAttributedString.Key.foregroundColor: UIColor.systemBlue]
-
+                                                          NSAttributedString.Key.foregroundColor: UIColor.white]
+    
+//    override var preferredStatusBarStyle: UIStatusBarStyle {
+//        return .lightContent
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationBar.isTranslucent = false
-        navigationBar.barTintColor = .systemBlue
-        navigationBar.tintColor = .white
-        navigationBar.backgroundColor = .white
-        navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
+        // text and content color
+        navigationBar.tintColor = accentColor
+        
+        if #available(iOS 13.0, *) {
+            let navBarAppearance = UINavigationBarAppearance()
+            navBarAppearance.configureWithOpaqueBackground()
+//            navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+//            navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+            navBarAppearance.backgroundColor = .white
+            navigationBar.standardAppearance = navBarAppearance
+            navigationBar.scrollEdgeAppearance = navBarAppearance
+            
+        } else {
+            navigationBar.barStyle = .black
+            // bar color
+            navigationBar.barTintColor = .white
+            navigationBar.isTranslucent = false
+            //background
+            navigationBar.backgroundColor = .white
+        }
     }
-
 }
+
+

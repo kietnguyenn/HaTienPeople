@@ -35,6 +35,19 @@
 		18334F442535680C00559CAA /* PlaceSearchingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18334F432535680C00559CAA /* PlaceSearchingViewController.swift */; };
 		186B86532578B45B00729FC7 /* UpdatePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186B86522578B45B00729FC7 /* UpdatePasswordViewController.swift */; };
 		18709B0B25549CA80029166E /* EmployeeLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18709B0A25549CA80029166E /* EmployeeLocationViewController.swift */; };
+		189D94782704BAF9005BB187 /* ProfileOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189D94772704BAF9005BB187 /* ProfileOptionsViewController.swift */; };
+		189D947C2704BDEF005BB187 /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189D947A2704BDEF005BB187 /* MenuTableViewCell.swift */; };
+		189D947D2704BDEF005BB187 /* MenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 189D947B2704BDEF005BB187 /* MenuTableViewCell.xib */; };
+		189D947F2704EE1F005BB187 /* OTPAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189D947E2704EE1E005BB187 /* OTPAuthViewController.swift */; };
+		189D948227058745005BB187 /* ExaminationResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189D948127058744005BB187 /* ExaminationResultViewController.swift */; };
+		189D9486270588A8005BB187 /* ExaminationResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189D9484270588A8005BB187 /* ExaminationResultCell.swift */; };
+		189D9487270588A8005BB187 /* ExaminationResultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 189D9485270588A8005BB187 /* ExaminationResultCell.xib */; };
+		189D94892705A4E8005BB187 /* ExaminationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189D94882705A4E7005BB187 /* ExaminationResult.swift */; };
+		189D948B2705F4C6005BB187 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189D948A2705F4C5005BB187 /* MainViewController.swift */; };
+		189D948D2705F560005BB187 /* OTPTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189D948C2705F560005BB187 /* OTPTextField.swift */; };
+		189D948F27060325005BB187 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189D948E27060325005BB187 /* UserInfo.swift */; };
+		189D94912708B21D005BB187 /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189D94902708B21C005BB187 /* RoundButton.swift */; };
+		189D94932708BB9A005BB187 /* ExaminationResultDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189D94922708BB9A005BB187 /* ExaminationResultDetailViewController.swift */; };
 		18A55D91258C937B00A3CC9E /* NotiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A55D90258C937B00A3CC9E /* NotiViewController.swift */; };
 		18A55D9D258CAE6F00A3CC9E /* NotiCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A55D9B258CAE6E00A3CC9E /* NotiCell.swift */; };
 		18A55D9E258CAE6F00A3CC9E /* NotiCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A55D9C258CAE6E00A3CC9E /* NotiCell.xib */; };
@@ -133,6 +146,19 @@
 		18334F432535680C00559CAA /* PlaceSearchingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceSearchingViewController.swift; sourceTree = "<group>"; };
 		186B86522578B45B00729FC7 /* UpdatePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePasswordViewController.swift; sourceTree = "<group>"; };
 		18709B0A25549CA80029166E /* EmployeeLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeLocationViewController.swift; sourceTree = "<group>"; };
+		189D94772704BAF9005BB187 /* ProfileOptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileOptionsViewController.swift; sourceTree = "<group>"; };
+		189D947A2704BDEF005BB187 /* MenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
+		189D947B2704BDEF005BB187 /* MenuTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuTableViewCell.xib; sourceTree = "<group>"; };
+		189D947E2704EE1E005BB187 /* OTPAuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPAuthViewController.swift; sourceTree = "<group>"; };
+		189D948127058744005BB187 /* ExaminationResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExaminationResultViewController.swift; sourceTree = "<group>"; };
+		189D9484270588A8005BB187 /* ExaminationResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExaminationResultCell.swift; sourceTree = "<group>"; };
+		189D9485270588A8005BB187 /* ExaminationResultCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExaminationResultCell.xib; sourceTree = "<group>"; };
+		189D94882705A4E7005BB187 /* ExaminationResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExaminationResult.swift; sourceTree = "<group>"; };
+		189D948A2705F4C5005BB187 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		189D948C2705F560005BB187 /* OTPTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPTextField.swift; sourceTree = "<group>"; };
+		189D948E27060325005BB187 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
+		189D94902708B21C005BB187 /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
+		189D94922708BB9A005BB187 /* ExaminationResultDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExaminationResultDetailViewController.swift; sourceTree = "<group>"; };
 		18A55D90258C937B00A3CC9E /* NotiViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotiViewController.swift; sourceTree = "<group>"; };
 		18A55D9B258CAE6E00A3CC9E /* NotiCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotiCell.swift; sourceTree = "<group>"; };
 		18A55D9C258CAE6E00A3CC9E /* NotiCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotiCell.xib; sourceTree = "<group>"; };
@@ -282,6 +308,7 @@
 		18334EB42534A87900559CAA /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				189D948027057A52005BB187 /* ExaminationResult */,
 				18ED46AB26327F8400859951 /* UserInfo */,
 				18ED46AA26327F7300859951 /* EventDetails */,
 				18ED469E2631730800859951 /* Auth */,
@@ -306,6 +333,8 @@
 		18334EC22534A87A00559CAA /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				189D94832705887A005BB187 /* ExaminationResultCell */,
+				189D94792704BD87005BB187 /* MenuCell */,
 				18E1B4402623844B006C0002 /* CustomerCell */,
 				18E1B4462623844B006C0002 /* EmployeeCell */,
 				18E1B4432623844B006C0002 /* EventHandlingUserCell */,
@@ -338,14 +367,16 @@
 		18334EC92534A87A00559CAA /* Helper */ = {
 			isa = PBXGroup;
 			children = (
-				18E1B43B26237FEB006C0002 /* Extensions.swift */,
 				18E1B4162623772A006C0002 /* Api.swift */,
+				18E1B43B26237FEB006C0002 /* Extensions.swift */,
 				18E1B4182623772B006C0002 /* Constant.swift */,
 				18E1B41C2623772C006C0002 /* EventLogTypeId.swift */,
 				18E1B4172623772A006C0002 /* EventStatusId.swift */,
 				18E1B41A2623772B006C0002 /* MyDateFormatter.swift */,
 				18E1B41B2623772B006C0002 /* MyStoryboard.swift */,
 				18E1B4192623772B006C0002 /* SignalRCoreService.swift */,
+				189D948C2705F560005BB187 /* OTPTextField.swift */,
+				189D94902708B21C005BB187 /* RoundButton.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -368,8 +399,37 @@
 				18E1B3E526237688006C0002 /* Notification.swift */,
 				18E1B3E126237687006C0002 /* User.swift */,
 				18ED46C12635F67700859951 /* SocketMessage.swift */,
+				189D94882705A4E7005BB187 /* ExaminationResult.swift */,
+				189D948E27060325005BB187 /* UserInfo.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		189D94792704BD87005BB187 /* MenuCell */ = {
+			isa = PBXGroup;
+			children = (
+				189D947A2704BDEF005BB187 /* MenuTableViewCell.swift */,
+				189D947B2704BDEF005BB187 /* MenuTableViewCell.xib */,
+			);
+			path = MenuCell;
+			sourceTree = "<group>";
+		};
+		189D948027057A52005BB187 /* ExaminationResult */ = {
+			isa = PBXGroup;
+			children = (
+				189D948127058744005BB187 /* ExaminationResultViewController.swift */,
+				189D94922708BB9A005BB187 /* ExaminationResultDetailViewController.swift */,
+			);
+			path = ExaminationResult;
+			sourceTree = "<group>";
+		};
+		189D94832705887A005BB187 /* ExaminationResultCell */ = {
+			isa = PBXGroup;
+			children = (
+				189D9484270588A8005BB187 /* ExaminationResultCell.swift */,
+				189D9485270588A8005BB187 /* ExaminationResultCell.xib */,
+			);
+			path = ExaminationResultCell;
 			sourceTree = "<group>";
 		};
 		18A55D9A258CAE5000A3CC9E /* NotiCell */ = {
@@ -448,6 +508,7 @@
 		18E1B4B82624B757006C0002 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				189D948A2705F4C5005BB187 /* MainViewController.swift */,
 				18334EB62534A87900559CAA /* ImagesSelectingViewController.swift */,
 				18334EB72534A87900559CAA /* EventPostingViewController.swift */,
 				18334EB82534A87900559CAA /* MapViewController.swift */,
@@ -489,6 +550,8 @@
 			children = (
 				186B86522578B45B00729FC7 /* UpdatePasswordViewController.swift */,
 				18334EBA2534A87900559CAA /* UserViewController.swift */,
+				189D94772704BAF9005BB187 /* ProfileOptionsViewController.swift */,
+				189D947E2704EE1E005BB187 /* OTPAuthViewController.swift */,
 			);
 			path = UserInfo;
 			sourceTree = "<group>";
@@ -630,10 +693,12 @@
 				18334EE12534A87A00559CAA /* ImageCell.xib in Resources */,
 				18334E752534A5EF00559CAA /* Assets.xcassets in Resources */,
 				18E1B44D2623844C006C0002 /* CustomerCell.xib in Resources */,
+				189D9487270588A8005BB187 /* ExaminationResultCell.xib in Resources */,
 				18E1B4532623844C006C0002 /* EventLogRow.xib in Resources */,
 				18E1B3A02622F528006C0002 /* CurrentLocation.gpx in Resources */,
 				18A55D9E258CAE6F00A3CC9E /* NotiCell.xib in Resources */,
 				18334EE42534A87A00559CAA /* EventCell.xib in Resources */,
+				189D947D2704BDEF005BB187 /* MenuTableViewCell.xib in Resources */,
 				18E1B44F2623844C006C0002 /* EventHandlingUserCell.xib in Resources */,
 				18A55DE02591A7DC00A3CC9E /* FileCell.xib in Resources */,
 				18E1B4502623844C006C0002 /* EmployeeCell.xib in Resources */,
@@ -801,6 +866,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				18E1B3EB26237689006C0002 /* _Event.swift in Sources */,
+				189D94892705A4E8005BB187 /* ExaminationResult.swift in Sources */,
 				18E1B3F426237689006C0002 /* CoordinateResult.swift in Sources */,
 				18E1B3F026237689006C0002 /* EventLog.swift in Sources */,
 				18E1B3E826237688006C0002 /* EventHandlingUsers.swift in Sources */,
@@ -808,14 +874,19 @@
 				18E1B3EC26237689006C0002 /* Employee.swift in Sources */,
 				18E1B3F126237689006C0002 /* Account.swift in Sources */,
 				18334EDD2534A87A00559CAA /* EventListViewController.swift in Sources */,
+				189D94912708B21D005BB187 /* RoundButton.swift in Sources */,
 				18334ED72534A87A00559CAA /* EventPostingViewController.swift in Sources */,
 				18334EDA2534A87A00559CAA /* UserViewController.swift in Sources */,
+				189D947F2704EE1F005BB187 /* OTPAuthViewController.swift in Sources */,
+				189D948F27060325005BB187 /* UserInfo.swift in Sources */,
 				18E1B4E926255CAF006C0002 /* NotificationDetailsViewController.swift in Sources */,
 				18E1B3EA26237689006C0002 /* EventDetails.swift in Sources */,
 				18E1B4522623844C006C0002 /* EventLogRow.swift in Sources */,
 				18334EF62534DE6B00559CAA /* ImageViewController.swift in Sources */,
 				18A55D9D258CAE6F00A3CC9E /* NotiCell.swift in Sources */,
 				18A55DDF2591A7DC00A3CC9E /* FileCell.swift in Sources */,
+				189D94932708BB9A005BB187 /* ExaminationResultDetailViewController.swift in Sources */,
+				189D948227058745005BB187 /* ExaminationResultViewController.swift in Sources */,
 				18E1B4222623772C006C0002 /* MyStoryboard.swift in Sources */,
 				18E1B3E926237688006C0002 /* CustomerInfo.swift in Sources */,
 				18334EE32534A87A00559CAA /* EventCell.swift in Sources */,
@@ -833,9 +904,11 @@
 				18E1B3ED26237689006C0002 /* AdminstrativeViolationRecords03.swift in Sources */,
 				18709B0B25549CA80029166E /* EmployeeLocationViewController.swift in Sources */,
 				18334EE02534A87A00559CAA /* BaseNavigationController.swift in Sources */,
+				189D948D2705F560005BB187 /* OTPTextField.swift in Sources */,
 				18334E6C2534A5ED00559CAA /* AppDelegate.swift in Sources */,
 				18E1B44C2623844C006C0002 /* CustomerCell.swift in Sources */,
 				18334EDB2534A87A00559CAA /* EventDetailsViewController.swift in Sources */,
+				189D948B2705F4C6005BB187 /* MainViewController.swift in Sources */,
 				18334ED52534A87A00559CAA /* SignUpViewController.swift in Sources */,
 				18334EDE2534A87A00559CAA /* BaseTabBarController.swift in Sources */,
 				18334EE22534A87A00559CAA /* ImageCell.swift in Sources */,
@@ -848,11 +921,14 @@
 				18E1B3F326237689006C0002 /* Notification.swift in Sources */,
 				18E1B3F526237689006C0002 /* EventHandlingByModel.swift in Sources */,
 				18334ED82534A87A00559CAA /* MapViewController.swift in Sources */,
+				189D9486270588A8005BB187 /* ExaminationResultCell.swift in Sources */,
 				18E1B43C26237FEC006C0002 /* Extensions.swift in Sources */,
 				18E1B44E2623844C006C0002 /* EventHandlingUserCell.swift in Sources */,
 				18E1B41D2623772C006C0002 /* Api.swift in Sources */,
 				18E1B4202623772C006C0002 /* SignalRCoreService.swift in Sources */,
 				186B86532578B45B00729FC7 /* UpdatePasswordViewController.swift in Sources */,
+				189D94782704BAF9005BB187 /* ProfileOptionsViewController.swift in Sources */,
+				189D947C2704BDEF005BB187 /* MenuTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1039,7 +1115,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.9;
+				MARKETING_VERSION = 1.0.10;
 				PRODUCT_BUNDLE_IDENTIFIER = vn.hatien.HaTienPeople;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1064,7 +1140,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.9;
+				MARKETING_VERSION = 1.0.10;
 				PRODUCT_BUNDLE_IDENTIFIER = vn.hatien.HaTienPeople;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

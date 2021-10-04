@@ -25,6 +25,8 @@ class NotiViewController: BaseViewController {
         super.viewDidLoad()
         self.title = "Thông báo"
         self.setup(notiListTableView)
+        self.showBackButton()
+        self.navigationController?.navigationBar.isHidden = false
     }
     
     override func viewDidAppear(_ animated: Bool) {

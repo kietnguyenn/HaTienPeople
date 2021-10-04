@@ -119,7 +119,7 @@ class EmployeeLocationViewController: BaseViewController {
         let origin = "\(startLocation.latitude),\(startLocation.longitude)"
         let destination = "\(endLocation.latitude),\(endLocation.longitude)"
         self.showHUD()
-        let url = "https://maps.googleapis.com/maps/api/directions/json?origin=\(origin)&destination=\(destination)&key=\(GMSApiKey.garageKey)&sensor=false"
+        let url = "https://maps.googleapis.com/maps/api/directions/json?origin=\(origin)&destination=\(destination)&key=\(GMSApiKey.iosKey)&sensor=false"
         Alamofire.request(url).responseSwiftyJSON { response in
             self.hideHUD()
             guard let json = response.value else { return }

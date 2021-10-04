@@ -21,11 +21,12 @@ class EventPostingViewController: BaseViewController {
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var pageControl: UIPageControl!
-
+    
     @IBOutlet weak var contentTextField: UITextField!
     @IBOutlet weak var eventTypeTextField: UITextField!
     @IBOutlet weak var addressTextField: UITextField!
     @IBOutlet weak var coordinatesLabel: UILabel!
+//    @IBOutlet weak var scrollViewBackgroundImageView: UIImageView!
     
     @IBAction func showMap(_: UIButton) {
         let vc = MyStoryboard.main.instantiateViewController(withIdentifier: "MapViewController") as! MapViewController
@@ -33,19 +34,19 @@ class EventPostingViewController: BaseViewController {
         let nav = BaseNavigationController(rootViewController: vc)
         nav.modalPresentationStyle = .fullScreen
         self.present(nav, animated: true, completion: nil)
-//
-//        let vc = PlaceSearchingViewController()
-//        let nav = BaseNavigationController(rootViewController: vc)
-//        nav.modalPresentationStyle = .fullScreen
-//        self.present(nav, animated: true, completion: nil)
-            
-//            self.presentAutocompleteController()
+        //
+        //        let vc = PlaceSearchingViewController()
+        //        let nav = BaseNavigationController(rootViewController: vc)
+        //        nav.modalPresentationStyle = .fullScreen
+        //        self.present(nav, animated: true, completion: nil)
+        
+        //            self.presentAutocompleteController()
     }
     
     @IBAction func post(_: UIButton) {
         self.postEvent()
     }
-
+    
     @IBAction func selectImage(_: UIButton) {
         let vc = MyStoryboard.main.instantiateViewController(withIdentifier: "ImagesSelectingViewController") as! ImagesSelectingViewController
         vc.delegate = self
@@ -84,24 +85,18 @@ class EventPostingViewController: BaseViewController {
     }
     
     var dropdown = DropDown()
-        
+    let scrollviewBackground = UIImage(named: "scroll-view-background")!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.checkCoreLocationPermission()
         self.getEventTypes()
         self.scrollView.delegate = self
         self.title = Constant.title.eventCreating
-        self.setupSocket()
+        self.showBackButton()
+        self.navigationController?.navigationBar.isHidden = false
     }
-    
-    fileprivate func setupSocket() {
-        let connection = SignalRCoreService.shared.connection
-        connection.delegate = self
-        connection.start()
-        connection.on(method: "ReceivedLatLong") { (lat: String, long: String, eventId: String) in
-            SocketMessage.shared.`init`(lat, long, eventId)
-        }
-    }
+
     
     func setup(scrollView: UIScrollView) {
         scrollView.showsHorizontalScrollIndicator = false
@@ -121,7 +116,7 @@ class EventPostingViewController: BaseViewController {
         scrollView.contentSize = CGSize(width: scrollView.frame.size.width * CGFloat(selectedImages.count), height: scrollView.frame.size.height)
         self.pageControl.numberOfPages = selectedImages.count
     }
-
+    
     
     fileprivate func setupDropdown() {
         self.dropdown.cellHeight = 50.0
@@ -136,18 +131,18 @@ class EventPostingViewController: BaseViewController {
             print("Selected item: \(item) at index: \(index)")
             self.selectedEventType = self.eventTypes[index]
             self.eventTypeTextField.text = item
-          }
+        }
     }
     
     fileprivate func postEvent() {
         guard let eventType = self.selectedEventType,
               let content = self.contentTextField.text,
               let address = self.addressTextField.text
-              else { return }
+        else { return }
         self.postEvent(content: content, eventTypeId: eventType.id, lat: "\(selectedCoordinates.latitude)", lng: "\(selectedCoordinates.longitude)", address: address)
     }
     
-
+    
     func postEvent(content: String, eventTypeId: String, lat: String, lng: String, address: String) {
         let params = [
             "decription": content,
@@ -158,7 +153,7 @@ class EventPostingViewController: BaseViewController {
             "eventTypeId": eventTypeId,
             "postedByUser": Account.current!.id,
             "address": address
-            ] as [String : Any]
+        ] as [String : Any]
         
         requestApiResponseString(urlString: Api.event, method: .post, params: params, encoding: JSONEncoding.default) { (responseString) in
             guard let jsonString = responseString.value else { return }
@@ -169,7 +164,7 @@ class EventPostingViewController: BaseViewController {
             self.showAlert(title: "Thành công", message: "báo cáo sự kiện thành công", style: .alert, hasTwoButton: false) { (action) in
                 self.postImage(eventLogId: eventLogId)
             }
-//            self.resignFirstResponder()
+            //            self.resignFirstResponder()
         }
     }
     
@@ -178,7 +173,7 @@ class EventPostingViewController: BaseViewController {
             self.uploadImage(images: self.selectedImages, eventLogId: eventLogId)
         } else {
             print("No Image selected!")
-//            self.reloadViewFromNib()
+            //            self.reloadViewFromNib()
             self.reloadData()
         }
     }
@@ -189,7 +184,7 @@ class EventPostingViewController: BaseViewController {
             guard let data = jsonString.data(using: .utf8) else { return }
             guard let eventTypes = try? JSONDecoder().decode([EventType].self, from: data) else { return }
             self.eventTypes = eventTypes
-
+            
         }
     }
     
@@ -224,7 +219,7 @@ class EventPostingViewController: BaseViewController {
                         .jpegData(compressionQuality: 0) else { return }
                 multipartFormData.append(imgData, withName: "files",fileName: "\(randomString(length: 5)).jpeg", mimeType: "image/jpeg")
             },
-            to: urlString, method: .put, headers: headers)
+                             to: urlString, method: .put, headers: headers)
             { (result) in
                 print("result", result)
                 switch result {
@@ -247,19 +242,21 @@ class EventPostingViewController: BaseViewController {
         }
         self.hideHUD()
     }
-
+    
     // MARK: Get address of location
     fileprivate func getAddress(of location: CLLocationCoordinate2D) {
-        requestNonTokenResponseString(urlString: "https://maps.googleapis.com/maps/api/geocode/json?latlng=\(location.latitude),\(location.longitude)&key=\(GMSApiKey.garageKey)",
+        requestNonTokenResponseString(urlString: "https://maps.googleapis.com/maps/api/geocode/json?latlng=\(location.latitude),\(location.longitude)&key=\(GMSApiKey.iosKey)",
                                       method: .post,
                                       params: nil,
                                       encoding: URLEncoding.default) { (response) in
             guard let jsonString = response.value,
                   let jsonData = jsonString.data(using: .utf8),
                   let resultCoordinates = try? JSONDecoder().decode(CoordinateResult.self, from: jsonData)
-                  else { return }
-            let formattedAddress = resultCoordinates.results[0].formattedAddress
-            self.addressTextField.text = formattedAddress
+            else { return }
+            if resultCoordinates.results.count > 0 {
+                let formattedAddress = resultCoordinates.results[0].formattedAddress
+                self.addressTextField.text = formattedAddress
+            }
         }
     }
 }
@@ -267,23 +264,23 @@ class EventPostingViewController: BaseViewController {
 extension EventPostingViewController  {
     // Present the Autocomplete view controller when the button is pressed.
     func presentAutocompleteController() {
-      let autocompleteController = GMSAutocompleteViewController()
-      autocompleteController.delegate = self
-
-      // Specify the place data types to return.
-      let fields: GMSPlaceField = GMSPlaceField(rawValue: UInt(GMSPlaceField.name.rawValue) |
-        UInt(GMSPlaceField.placeID.rawValue))!
-      autocompleteController.placeFields = fields
-
-      // Specify a filter.
-      let filter = GMSAutocompleteFilter()
-      filter.type = .address
-      autocompleteController.autocompleteFilter = filter
-
-      // Display the autocomplete view controller.
-      present(autocompleteController, animated: true, completion: nil)
+        let autocompleteController = GMSAutocompleteViewController()
+        autocompleteController.delegate = self
+        
+        // Specify the place data types to return.
+        let fields: GMSPlaceField = GMSPlaceField(rawValue: UInt(GMSPlaceField.name.rawValue) |
+                                                  UInt(GMSPlaceField.placeID.rawValue))
+        autocompleteController.placeFields = fields
+        
+        // Specify a filter.
+        let filter = GMSAutocompleteFilter()
+        filter.type = .address
+        autocompleteController.autocompleteFilter = filter
+        
+        // Display the autocomplete view controller.
+        present(autocompleteController, animated: true, completion: nil)
     }
-
+    
 }
 
 extension EventPostingViewController: MapViewControllerDelegate {
@@ -295,8 +292,8 @@ extension EventPostingViewController: MapViewControllerDelegate {
 extension EventPostingViewController: UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let page = scrollView.contentOffset.x/scrollView.frame.size.width
-            pageControl.currentPage = Int(page)
-        }
+        pageControl.currentPage = Int(page)
+    }
 }
 
 extension EventPostingViewController: ImagesSelectingViewControllerDelegate {
@@ -307,51 +304,31 @@ extension EventPostingViewController: ImagesSelectingViewControllerDelegate {
 }
 
 extension EventPostingViewController: GMSAutocompleteViewControllerDelegate {
-
-  // Handle the user's selection.
-  func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
-    print("Place name: \(place.name!)")
-    print("Place ID: \(place.placeID!)")
-    print("Place attributions: \(place.attributions!)")
-    dismiss(animated: true, completion: nil)
-  }
-
-  func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
-    print("Error: ", error.localizedDescription)
-  }
-
-  func wasCancelled(_ viewController: GMSAutocompleteViewController) {
-    dismiss(animated: true, completion: nil)
-  }
-
-  // Turn the network activity indicator on and off again.
-  func didRequestAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
-    UIApplication.shared.isNetworkActivityIndicatorVisible = true
-  }
-
-  func didUpdateAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
-    UIApplication.shared.isNetworkActivityIndicatorVisible = false
-  }
-}
-
-extension EventPostingViewController: HubConnectionDelegate {
-    func connectionDidOpen(hubConnection: HubConnection) {
-        print("Connection did Open")
-//        self.send(location: self.currentLocation, connection: hubConnection)
+    
+    // Handle the user's selection.
+    func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
+        print("Place name: \(place.name!)")
+        print("Place ID: \(place.placeID!)")
+        print("Place attributions: \(place.attributions!)")
+        dismiss(animated: true, completion: nil)
     }
     
-    func connectionDidFailToOpen(error: Error) {
-        print("Fail To Open")
+    func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
+        print("Error: ", error.localizedDescription)
     }
     
-    func connectionDidClose(error: Error?) {
-        print("Did Close")
+    func wasCancelled(_ viewController: GMSAutocompleteViewController) {
+        dismiss(animated: true, completion: nil)
     }
     
-    func connectionDidReconnect() {
-        print("Did Reconnect")
+    // Turn the network activity indicator on and off again.
+    func didRequestAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
     }
-
+    
+    func didUpdateAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+    }
 }
 
 protocol SocketMessageDelegate: class {

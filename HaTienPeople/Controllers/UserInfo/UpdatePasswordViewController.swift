@@ -20,6 +20,9 @@ class UpdatePasswordViewController: BaseViewController {
             self.update(old: tuples.old, new: tuples.new, confirm: tuples.confirm)
         }
     }
+    @IBAction func cancel(_ sender: UIButton) {
+        self.dismiss(animated: true)
+    }
     
     let error = "Xác nhận mật khẩu không đúng!"
     let error2 = "Vui lòng điền đẩy đủ 3 trường!"
