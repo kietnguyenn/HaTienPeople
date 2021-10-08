@@ -16,16 +16,20 @@ import Photos
 import PhotosUI
 import GooglePlaces
 import SwiftSignalRClient
+import ImageSlideshow
+
 
 class EventPostingViewController: BaseViewController {
     
-    @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var pageControl: UIPageControl!
-    
-    @IBOutlet weak var contentTextField: UITextField!
+    @IBOutlet weak var slideshow: ImageSlideshow!
+    @IBOutlet weak var contentTextView: UITextView!
     @IBOutlet weak var eventTypeTextField: UITextField!
     @IBOutlet weak var addressTextField: UITextField!
-    @IBOutlet weak var coordinatesLabel: UILabel!
+    @IBOutlet weak var addImageButton: UIButton!
+    
+    @IBAction func selectImage(_ button: UIButton) {
+        self.selectImages()
+    }
     
     @IBAction func showMap(_: UIButton) {
         let vc = MyStoryboard.main.instantiateViewController(withIdentifier: "MapViewController") as! MapViewController
@@ -33,13 +37,6 @@ class EventPostingViewController: BaseViewController {
         let nav = BaseNavigationController(rootViewController: vc)
         nav.modalPresentationStyle = .fullScreen
         self.present(nav, animated: true, completion: nil)
-        //
-        //        let vc = PlaceSearchingViewController()
-        //        let nav = BaseNavigationController(rootViewController: vc)
-        //        nav.modalPresentationStyle = .fullScreen
-        //        self.present(nav, animated: true, completion: nil)
-        
-        //            self.presentAutocompleteController()
     }
     
     @IBAction func post(_: UIButton) {
@@ -53,11 +50,13 @@ class EventPostingViewController: BaseViewController {
     var selectedImages = [UIImage]() {
         didSet {
             print("Images: \(selectedImages.count)")
-            setup(scrollView: self.scrollView)
+            if selectedImages.count > 0 {
+                self.slideshow.isHidden = false
+            } else {
+                self.slideshow.isHidden = true
+            }
         }
     }
-    
-    var frame = CGRect(x: 0, y: 0, width: 0, height: 0)
     
     var eventTypes = [EventType]() {
         didSet {
@@ -69,73 +68,60 @@ class EventPostingViewController: BaseViewController {
     
     var selectedEventType: EventType?
     
-    var scrollviewBackgroundImage = UIImage()
-    
-    var selectedCoordinates = CLLocationCoordinate2D(latitude: CurrentLocation.latitude, longitude: CurrentLocation.longitude) {
-        didSet {
-            self.getAddress(of: selectedCoordinates)
-            coordinatesLabel.text = "Lat: \(selectedCoordinates.latitude), lng: \(selectedCoordinates.longitude)"
-        }
-    }
-    
+    var selectedCoordinates = CLLocationCoordinate2D(latitude: CurrentLocation.latitude, longitude: CurrentLocation.longitude)
     
     var dropdown = DropDown()
-    let scrollviewBackground = UIImage(named: "scroll-view-background")!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.checkCoreLocationPermission()
+        self.contentTextView.delegate = self
         self.getEventTypes()
         self.title = Constant.title.eventCreating
         self.showBackButton()
         self.navigationController?.navigationBar.isHidden = false
-        self.configSrollView()
+        self.getAddress(of: CurrentLocation)
+        self.setupSlideshow()
+    }
+
+    func setupSlideshow() {
+        slideshow.slideshowInterval = 3.0
+        slideshow.zoomEnabled = true
+        slideshow.isHidden = true
+        let pageIndicator = UIPageControl()
+        pageIndicator.currentPageIndicatorTintColor = UIColor.lightGray
+        pageIndicator.pageIndicatorTintColor = UIColor.black
+        if #available(iOS 14.0, *) {
+            pageIndicator.backgroundStyle = .prominent
+        } else {
+            // Fallback on earlier versions
+        }
+        slideshow.pageIndicator = pageIndicator
+//                slideshow.pageIndicatorPosition = .init(horizontal: .center, vertical: .customBottom(padding: -20))
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.didTap))
+        slideshow.addGestureRecognizer(gestureRecognizer)
     }
     
-    func configSrollView() {
-        self.scrollView.delegate = self
-        guard let image = UIImage(named: "add-image-button-image") else { return }
-        self.scrollviewBackgroundImage = image.resizeImage(targetSize: scrollView.bounds.size)
-        self.scrollView.backgroundColor = UIColor(patternImage: self.scrollviewBackgroundImage)
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.addImage(_:)))
-        self.scrollView.addGestureRecognizer(tapGesture)
+    @objc func didTap() {
+//        if selectedImages.count > 0 {
+//            slideshow.presentFullScreenController(from: self)
+//        }
+        self.selectImages()
     }
     
-    @objc func addImage(_ : UIScrollView) {
+    func setupImageSources(with images: [UIImage]) {
+        let inputSources = images.map { (image) -> ImageSource in
+            ImageSource(image: image)
+        }
+        self.slideshow.setImageInputs(inputSources)
+    }
+    
+    func selectImages() {
         let vc = MyStoryboard.main.instantiateViewController(withIdentifier: "ImagesSelectingViewController") as! ImagesSelectingViewController
         vc.delegate = self
         vc.imageList = self.selectedImages
         present(vc, animated: true)
     }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        if selectedImages.count > 0 {
-            self.scrollView.backgroundColor = UIColor.lightGray
-        } else {
-            self.scrollView.backgroundColor = UIColor(patternImage: self.scrollviewBackgroundImage)
-        }
-    }
-
-    func setup(scrollView: UIScrollView) {
-        scrollView.showsHorizontalScrollIndicator = false
-        scrollView.showsVerticalScrollIndicator = false
-        scrollView.alwaysBounceVertical = false
-        scrollView.isPagingEnabled = true
-        
-        for index in 0..<selectedImages.count {
-            frame.origin.x = scrollView.frame.size.width * CGFloat(index)
-            frame.size = scrollView.frame.size
-            
-            let imageView = UIImageView(frame: frame)
-            imageView.contentMode = .scaleAspectFit
-            imageView.image = selectedImages[index]
-            self.scrollView.addSubview(imageView)
-        }
-        scrollView.contentSize = CGSize(width: scrollView.frame.size.width * CGFloat(selectedImages.count), height: scrollView.frame.size.height)
-        self.pageControl.numberOfPages = selectedImages.count
-    }
-    
     
     fileprivate func setupDropdown() {
         self.dropdown.cellHeight = 50.0
@@ -155,7 +141,7 @@ class EventPostingViewController: BaseViewController {
     
     fileprivate func postEvent() {
         guard let eventType = self.selectedEventType,
-              let content = self.contentTextField.text,
+              let content = self.contentTextView.text,
               let address = self.addressTextField.text
         else { return }
         self.postEvent(content: content, eventTypeId: eventType.id, lat: "\(selectedCoordinates.latitude)", lng: "\(selectedCoordinates.longitude)", address: address)
@@ -264,17 +250,31 @@ class EventPostingViewController: BaseViewController {
     
     // MARK: Get address of location
     fileprivate func getAddress(of location: CLLocationCoordinate2D) {
-        requestNonTokenResponseString(urlString: "https://maps.googleapis.com/maps/api/geocode/json?latlng=\(location.latitude),\(location.longitude)&key=\(GMSApiKey.iosKey)",
-                                      method: .post,
+//        requestNonTokenResponseString(urlString: "https://maps.googleapis.com/maps/api/geocode/json?latlng=\(location.latitude),\(location.longitude)&key=\(GMSApiKey.iosKey)",
+//                                      method: .post,
+//                                      params: nil,
+//                                      encoding: URLEncoding.default) { (response) in
+//            guard let jsonString = response.value,
+//                  let jsonData = jsonString.data(using: .utf8),
+//                  let resultCoordinates = try? JSONDecoder().decode(CoordinateResult.self, from: jsonData)
+//            else { return }
+//            if resultCoordinates.results.count > 0 {
+//                let formattedAddress = resultCoordinates.results[0].formattedAddress
+//                self.addressTextField.text = formattedAddress
+//            }
+//        }
+        requestNonTokenResponseString(urlString: "https://api.mapbox.com/geocoding/v5/mapbox.places/\(location.longitude),\(location.latitude).json?&access_token=\(MapBoxKey.publicToken)&language=vi&coutnry=VN",
+                                      method: .get,
                                       params: nil,
                                       encoding: URLEncoding.default) { (response) in
             guard let jsonString = response.value,
                   let jsonData = jsonString.data(using: .utf8),
-                  let resultCoordinates = try? JSONDecoder().decode(CoordinateResult.self, from: jsonData)
+                  let geocodingResult = try? JSONDecoder().decode(GeocodingJSONResult.self, from: jsonData),
+                  let features = geocodingResult.features
             else { return }
-            if resultCoordinates.results.count > 0 {
-                let formattedAddress = resultCoordinates.results[0].formattedAddress
-                self.addressTextField.text = formattedAddress
+            if features.count > 0 {
+                guard let address = features[0].placeName else { return }
+                self.addressTextField.text = address
             }
         }
     }
@@ -299,26 +299,20 @@ extension EventPostingViewController  {
         // Display the autocomplete view controller.
         present(autocompleteController, animated: true, completion: nil)
     }
-    
 }
 
 extension EventPostingViewController: MapViewControllerDelegate {
-    func didPickLocation(coordinate: CLLocationCoordinate2D) {
+    func didPickLocation(coordinate: CLLocationCoordinate2D, address: String) {
         self.selectedCoordinates = coordinate
+        self.addressTextField.text = address
     }
-}
 
-extension EventPostingViewController: UIScrollViewDelegate {
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        let page = scrollView.contentOffset.x/scrollView.frame.size.width
-        pageControl.currentPage = Int(page)
-    }
 }
 
 extension EventPostingViewController: ImagesSelectingViewControllerDelegate {
     func didSelect(images: [UIImage]) {
         self.selectedImages = images
-        self.setup(scrollView: self.scrollView)
+        self.setupImageSources(with: images)
     }
 }
 
@@ -352,4 +346,21 @@ extension EventPostingViewController: GMSAutocompleteViewControllerDelegate {
 
 protocol SocketMessageDelegate: class {
     func didReceiveMessage()
+}
+
+// MARK: - UITextView Delegate
+extension EventPostingViewController: UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.textColor == UIColor.lightGray {
+            textView.text = nil
+            textView.textColor = UIColor.black
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.isEmpty {
+            textView.text = "Nội dung sự cố"
+            textView.textColor = UIColor.lightGray
+        }
+    }
 }

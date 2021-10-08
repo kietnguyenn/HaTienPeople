@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		13E3455B888289782B92C886 /* Pods_HaTienPeople.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F6458838A089BEAFE08F725 /* Pods_HaTienPeople.framework */; };
 		18267DE625359CA20058B6A2 /* locations.json in Resources */ = {isa = PBXBuildFile; fileRef = 18267DE525359CA20058B6A2 /* locations.json */; };
 		18334E6C2534A5ED00559CAA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18334E6B2534A5ED00559CAA /* AppDelegate.swift */; };
 		18334E6E2534A5ED00559CAA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18334E6D2534A5ED00559CAA /* SceneDelegate.swift */; };
@@ -35,6 +34,8 @@
 		18334F442535680C00559CAA /* PlaceSearchingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18334F432535680C00559CAA /* PlaceSearchingViewController.swift */; };
 		186B86532578B45B00729FC7 /* UpdatePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186B86522578B45B00729FC7 /* UpdatePasswordViewController.swift */; };
 		18709B0B25549CA80029166E /* EmployeeLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18709B0A25549CA80029166E /* EmployeeLocationViewController.swift */; };
+		18900E89270F54EE002F5012 /* GeoJsonResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18900E88270F54EE002F5012 /* GeoJsonResponse.swift */; };
+		18900E8B270F6652002F5012 /* LocationsResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18900E8A270F6652002F5012 /* LocationsResult.swift */; };
 		189D94782704BAF9005BB187 /* ProfileOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189D94772704BAF9005BB187 /* ProfileOptionsViewController.swift */; };
 		189D947C2704BDEF005BB187 /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189D947A2704BDEF005BB187 /* MenuTableViewCell.swift */; };
 		189D947D2704BDEF005BB187 /* MenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 189D947B2704BDEF005BB187 /* MenuTableViewCell.xib */; };
@@ -53,6 +54,8 @@
 		18A55D9E258CAE6F00A3CC9E /* NotiCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A55D9C258CAE6E00A3CC9E /* NotiCell.xib */; };
 		18A55DDF2591A7DC00A3CC9E /* FileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A55DDD2591A7DB00A3CC9E /* FileCell.swift */; };
 		18A55DE02591A7DC00A3CC9E /* FileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A55DDE2591A7DB00A3CC9E /* FileCell.xib */; };
+		18AFD5D3270D7A2B004128F6 /* Pods_HaTienPeople.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F6458838A089BEAFE08F725 /* Pods_HaTienPeople.framework */; };
+		18AFD5D6270D872C004128F6 /* MKMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AFD5D5270D872C004128F6 /* MKMapViewController.swift */; };
 		18E1B3A02622F528006C0002 /* CurrentLocation.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 18E1B39F2622F528006C0002 /* CurrentLocation.gpx */; };
 		18E1B3E826237688006C0002 /* EventHandlingUsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E1B3DA26237684006C0002 /* EventHandlingUsers.swift */; };
 		18E1B3E926237688006C0002 /* CustomerInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E1B3DB26237685006C0002 /* CustomerInfo.swift */; };
@@ -146,6 +149,8 @@
 		18334F432535680C00559CAA /* PlaceSearchingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceSearchingViewController.swift; sourceTree = "<group>"; };
 		186B86522578B45B00729FC7 /* UpdatePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePasswordViewController.swift; sourceTree = "<group>"; };
 		18709B0A25549CA80029166E /* EmployeeLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeLocationViewController.swift; sourceTree = "<group>"; };
+		18900E88270F54EE002F5012 /* GeoJsonResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoJsonResponse.swift; sourceTree = "<group>"; };
+		18900E8A270F6652002F5012 /* LocationsResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsResult.swift; sourceTree = "<group>"; };
 		189D94772704BAF9005BB187 /* ProfileOptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileOptionsViewController.swift; sourceTree = "<group>"; };
 		189D947A2704BDEF005BB187 /* MenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
 		189D947B2704BDEF005BB187 /* MenuTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuTableViewCell.xib; sourceTree = "<group>"; };
@@ -164,6 +169,7 @@
 		18A55D9C258CAE6E00A3CC9E /* NotiCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotiCell.xib; sourceTree = "<group>"; };
 		18A55DDD2591A7DB00A3CC9E /* FileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileCell.swift; sourceTree = "<group>"; };
 		18A55DDE2591A7DB00A3CC9E /* FileCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FileCell.xib; sourceTree = "<group>"; };
+		18AFD5D5270D872C004128F6 /* MKMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKMapViewController.swift; sourceTree = "<group>"; };
 		18E1B39F2622F528006C0002 /* CurrentLocation.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = CurrentLocation.gpx; sourceTree = "<group>"; };
 		18E1B3DA26237684006C0002 /* EventHandlingUsers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventHandlingUsers.swift; sourceTree = "<group>"; };
 		18E1B3DB26237685006C0002 /* CustomerInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerInfo.swift; sourceTree = "<group>"; };
@@ -214,7 +220,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				13E3455B888289782B92C886 /* Pods_HaTienPeople.framework in Frameworks */,
+				18AFD5D3270D7A2B004128F6 /* Pods_HaTienPeople.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -314,7 +320,7 @@
 				18ED469E2631730800859951 /* Auth */,
 				18ED464D262E065B00859951 /* Users */,
 				18E1B4B82624B757006C0002 /* Main */,
-				18E1B47B262425BC006C0002 /* EventLogVc */,
+				18E1B47B262425BC006C0002 /* EventLogs */,
 				18A55DAD25908FCA00A3CC9E /* Notifications */,
 			);
 			path = Controllers;
@@ -401,6 +407,8 @@
 				18ED46C12635F67700859951 /* SocketMessage.swift */,
 				189D94882705A4E7005BB187 /* ExaminationResult.swift */,
 				189D948E27060325005BB187 /* UserInfo.swift */,
+				18900E88270F54EE002F5012 /* GeoJsonResponse.swift */,
+				18900E8A270F6652002F5012 /* LocationsResult.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -496,13 +504,13 @@
 			path = EventLogRow;
 			sourceTree = "<group>";
 		};
-		18E1B47B262425BC006C0002 /* EventLogVc */ = {
+		18E1B47B262425BC006C0002 /* EventLogs */ = {
 			isa = PBXGroup;
 			children = (
 				18E1B47026242581006C0002 /* EventLogsViewController.swift */,
 				18E1B475262425AA006C0002 /* EventLogDetailsViewController.swift */,
 			);
-			path = EventLogVc;
+			path = EventLogs;
 			sourceTree = "<group>";
 		};
 		18E1B4B82624B757006C0002 /* Main */ = {
@@ -512,6 +520,7 @@
 				18334EB62534A87900559CAA /* ImagesSelectingViewController.swift */,
 				18334EB72534A87900559CAA /* EventPostingViewController.swift */,
 				18334EB82534A87900559CAA /* MapViewController.swift */,
+				18AFD5D5270D872C004128F6 /* MKMapViewController.swift */,
 				18334F432535680C00559CAA /* PlaceSearchingViewController.swift */,
 			);
 			path = Main;
@@ -876,6 +885,7 @@
 				18334EDD2534A87A00559CAA /* EventListViewController.swift in Sources */,
 				189D94912708B21D005BB187 /* RoundButton.swift in Sources */,
 				18334ED72534A87A00559CAA /* EventPostingViewController.swift in Sources */,
+				18AFD5D6270D872C004128F6 /* MKMapViewController.swift in Sources */,
 				18334EDA2534A87A00559CAA /* UserViewController.swift in Sources */,
 				189D947F2704EE1F005BB187 /* OTPAuthViewController.swift in Sources */,
 				189D948F27060325005BB187 /* UserInfo.swift in Sources */,
@@ -887,6 +897,7 @@
 				18A55DDF2591A7DC00A3CC9E /* FileCell.swift in Sources */,
 				189D94932708BB9A005BB187 /* ExaminationResultDetailViewController.swift in Sources */,
 				189D948227058745005BB187 /* ExaminationResultViewController.swift in Sources */,
+				18900E8B270F6652002F5012 /* LocationsResult.swift in Sources */,
 				18E1B4222623772C006C0002 /* MyStoryboard.swift in Sources */,
 				18E1B3E926237688006C0002 /* CustomerInfo.swift in Sources */,
 				18334EE32534A87A00559CAA /* EventCell.swift in Sources */,
@@ -912,6 +923,7 @@
 				18334ED52534A87A00559CAA /* SignUpViewController.swift in Sources */,
 				18334EDE2534A87A00559CAA /* BaseTabBarController.swift in Sources */,
 				18334EE22534A87A00559CAA /* ImageCell.swift in Sources */,
+				18900E89270F54EE002F5012 /* GeoJsonResponse.swift in Sources */,
 				18334E6E2534A5ED00559CAA /* SceneDelegate.swift in Sources */,
 				18E1B476262425AB006C0002 /* EventLogDetailsViewController.swift in Sources */,
 				18E1B3F226237689006C0002 /* EventLogFile.swift in Sources */,
@@ -1109,6 +1121,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 100;
 				DEVELOPMENT_TEAM = PSUT9HQT37;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/mapbox-ios-sdk-dynamic-with-events/dynamic",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = HaTienPeople/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1134,6 +1151,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 100;
 				DEVELOPMENT_TEAM = PSUT9HQT37;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/mapbox-ios-sdk-dynamic-with-events/dynamic",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = HaTienPeople/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (

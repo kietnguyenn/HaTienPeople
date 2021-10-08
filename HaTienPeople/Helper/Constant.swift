@@ -12,11 +12,16 @@ let accentColorName = "AccentColor"
 let accentColor = UIColor(named: accentColorName)
 
 struct GMSApiKey {
-//    static let iosKey = "AIzaSyA8o9zr__FemrWZ_xyVFQdPQFC03Uqlbhw"
-    static let iosKey = "AIzaSyCMbslNBmuqgVsJXXyYHS7CI5RdwUdkZZw"
-//    static let iosKey = "AIzaSyCSqne0SIdhxLVnPqn51P48DKTUSRFoA9s"
-    
+    static let iosKey = "AIzaSyAmFnTIuypzz79WDqtozYSyOm6-nBtVkQk"
 }
+
+struct MapBoxKey {
+    static let key1 = "pk.eyJ1Ijoia2lldDA5MTAiLCJhIjoiY2t1ZXhhNXpoMW9zdjJxbG05M29rdGx0ZyJ9.-IxknyAMP64-ncyzScMquQ"
+    static let apiKey = "rhRrzINdW1pw0GMmcVSpN2okwjb6rEp1ilxOzP6D"
+    static let publicToken = "pk.eyJ1Ijoia2lldDA5MTAiLCJhIjoiY2t1ZXhhNXpoMW9zdjJxbG05M29rdGx0ZyJ9.-IxknyAMP64-ncyzScMquQ"
+    static let privateToken = "pk.eyJ1Ijoia2lldDA5MTAiLCJhIjoiY2t1ZTV3ZGlsMWhjNzJubW80NWZmN2E1ayJ9.VC9vcZTWVFRLy07AFc4agQ"
+}
+
 
 struct Constant {
     static var statusList = [EventStatus]() {
@@ -45,7 +50,6 @@ struct Constant {
     
     struct AlertContent {
         static let serverError = "Hệ thống đang gặp sự cố, xin thử lại trong giây lát!"
-        static let api400 = ""
         static let phoneNumberDidVerified = "Số điện thoại đang dùng đã được xác thực"
     }
 

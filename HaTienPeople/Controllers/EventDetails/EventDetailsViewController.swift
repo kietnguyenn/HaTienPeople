@@ -313,7 +313,6 @@ class EventDetailsViewController: BaseViewController {
         self.view.addSubview(floaty)
     }
     
-    
     /// Get Images
     func getImages(eventLogId: String) {
         requestApiResponseString(urlString: ApiDomain.new + "\(eventLogId)/Files", method: .get, encoding: URLEncoding.queryString) { (responseString) in

@@ -100,9 +100,9 @@ extension EventLogsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let details = self.storyboard?.instantiateViewController(withIdentifier: "EventLogDetailsViewController") as! EventLogDetailsViewController
-//        let log = eventLogs[indexPath.row]
-//        details.eventLog = log
-//        self.navigationController?.pushViewController(details, animated: true)
+        let details = self.storyboard?.instantiateViewController(withIdentifier: "EventLogDetailsViewController") as! EventLogDetailsViewController
+        let log = eventLogs[indexPath.row]
+        details.eventLog = log
+        self.navigationController?.pushViewController(details, animated: true)
     }
 }

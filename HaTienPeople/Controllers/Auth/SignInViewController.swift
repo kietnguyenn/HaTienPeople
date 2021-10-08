@@ -33,6 +33,10 @@ class SignInViewController: BaseViewController {
         self.present(vc, animated: true)
     }
     
+    @IBAction func getPassword(_ sender: UIButton) {
+        // show otp auth vc
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }

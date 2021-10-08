@@ -13,12 +13,6 @@ import ImageSlideshow
 
 class EventLogDetailsViewController: BaseViewController {
     @IBOutlet weak var contentLabel: UILabel!
-//    @IBOutlet weak var pagerView: FSPagerView! {
-//        didSet {
-//            self.pagerView.register(FSPagerViewCell.self, forCellWithReuseIdentifier: "cell")
-//        }
-//    }
-    
     @IBOutlet weak var slideshow: ImageSlideshow!
     @IBOutlet weak var empNameLabel: UILabel!
     

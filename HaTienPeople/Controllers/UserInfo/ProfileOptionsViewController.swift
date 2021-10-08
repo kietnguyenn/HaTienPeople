@@ -25,8 +25,8 @@ class ProfileOptionsViewController: BaseViewController {
     }
     
     let items = [MenuTableViewItem(icon: "icon-update-profile", title: "Cập nhật thông tin cá nhân"),
-                 MenuTableViewItem(icon: "icon-update-password", title: "Đổi mật khẩu"),
-                 MenuTableViewItem(icon: "icon-examination-result", title: "Kết quả xét nghiệm")
+                 MenuTableViewItem(icon: "icon-update-password", title: "Đổi mật khẩu")
+//                 MenuTableViewItem(icon: "icon-examination-result", title: "Kết quả xét nghiệm")
     ]
     let cellId = "MenuTableViewCell"
     var customerInfo: CustomerInfo? {

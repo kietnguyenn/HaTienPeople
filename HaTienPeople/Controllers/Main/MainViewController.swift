@@ -11,16 +11,18 @@ import Alamofire
 import SwiftSignalRClient
 
 class MainViewController: BaseViewController {
-
     
     @IBOutlet weak var userNameLabel: UILabel!
     
     var customerInfo : CustomerInfo? {
         didSet {
             UserInfo.current = customerInfo!
-            guard let phoneNum = UserInfo.current?.phoneNumber else { return }
+            guard let phoneNum = UserInfo.current?.phoneNumber,
+                    let name = UserInfo.current?.fullName
+            else { return }
             self.currentPhoneNumber = phoneNum
             print("phone", phoneNum)
+            self.userNameLabel.text = name
         }
     }
     
@@ -83,6 +85,7 @@ class MainViewController: BaseViewController {
             } else if statusCode == 400 {
                 guard let jsonString = response.value
                 else { return }
+                print(jsonString)
                 if jsonString == "Tài khoản đã xác thực" || jsonString == "IS_CONFIRMED" {
                     wSelf.showExaminationResultVc()
                 }
