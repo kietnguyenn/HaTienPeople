@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import Alamofire
 import PasswordTextField
+import SCLAlertView
 
 let _customer = "Customer"
 let _employee = "Employee"
@@ -34,7 +35,24 @@ class SignInViewController: BaseViewController {
     }
     
     @IBAction func getPassword(_ sender: UIButton) {
-        // show otp auth vc
+        let appearance = SCLAlertView.SCLAppearance(
+            kTitleFont: UIFont(name: "Avenir-Bold", size: 20)!,
+            kTextFont: UIFont(name: "Avenir", size: 14)!,
+            kButtonFont: UIFont(name: "Avenir-DemiBold", size: 14)!,
+            showCloseButton: false,
+            showCircularIcon: false
+        )
+        let alertView = SCLAlertView(appearance: appearance)
+        let txt = alertView.addTextField("Nhập số điện thoại")
+        alertView.addButton("Ok", target:self, selector:#selector(self.okButtonTapped))
+        alertView.addButton("Hủy") {
+            print("Second button tapped")
+        }
+        alertView.showEdit("Xác thực số điện thoại", subTitle: "Nhận mã xác thực OTP qua số điện thoại")
+    }
+
+    @objc func okButtonTapped() {
+        
     }
     
     override func viewDidLoad() {
@@ -85,6 +103,48 @@ class SignInViewController: BaseViewController {
         } else {
             return false
         }
+    }
+    
+    func showOtpAuthVc() {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "OTPAuthViewController") as! OTPAuthViewController
+        let nav = BaseNavigationController(rootViewController: vc)
+        vc.delegate = self
+        self.present(nav, animated: true) {
+            vc.modalPresentationStyle = .fullScreen
+            vc.showDismissButton(title: "Hủy")
+            vc.title = "Xác thực OTP"
+        }
+    }
+    
+    fileprivate func sendOTP(with phoneNum: String) {
+        self.showHUD()
+        guard let url = URL(string: Api.sendOTPCode + "?phoneNumber=\(phoneNum)") else { return }
+        Alamofire.request(url, method: .post, parameters: nil, encoding: URLEncoding.default, headers: nil).responseString { [weak self] (response) in
+            guard let wSelf = self else { return }
+            wSelf.hideHUD()
+            guard let statusCode = response.response?.statusCode else { return }
+            print("code",  statusCode)
+            if 200..<300 ~= statusCode && response.result.isSuccess {
+                // show OTP verification vc /  Did not verified
+                wSelf.showOtpAuthVc()
+            } else if statusCode == 400 {
+                guard let jsonString = response.value
+                else { return }
+                print(jsonString)
+                if jsonString == "Tài khoản đã xác thực" || jsonString == "IS_CONFIRMED" {
+                    
+                }
+            } else {
+                wSelf.showAlert(errorMessage: Constant.AlertContent.serverError)
+            }
+        }
+    }
+}
+
+extension SignInViewController : OTPAuthViewControllerDelegate {
+    func didVerifyOTP() {
+        // SHOW UPDATE PASSWORD VIEW
+        
     }
 }
 

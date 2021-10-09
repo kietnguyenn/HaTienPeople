@@ -33,6 +33,7 @@
 		18334EF62534DE6B00559CAA /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18334EF52534DE6B00559CAA /* ImageViewController.swift */; };
 		18334F442535680C00559CAA /* PlaceSearchingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18334F432535680C00559CAA /* PlaceSearchingViewController.swift */; };
 		186B86532578B45B00729FC7 /* UpdatePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186B86522578B45B00729FC7 /* UpdatePasswordViewController.swift */; };
+		186C746A271048AB0047DAB8 /* RequestNewPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186C7469271048AB0047DAB8 /* RequestNewPasswordViewController.swift */; };
 		18709B0B25549CA80029166E /* EmployeeLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18709B0A25549CA80029166E /* EmployeeLocationViewController.swift */; };
 		18900E89270F54EE002F5012 /* GeoJsonResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18900E88270F54EE002F5012 /* GeoJsonResponse.swift */; };
 		18900E8B270F6652002F5012 /* LocationsResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18900E8A270F6652002F5012 /* LocationsResult.swift */; };
@@ -148,6 +149,7 @@
 		18334EF52534DE6B00559CAA /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		18334F432535680C00559CAA /* PlaceSearchingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceSearchingViewController.swift; sourceTree = "<group>"; };
 		186B86522578B45B00729FC7 /* UpdatePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePasswordViewController.swift; sourceTree = "<group>"; };
+		186C7469271048AB0047DAB8 /* RequestNewPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestNewPasswordViewController.swift; sourceTree = "<group>"; };
 		18709B0A25549CA80029166E /* EmployeeLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeLocationViewController.swift; sourceTree = "<group>"; };
 		18900E88270F54EE002F5012 /* GeoJsonResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoJsonResponse.swift; sourceTree = "<group>"; };
 		18900E8A270F6652002F5012 /* LocationsResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsResult.swift; sourceTree = "<group>"; };
@@ -539,6 +541,7 @@
 			children = (
 				18334EBC2534A87900559CAA /* SignInViewController.swift */,
 				18334EB52534A87900559CAA /* SignUpViewController.swift */,
+				186C7469271048AB0047DAB8 /* RequestNewPasswordViewController.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -876,6 +879,7 @@
 			files = (
 				18E1B3EB26237689006C0002 /* _Event.swift in Sources */,
 				189D94892705A4E8005BB187 /* ExaminationResult.swift in Sources */,
+				186C746A271048AB0047DAB8 /* RequestNewPasswordViewController.swift in Sources */,
 				18E1B3F426237689006C0002 /* CoordinateResult.swift in Sources */,
 				18E1B3F026237689006C0002 /* EventLog.swift in Sources */,
 				18E1B3E826237688006C0002 /* EventHandlingUsers.swift in Sources */,
