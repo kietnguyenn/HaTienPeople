@@ -35,7 +35,7 @@ class BaseNavigationController: UINavigationController {
             navigationBar.scrollEdgeAppearance = navBarAppearance
             
         } else {
-            navigationBar.barStyle = .black
+            navigationBar.barStyle = .default
             // bar color
             navigationBar.barTintColor = .white
             navigationBar.isTranslucent = false

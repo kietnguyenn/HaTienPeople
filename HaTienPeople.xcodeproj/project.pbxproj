@@ -37,6 +37,7 @@
 		18709B0B25549CA80029166E /* EmployeeLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18709B0A25549CA80029166E /* EmployeeLocationViewController.swift */; };
 		18900E89270F54EE002F5012 /* GeoJsonResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18900E88270F54EE002F5012 /* GeoJsonResponse.swift */; };
 		18900E8B270F6652002F5012 /* LocationsResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18900E8A270F6652002F5012 /* LocationsResult.swift */; };
+		1892C68D27141E280040B943 /* PhoneNumberVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1892C68C27141E280040B943 /* PhoneNumberVerificationViewController.swift */; };
 		189D94782704BAF9005BB187 /* ProfileOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189D94772704BAF9005BB187 /* ProfileOptionsViewController.swift */; };
 		189D947C2704BDEF005BB187 /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189D947A2704BDEF005BB187 /* MenuTableViewCell.swift */; };
 		189D947D2704BDEF005BB187 /* MenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 189D947B2704BDEF005BB187 /* MenuTableViewCell.xib */; };
@@ -153,6 +154,7 @@
 		18709B0A25549CA80029166E /* EmployeeLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeLocationViewController.swift; sourceTree = "<group>"; };
 		18900E88270F54EE002F5012 /* GeoJsonResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoJsonResponse.swift; sourceTree = "<group>"; };
 		18900E8A270F6652002F5012 /* LocationsResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsResult.swift; sourceTree = "<group>"; };
+		1892C68C27141E280040B943 /* PhoneNumberVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberVerificationViewController.swift; sourceTree = "<group>"; };
 		189D94772704BAF9005BB187 /* ProfileOptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileOptionsViewController.swift; sourceTree = "<group>"; };
 		189D947A2704BDEF005BB187 /* MenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
 		189D947B2704BDEF005BB187 /* MenuTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuTableViewCell.xib; sourceTree = "<group>"; };
@@ -542,6 +544,7 @@
 				18334EBC2534A87900559CAA /* SignInViewController.swift */,
 				18334EB52534A87900559CAA /* SignUpViewController.swift */,
 				186C7469271048AB0047DAB8 /* RequestNewPasswordViewController.swift */,
+				1892C68C27141E280040B943 /* PhoneNumberVerificationViewController.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -916,6 +919,7 @@
 				18E1B47126242581006C0002 /* EventLogsViewController.swift in Sources */,
 				18A55D91258C937B00A3CC9E /* NotiViewController.swift in Sources */,
 				18334ED62534A87A00559CAA /* ImagesSelectingViewController.swift in Sources */,
+				1892C68D27141E280040B943 /* PhoneNumberVerificationViewController.swift in Sources */,
 				18E1B3ED26237689006C0002 /* AdminstrativeViolationRecords03.swift in Sources */,
 				18709B0B25549CA80029166E /* EmployeeLocationViewController.swift in Sources */,
 				18334EE02534A87A00559CAA /* BaseNavigationController.swift in Sources */,

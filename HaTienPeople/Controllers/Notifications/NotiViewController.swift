@@ -15,7 +15,7 @@ class NotiViewController: BaseViewController {
     
     let cellId = "NotiCell"
     
-    var notiList = [NotificationElement]() {
+    var notiList = [NotificationItem]() {
         didSet {
             print("NotiList.count = \(notiList.count)")
         }
@@ -50,15 +50,17 @@ class NotiViewController: BaseViewController {
 //            "title": title,
 //            "fromDate" : from,
 //            "toDate" : to,
+            "dateDescending": true,
             "pageIndex": 1,
             "pageSize": 20]
         newApiRerequest_responseString(url: Api.notificationFilter,
                                        method: .get,
-                                       param: nil,
-                                       encoding: URLEncoding.default) { (res, data, status) in
+                                       param: param,
+                                       encoding: URLEncoding.queryString) { (res, data, status) in
             print(res)
             do {
-                let notiList = try JSONDecoder().decode(Notification.self, from: data)
+                let notificationResponse = try JSONDecoder().decode(NotificationsResponse.self, from: data)
+                guard let notiList = notificationResponse.data else { return }
                 self.notiList = notiList
                 self.notiListTableView.reloadData()
             } catch let DecodingError.dataCorrupted(context) {
@@ -77,9 +79,6 @@ class NotiViewController: BaseViewController {
             }
         }
     }
-    
-
-
 }
 
 // MARK: UITABLEVIEW DELEGATE & DATASOURCES
@@ -93,23 +92,23 @@ extension NotiViewController: UITableViewDelegate, UITableViewDataSource {
         cell.selectionStyle = .none
         let notiItem = notiList[indexPath.row]
         
-        if let category = notiItem.notification?.category?.categoryDescription {
+        if let category = notiItem.category?.categoryDescription {
             cell.typeLabel.text = category
         }
 
-        if let title = notiItem.notification?.title {
+        if let title = notiItem.title {
             cell.titleLabel.text = title
         }
-        if let description = notiItem.notification?.notificationDescription {
+        if let description = notiItem.description {
             cell.contentLabel.text = description
         }
         if let date = notiItem.dateCreated {
             let date_ = configDateTimeStringOnServerToDevice(dateString: date)
             cell.dateTimeLabel.text = date_.date
         }
-        if let seen = notiItem.seen {
-            cell.unreadLabel.isHidden = seen
-        }
+//        if let seen = notiItem.seen {
+//            cell.unreadLabel.isHidden = seen
+//        }
         return cell
     }
     
@@ -148,7 +147,7 @@ extension NotiViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     // call seen APi
-    func seen(_ notiItem: NotificationElement) -> Bool {
+    func seen(_ notiItem: NotificationItem) -> Bool {
         return true
     }
 }

@@ -7,35 +7,41 @@
 
 import Foundation
 
-// MARK: - NotificationElement
-struct NotificationElement: Codable {
-    let id: String?
-    let seen, starred, isDeleted: Bool?
-    let dateCreated: String?
-    let notification: NotificationClass?
+
+// MARK: - File
+struct File: Codable {
+    let id, fileName: String?
+}
+//
+
+// MARK: - Empty
+struct NotificationsResponse: Codable {
+    let pageIndex, pageSize, totalSize: Int?
+    let data: [NotificationItem]?
 }
 
 //
 // To read values from URLs:
 //
-//   let task = URLSession.shared.notificationClassTask(with: url) { notificationClass, response, error in
-//     if let notificationClass = notificationClass {
+//   let task = URLSession.shared.datumTask(with: url) { datum, response, error in
+//     if let datum = datum {
 //       ...
 //     }
 //   }
 //   task.resume()
 
-// MARK: - NotificationClass
-struct NotificationClass: Codable {
+// MARK: - Datum
+struct NotificationItem: Codable {
     let id: String?
     let files: [File]?
     let category: Category?
-    let notificationDescription, title: String?
+    let description, title, dateCreated, datePublic: String?
+    let fromUnit: JSONNull?
 
     enum CodingKeys: String, CodingKey {
         case id, files, category
-        case notificationDescription = "description"
-        case title
+        case description = "description"
+        case title, dateCreated, datePublic, fromUnit
     }
 }
 
@@ -58,20 +64,3 @@ struct Category: Codable {
         case categoryDescription = "description"
     }
 }
-
-//
-// To read values from URLs:
-//
-//   let task = URLSession.shared.fileTask(with: url) { file, response, error in
-//     if let file = file {
-//       ...
-//     }
-//   }
-//   task.resume()
-
-// MARK: - File
-struct File: Codable {
-    let id, fileName: String?
-}
-
-typealias Notification = [NotificationElement]

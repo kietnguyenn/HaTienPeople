@@ -10,14 +10,13 @@ import UIKit
 import Alamofire
 
 class RequestNewPasswordViewController: BaseViewController {
-    @IBOutlet weak var oldPasswordTf: UITextField!
-    @IBOutlet weak var newPasswordTf: UITextField!
-    @IBOutlet weak var confirmNewPassword: UITextField!
+    @IBOutlet weak var newPasswordTextField: UITextField!
+    @IBOutlet weak var confirmNewPasswordTextField: UITextField!
     
     @IBAction func updateButtonTapped(_: UIButton) {
-        let tuples = self.unwrapOptionals(old: oldPasswordTf, new: newPasswordTf, confirm: confirmNewPassword)
-        if validate(tuples.old, tuples.new, tuples.confirm) {
-            self.update(old: tuples.old, new: tuples.new, confirm: tuples.confirm)
+        let tuples = self.unwrapOptionals(new: newPasswordTextField, confirm: confirmNewPasswordTextField)
+        if validate(tuples.new, tuples.confirm) {
+            self.update(new: tuples.new, id: tuples.confirm)
         }
     }
     @IBAction func cancel(_ sender: UIButton) {
@@ -28,12 +27,15 @@ class RequestNewPasswordViewController: BaseViewController {
     let error2 = "Vui lòng điền đẩy đủ 3 trường!"
     let success = "Cập nhật mật khẩu thành công!"
     
+    var phoneNumber : String?
+    var id : String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
-    func validate(_ old: String, _ new: String, _ confirm: String) -> Bool {
-        if old.count>0 && new.count>0 && confirm.count>0 {
+    func validate(_ new: String, _ confirm: String) -> Bool {
+        if new.count>0 && confirm.count>0 {
             if new == confirm {
                 return true
             } else {
@@ -46,9 +48,10 @@ class RequestNewPasswordViewController: BaseViewController {
         }
     }
     
-    func update(old: String, new: String, confirm: String) {
-        let params: Parameters = [  "oldPassword": old,
-                                    "newPassword": confirm
+    func update(new: String, id: String) {
+        let params: Parameters = [    "phoneNumber": phoneNumber,
+                                      "id": id,
+                                      "newPassword": new
         ]
         newApiRerequest_responseString(url: Api.password,
                                        method: .post,
@@ -64,8 +67,8 @@ class RequestNewPasswordViewController: BaseViewController {
         }
     }
     
-    func unwrapOptionals(old: UITextField, new: UITextField, confirm: UITextField) -> (old: String, new: String, confirm: String) {
-        guard let old = old.text, let new = new.text, let confirm = confirm.text else {return ("", "", "")}
-        return (old, new, confirm)
+    func unwrapOptionals(new: UITextField, confirm: UITextField) -> (new: String, confirm: String) {
+        guard let new = new.text, let confirm = confirm.text else {return ("", "")}
+        return (new, confirm)
     }
 }

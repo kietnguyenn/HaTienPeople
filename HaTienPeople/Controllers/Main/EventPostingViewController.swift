@@ -263,17 +263,17 @@ class EventPostingViewController: BaseViewController {
 //                self.addressTextField.text = formattedAddress
 //            }
 //        }
-        requestNonTokenResponseString(urlString: "https://api.mapbox.com/geocoding/v5/mapbox.places/\(location.longitude),\(location.latitude).json?&access_token=\(MapBoxKey.publicToken)&language=vi&coutnry=VN",
+        requestNonTokenResponseString(urlString: "https://rsapi.goong.io/Geocode?latlng=\(location.latitude),%20\(location.longitude)&api_key=\(MapBoxKey.apiKey)",
                                       method: .get,
                                       params: nil,
                                       encoding: URLEncoding.default) { (response) in
             guard let jsonString = response.value,
                   let jsonData = jsonString.data(using: .utf8),
-                  let geocodingResult = try? JSONDecoder().decode(GeocodingJSONResult.self, from: jsonData),
-                  let features = geocodingResult.features
+                  let geocodingResult = try? JSONDecoder().decode(GeoCoding.self, from: jsonData),
+                  let results = geocodingResult.results
             else { return }
-            if features.count > 0 {
-                guard let address = features[0].placeName else { return }
+            if results.count > 0 {
+                guard let address = results[0].formattedAddress else { return }
                 self.addressTextField.text = address
             }
         }

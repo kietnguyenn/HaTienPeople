@@ -19,18 +19,29 @@ class OTPAuthViewController: BaseViewController {
     @IBOutlet weak var resendButton: UIButton!
     @IBOutlet weak var verifyButton: UIButton!
     @IBAction func resendOTPCode(_ sender: UIButton) {
-        guard let phoneNumber = UserInfo.current?.phoneNumber else { return }
-        self.sendOTP(with: phoneNumber)
+        if let phoneNumber = self.phoneNumber {
+            // resetPassword request
+            self.sendOtpForResetPassword(with: phoneNumber)
+        } else {
+            guard let phoneNum = UserInfo.current?.phoneNumber else { return }
+            self.sendOTP(with: phoneNum)
+        }
     }
     @IBAction func verifyOTPCode(_ sender: UIButton) {
-        guard let phoneNumber = UserInfo.current?.phoneNumber, let otpCode = self.textField.text else { return }
-        self.verifyOTP(phoneNumber, otpCode)
+        guard let otpCode = self.textField.text else { return }
+        if let phoneNumber = self.phoneNumber {
+            self.verify(phone: phoneNumber, otp: otpCode)
+        } else {
+            guard let phoneNumber = UserInfo.current?.phoneNumber else { return }
+            self.verifyOTP(phoneNumber, otpCode)
+        }
     }
     
     var delegate: OTPAuthViewControllerDelegate!
     var countTimer : Timer!
     var counter = 60
-    
+    var phoneNumber : String?
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         self.addObserverForTextField()
@@ -92,6 +103,20 @@ class OTPAuthViewController: BaseViewController {
         }
     }
     
+    func sendOtpForResetPassword(with phoneNumber: String) {
+        _newApiRequestWithErrorHandling(url: Api.sendOTPCodeNonVerified,
+                                        method: .post,
+                                        param: ["phoneNumber" : phoneNumber],
+                                        encoding: URLEncoding.queryString) {
+            (response, jsondata, status) in
+            if 200..<300 ~= status {
+
+            } else {
+                self.showAlert(errorMessage: "\(response.value ?? Constant.AlertContent.serverError)")
+            }
+        }
+    }
+    
     fileprivate func verifyOTP(_ phoneNum: String, _ code: String) {
         newApiRerequest_responseString(url: Api.verifyOTPCode,
                                        method: .post,
@@ -104,6 +129,26 @@ class OTPAuthViewController: BaseViewController {
                 wSelf.dismiss(animated: true) {
                     wSelf.delegate.didVerifyOTP()
                 }
+            }
+        }
+    }
+    
+    func verify(phone: String, otp: String) {
+        _newApiRequestWithErrorHandling(url: Api.verifyOTPForNewPassword,
+                                        method: .post,
+                                        param: [ "phoneNumber": phone,
+                                                 "otp": otp],
+                                        encoding: JSONEncoding.default) { res, data, status in
+            if 200..<300 ~= status {
+                // move to otp auth
+                self.showAlert(title: "Thành công", message: "Xác thực số điện thoại thành công!", style: .alert, hasTwoButton: false, actionButtonTitle: "Tạo mật khẩu mới") { action in
+                    
+                }
+            } else if 400..<500 ~= status {
+                let error = res.value ?? "Lỗi, code \(status)"
+                self.showAlert(errorMessage: error)
+            } else if status == 500 {
+                self.showAlert(errorMessage: Constant.AlertContent.serverError)
             }
         }
     }

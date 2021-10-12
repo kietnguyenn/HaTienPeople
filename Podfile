@@ -29,7 +29,6 @@ pod 'SCLAlertView'
 pod 'ImageSlideshow', '~> 1.9.0'
 pod 'ImageScrollView'
 pod 'SCLAlertView'
-
 #pod 'Mapbox-iOS-SDK', '~> 6.4.0'
 
 

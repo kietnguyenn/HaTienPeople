@@ -32,7 +32,7 @@ struct Api {
     static let userInfo = ApiDomain.new + "api/Users/Info"
     static let files = ApiDomain.new + "api/Notification/File"
     static let notifications = ApiDomain.new + "api/Notification"
-    static let notificationFilter = ApiDomain.new + "api/NotificationUser/Filter?dateDescending=true&pageIndex=1&pageSize=10"
+    static let notificationFilter = ApiDomain.new + "api/NotificationUser/Filter"
     static let eventsRelatedUser = ApiDomain.new + "api/Events/RelatedUsers"
     static let notificationsForUser = ApiDomain.new + "api/NotificationUser/Filter"
     static let addEmpToEvent = ApiDomain.new + "api/EventsAd/SetEventToUser"
@@ -43,5 +43,7 @@ struct Api {
     
     static let sendOTPCode =  ApiDomain.new + "api/Users/SendOTPVerification"
     static let verifyOTPCode = ApiDomain.new + "api/Users/VerifyOTPOfPhoneNumber"
+    static let verifyOTPForNewPassword = ApiDomain.new + "api/Otp/VerifyOTPOfPhoneNumber"
     static let examinationResult = ApiDomain.new + "api/Seach/SearchDetailReports"
+    static let sendOTPCodeNonVerified = ApiDomain.new + "api/Otp/SendOTP" // post
 }

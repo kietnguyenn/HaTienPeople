@@ -18,9 +18,9 @@ class NotificationDetailsViewController: BaseViewController {
     @IBOutlet weak var typeLabel: UILabel!
     @IBOutlet weak var contentLabel: UILabel!
     
-    var notification: NotificationElement? {
+    var notification: NotificationItem? {
         didSet {
-            guard let files = notification?.notification?.files else { return }
+            guard let files = notification?.files else { return }
             self.files = files
         }
     }
@@ -47,20 +47,18 @@ class NotificationDetailsViewController: BaseViewController {
         self.updateUI(noti)
     }
     
-    func updateUI(_ notiItem: NotificationElement) {
-        if let notification = notiItem.notification {
-            if let title = notification.title {
+    func updateUI(_ notiItem: NotificationItem) {
+            if let title = notiItem.title {
                 self.titleLabel.text = "Tiêu đề: " + title
             } else {
                 self.titleLabel.text = "Không có tiêu đề"
             }
-            if let content = notification.notificationDescription {
+            if let content = notiItem.description {
                 self.contentLabel.text = content
             }
-            if let type = notification.category?.categoryDescription {
+            if let type = notiItem.category?.categoryDescription {
                 self.typeLabel.text = type
             }
-        }
         if let date = notiItem.dateCreated {
             let date_ = configDateTimeStringOnServerToDevice(dateString: date)
             self.dateLabel.text = date_.date + " lúc " + date_.time

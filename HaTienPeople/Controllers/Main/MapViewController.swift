@@ -132,44 +132,44 @@ class MapViewController: BaseViewController {
 //    }
     
     // MARK: Get address of location
-    fileprivate func setAddress(of location: CLLocationCoordinate2D) {
-        requestNonTokenResponseString(urlString: "https://maps.googleapis.com/maps/api/geocode/json?latlng=\(location.latitude),\(location.longitude)&key=\(GMSApiKey.iosKey)",
-                                      method: .post,
-                                      params: nil,
-                                      encoding: URLEncoding.default) { (response) in
-            guard let jsonString = response.value,
-                  let jsonData = jsonString.data(using: .utf8),
-                  let resultCoordinates = try? JSONDecoder().decode(CoordinateResult.self, from: jsonData)
-            else { return }
-            if resultCoordinates.results.count > 0 {
-                let formattedAddress = resultCoordinates.results[0].formattedAddress
-                if #available(iOS 13.0, *) {
-                    guard let searchTextField = self.resultSearchController?.searchBar.searchTextField else { return }
-                    searchTextField.text = formattedAddress
-                } else {
-                    // Fallback on earlier versions
-                    guard let textField = self.resultSearchController?.searchBar.value(forKey: "searchField") as? UITextField else { return }
-                    textField.text = formattedAddress
-                }
-            }
-            
-        }
-    }
-    
+//    fileprivate func setAddress(of location: CLLocationCoordinate2D) {
+//        requestNonTokenResponseString(urlString: "https://maps.googleapis.com/maps/api/geocode/json?latlng=\(location.latitude),\(location.longitude)&key=\(GMSApiKey.iosKey)",
+//                                      method: .post,
+//                                      params: nil,
+//                                      encoding: URLEncoding.default) { (response) in
+//            guard let jsonString = response.value,
+//                  let jsonData = jsonString.data(using: .utf8),
+//                  let resultCoordinates = try? JSONDecoder().decode(CoordinateResult.self, from: jsonData)
+//            else { return }
+//            if resultCoordinates.results.count > 0 {
+//                let formattedAddress = resultCoordinates.results[0].formattedAddress
+//                if #available(iOS 13.0, *) {
+//                    guard let searchTextField = self.resultSearchController?.searchBar.searchTextField else { return }
+//                    searchTextField.text = formattedAddress
+//                } else {
+//                    // Fallback on earlier versions
+//                    guard let textField = self.resultSearchController?.searchBar.value(forKey: "searchField") as? UITextField else { return }
+//                    textField.text = formattedAddress
+//                }
+//            }
+//            
+//        }
+//    }
+//    
     // New api to get address with location
     // REVERSE GEOCODING (location -> address)
     fileprivate func getAddress(with location: CLLocationCoordinate2D) {
-        requestNonTokenResponseString(urlString: "https://api.mapbox.com/geocoding/v5/mapbox.places/\(location.longitude),\(location.latitude).json?&access_token=\(MapBoxKey.publicToken)&language=vi&coutnry=VN",
+        requestNonTokenResponseString(urlString: "https://rsapi.goong.io/Geocode?latlng=\(location.latitude),%20\(location.longitude)&api_key=\(MapBoxKey.apiKey)",
                                       method: .get,
                                       params: nil,
                                       encoding: URLEncoding.default) { (response) in
             guard let jsonString = response.value,
                   let jsonData = jsonString.data(using: .utf8),
-                  let geocodingResult = try? JSONDecoder().decode(GeocodingJSONResult.self, from: jsonData),
-                  let features = geocodingResult.features
+                  let geocodingResult = try? JSONDecoder().decode(GeoCoding.self, from: jsonData),
+                  let results = geocodingResult.results
             else { return }
-            if features.count > 0 {
-                guard let address = features[0].placeName else { return }
+            if results.count > 0 {
+                guard let address = results[0].formattedAddress else { return }
                 if #available(iOS 13.0, *) {
                     guard let searchTextField = self.resultSearchController?.searchBar.searchTextField else { return }
                     searchTextField.text = address
@@ -312,7 +312,7 @@ class LocationsTableViewController: UITableViewController{
 
 extension LocationsTableViewController : UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        // FORWARD GEOCODING HERE
+        
         guard let searchBarText = searchController.searchBar.text else { return }
 //        let formatedSearchBarText = searchBarText.replacingOccurrences(of: " ", with: "%20")
         guard let url = URL(string: "https://rsapi.goong.io/Place/AutoComplete")
