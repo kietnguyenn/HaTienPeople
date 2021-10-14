@@ -34,18 +34,10 @@ class PhoneNumberVerificationViewController: BaseViewController {
     }
     
     func setShawdowForWrapperView(_ wView: UIView){
-        wView.layer.shadowColor = UIColor.lightGray.cgColor
-        wView.layer.shadowOpacity = 0.5
-        wView.layer.shadowOffset = .zero
-        wView.layer.shadowRadius = 5
-        wView.layer.masksToBounds = false
-        wView.clipsToBounds = true
-//        wView.layer.shadowPath = UIBezierPath(rect: wView.bounds).cgPath
-//        wView.layer.shouldRasterize = true
-//        wView.layer.rasterizationScale = UIScreen.main.scale
         wView.layer.cornerRadius = 8.0
-//        wView.layer.masksToBounds = true
-
+        wView.clipsToBounds = true
+        wView.layer.borderColor = UIColor.lightGray.cgColor
+        wView.layer.borderWidth = 0.5
     }
     
     func sendOtpForResetPassword(with phoneNumber: String) {
@@ -67,6 +59,7 @@ class PhoneNumberVerificationViewController: BaseViewController {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "OTPAuthViewController") as! OTPAuthViewController
         vc.delegate = self
         vc.phoneNumber = phone
+        vc.showBackButton()
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }

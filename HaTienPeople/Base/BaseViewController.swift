@@ -138,7 +138,7 @@ class BaseViewController: UIViewController {
     // MARK: - Show Alert
     open func showAlert(title: String, message: String, style: UIAlertController.Style, hasTwoButton: Bool = false, actionButtonTitle: String = "Ok", okAction: @escaping (_ action: UIAlertAction) -> Void ) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: style)
-        let ok = UIAlertAction(title: "Ok", style: .default, handler: okAction)
+        let ok = UIAlertAction(title: actionButtonTitle, style: .default, handler: okAction)
         alert.addAction(ok)
         if hasTwoButton {
             let cancelAction = UIAlertAction(title: "Huỷ", style: .cancel, handler: nil)
@@ -200,22 +200,29 @@ class BaseViewController: UIViewController {
     }
     
     // Response JSON
-    func requestApiResponseJson(urlString: String, method: HTTPMethod, params: Parameters? = nil, encoding: ParameterEncoding, completion: @escaping (_ response: DataResponse<JSON>) -> Void ) {
-        guard let token = UserDefaults.standard.value(forKey: "Token") as? String else { return }
-        let tokenHeader = ["Authorization" : "Bearer \(token)"]
+    func requestApiResponseJson(urlString: String, method: HTTPMethod, params: Parameters? = nil, encoding: ParameterEncoding, completion: @escaping (_ response: DataResponse<Any>, _ data: Data) -> Void ) {
+        var tokenHeader: HTTPHeaders?
+        if let _token = Account.current?.access_token {
+            tokenHeader = [ "Authorization" : "Bearer \(_token)"  ]
+        } else {
+            tokenHeader = nil
+        }
         let url = URL(string: urlString)!
         self.showHUD()
-        Alamofire.request(url, method: method, parameters: params, encoding: encoding, headers: tokenHeader).responseSwiftyJSON { (responseSwiftyJson) in
+        Alamofire.request(url, method: method, parameters: params, encoding: encoding, headers: tokenHeader).responseJSON { res in
             self.hideHUD()
-            guard let statusCode = responseSwiftyJson.response?.statusCode else { return }
+            debugPrint(res.result)
+            guard let statusCode = res.response?.statusCode, let data = res.data else { return }
             print("Status code: \(statusCode)")
             if 200..<300 ~= statusCode {
-                completion(responseSwiftyJson)
+                completion(res, data)
             } else {
-                self.showAlert(errorMessage: responseSwiftyJson.error.debugDescription)
+                self.showAlert(errorMessage: res.error.debugDescription)
             }
         }
     }
+    
+    
     
     //MARK: Default Alert
     func showAlert(title: String, mess: String, style: UIAlertController.Style, isSimpleAlert: Bool = true) {
@@ -347,6 +354,7 @@ extension BaseViewController {
         Alamofire.request(urll, method: method, parameters: param, encoding: encoding, headers: tokenHeader).responseString { [weak self] (response) in
             guard let wSelf = self else { return }
             wSelf.hideHUD()
+            debugPrint(response)
             guard let statusCode = response.response?.statusCode else { return }
             print("code",  statusCode)
             if 200..<300 ~= statusCode && response.result.isSuccess {
@@ -356,7 +364,7 @@ extension BaseViewController {
                 else { return }
                 completion(response, jsonData, statusCode)
             } else {
-                wSelf.showAlert(title: "Lỗi", mess: "Không thể kết nối đến server! \ncode \(statusCode)", style: .alert)
+                wSelf.showAlert(title: "Lỗi", mess: response.value ?? response.error.debugDescription, style: .alert)
             }
         }
     }

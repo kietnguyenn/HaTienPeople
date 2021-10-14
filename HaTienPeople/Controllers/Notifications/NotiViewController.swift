@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import Alamofire
+import SwiftUI
 
 class NotiViewController: BaseViewController {
     
@@ -50,14 +51,13 @@ class NotiViewController: BaseViewController {
 //            "title": title,
 //            "fromDate" : from,
 //            "toDate" : to,
-            "dateDescending": true,
+//            "dateDescending": true,
             "pageIndex": 1,
             "pageSize": 20]
-        newApiRerequest_responseString(url: Api.notificationFilter,
-                                       method: .get,
-                                       param: param,
-                                       encoding: URLEncoding.queryString) { (res, data, status) in
-            print(res)
+        _newApiRequestWithErrorHandling(url: Api.notificationFilter,
+                                        method: .get,
+                                        param: param,
+                                        encoding: URLEncoding.default) { res, data, status in
             do {
                 let notificationResponse = try JSONDecoder().decode(NotificationsResponse.self, from: data)
                 guard let notiList = notificationResponse.data else { return }
@@ -119,13 +119,13 @@ extension NotiViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     //MARK: - Contextual Actions
-    private func makeDeleteContextualAction(forRowAt indexPath: IndexPath) -> UIContextualAction {
-        return UIContextualAction(style: .destructive, title: "Xóa") { (action, swipeButtonView, completion) in
-            print("DELETE HERE")
-
-            completion(true)
-        }
-    }
+//    private func makeDeleteContextualAction(forRowAt indexPath: IndexPath) -> UIContextualAction {
+//        return UIContextualAction(style: .destructive, title: "Xóa") { (action, swipeButtonView, completion) in
+//            print("DELETE HERE")
+//
+//            completion(true)
+//        }
+//    }
     
 //    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
 //        guard let notiCell = cell as? NotiCell else { return }
@@ -139,16 +139,31 @@ extension NotiViewController: UITableViewDelegate, UITableViewDataSource {
 //    }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedItem = notiList[indexPath.row]
-        if seen(selectedItem) {
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "NotificationDetailsViewController") as! NotificationDetailsViewController
-            self.navigationController?.pushViewController(vc, animated: true)
-            vc.notification = selectedItem
+        guard let id = selectedItem.id else { return }
+        self.seen(selectedItem) { seen in
+            if seen {
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: "NotificationDetailsViewController") as! NotificationDetailsViewController
+                self.navigationController?.pushViewController(vc, animated: true)
+                vc.notificationId = id
+            } else {
+                //
+            }
         }
     }
     
     // call seen APi
-    func seen(_ notiItem: NotificationItem) -> Bool {
-        return true
+    func seen(_ notiItem: NotificationItem, completion: @escaping (_ didSeen: Bool ) -> Void) {
+//        guard let notiId = notiItem.id else { return }
+//        _newApiRequestWithErrorHandling(url: Api.notificationsForUser,
+//                                        method: .put, param: ["id":notiId],
+//                                        encoding: JSONEncoding.default) { response, jsonData, statusCode in
+//            if 200..<300 ~= statusCode {
+//                completion(true)
+//            } else {
+//                completion(false)
+//            }
+//        }
+        completion(true)
     }
 }
 

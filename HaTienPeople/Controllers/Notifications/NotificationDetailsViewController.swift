@@ -27,7 +27,13 @@ class NotificationDetailsViewController: BaseViewController {
     
     let cellId = "FileCell"
     
-    var files = [File]()
+    var files = [File]() {
+        didSet {
+            self.tableView.reloadData()
+        }
+    }
+    
+    var notificationId : String?
     
     var destinationURL: URL? {
         didSet {
@@ -43,8 +49,8 @@ class NotificationDetailsViewController: BaseViewController {
         self.title = "Nội dung thông báo"
         self.setup(tableView)
         self.showBackButton()
-        guard let noti = self.notification else { return }
-        self.updateUI(noti)
+        guard let notificationId = self.notificationId else { return }
+        self.getDetails(by: notificationId)
     }
     
     func updateUI(_ notiItem: NotificationItem) {
@@ -57,7 +63,9 @@ class NotificationDetailsViewController: BaseViewController {
                 self.contentLabel.text = content
             }
             if let type = notiItem.category?.categoryDescription {
-                self.typeLabel.text = type
+                self.typeLabel.text = "Loại: " + type
+            } else {
+                self.typeLabel.text = "Trống"
             }
         if let date = notiItem.dateCreated {
             let date_ = configDateTimeStringOnServerToDevice(dateString: date)
@@ -72,6 +80,19 @@ class NotificationDetailsViewController: BaseViewController {
         tableView.tableFooterView = UIView()
         tableView.rowHeight = 40.0
         tableView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
+    }
+    
+    func getDetails(by id: String) {
+        newApiRerequest_responseString(url: Api.notifications,
+                                       method: .get,
+                                       param: ["id" : id],
+                                       encoding: URLEncoding.default) { response, jsonData, statusCode in
+            guard let _notifications = try? JSONDecoder().decode([NotificationItem].self, from: jsonData),
+                  let notiItem = _notifications.first
+            else { return }
+            self.notification = notiItem
+            self.updateUI(notiItem)
+        }
     }
     
     func downloadFileWithAlamofire(with file: File) {

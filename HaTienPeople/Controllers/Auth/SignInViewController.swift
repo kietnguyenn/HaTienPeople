@@ -57,11 +57,21 @@ class SignInViewController: BaseViewController {
                     self.setCurrentUser(user: currentUser)
                     self.changeRootView()
                 } else if let error = try? JSONDecoder().decode(LogInErrorResponse.self, from: jsondata) {
-                    guard let loginFailure = error.value?.loginFailure?[0] else { return }
-                    self.showAlert(errorMessage: loginFailure)
+                    guard let loginFailure = error.loginFailure else { return }
+                    if loginFailure.count > 0 {
+                        self.showAlert(errorMessage: loginFailure[0])
+                    }
                 }
-            } else if status == 400 {
-                self.showAlert(errorMessage: "Lỗi kết nối vui lòng thử lại sau ít phút")
+            } else {
+                if let error = try? JSONDecoder().decode(LogInErrorResponse.self, from: jsondata) {
+                    guard let loginFailure = error.loginFailure else { return }
+                    if loginFailure.count > 0 {
+//                        self.showAlert(errorMessage: loginFailure[0])
+                        self.showAlert(errorMessage: "Tên đăng nhập hoặc mật khẩu không đúng!")
+                    }
+                } else {
+                    self.showAlert(errorMessage: response.value ?? "Lỗi kết nối đến server, vui lòng thử lại trong giấy lát!")
+                }
             }
         }
     }
@@ -95,17 +105,10 @@ class SignInViewController: BaseViewController {
 import Foundation
 // MARK: - Login error response
 struct LogInErrorResponse: Codable {
-    let value: Value?
-    let formatters, contentTypes: [JSONNull]?
-    let declaredType: JSONNull?
-    let statusCode: Int?
-}
-
-// MARK: - Value
-struct Value: Codable {
     let loginFailure: [String]?
-    
+
     enum CodingKeys: String, CodingKey {
         case loginFailure = "login_failure"
     }
 }
+

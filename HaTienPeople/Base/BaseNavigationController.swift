@@ -28,7 +28,8 @@ class BaseNavigationController: UINavigationController {
         if #available(iOS 13.0, *) {
             let navBarAppearance = UINavigationBarAppearance()
             navBarAppearance.configureWithOpaqueBackground()
-//            navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+            navBarAppearance.titleTextAttributes = [.font : UIFont(name: "AvenirNext-Medium", size: 17.0)!,
+                                                    .foregroundColor: accentColor!]
 //            navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
             navBarAppearance.backgroundColor = .white
             navigationBar.standardAppearance = navBarAppearance

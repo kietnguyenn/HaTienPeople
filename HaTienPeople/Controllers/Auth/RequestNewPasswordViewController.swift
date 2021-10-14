@@ -15,23 +15,34 @@ class RequestNewPasswordViewController: BaseViewController {
     
     @IBAction func updateButtonTapped(_: UIButton) {
         let tuples = self.unwrapOptionals(new: newPasswordTextField, confirm: confirmNewPasswordTextField)
+        guard let phone = self.phoneNumber, let resetId = self.id else { return }
         if validate(tuples.new, tuples.confirm) {
-            self.update(new: tuples.new, id: tuples.confirm)
+            self.requestNewPassword(newPassword: tuples.new, resetID: resetId, phone: phone)
         }
     }
     @IBAction func cancel(_ sender: UIButton) {
         self.dismiss(animated: true)
     }
     
-    let error = "Xác nhận mật khẩu không đúng!"
-    let error2 = "Vui lòng điền đẩy đủ 3 trường!"
-    let success = "Cập nhật mật khẩu thành công!"
+    let confirmingError = "Xác nhận mật khẩu không đúng!"
+    let missingFieldError = "Vui lòng điền đẩy đủ 3 trường!"
+    let success = "Đặt lại mật khẩu thành công!\n Đăng nhập với mật khẩu mới"
     
-    var phoneNumber : String?
-    var id : String?
+    var phoneNumber : String? {
+        didSet{
+            print(phoneNumber!)
+        }
+    }
+    var id : String? {
+        didSet{
+            print(id!)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.setHidesBackButton(true, animated: false)
+        self.navigationController?.navigationBar.isHidden = true
     }
     
     func validate(_ new: String, _ confirm: String) -> Bool {
@@ -39,30 +50,25 @@ class RequestNewPasswordViewController: BaseViewController {
             if new == confirm {
                 return true
             } else {
-                self.showAlert(errorMessage: error2)
+                self.showAlert(errorMessage: confirmingError)
                 return false
             }
         } else {
-            self.showAlert(errorMessage: error)
+            self.showAlert(errorMessage: missingFieldError)
             return false
         }
     }
     
-    func update(new: String, id: String) {
-        let params: Parameters = [    "phoneNumber": phoneNumber,
-                                      "id": id,
-                                      "newPassword": new
-        ]
-        newApiRerequest_responseString(url: Api.password,
-                                       method: .post,
-                                       param: params,
-                                       encoding: JSONEncoding.default) { (response, jsondata, status) in
-            if status == 200 || status == 201 {
-                self.showAlert(title: "Thành công", message: self.success, style: .alert) { (okAction) in
-                    self.dismiss(animated: true, completion: nil)
-                }
-            } else {
-                self.showAlert(errorMessage: response.error.debugDescription)
+    func requestNewPassword(newPassword: String, resetID: String, phone: String) {
+        let params : Parameters = [    "phoneNumber": phone,
+                                       "id": resetID,
+                                       "newPassword": newPassword ]
+        requestApiResponseJson(urlString: Api.resetPasswordWithPhone,
+                               method: .post, params: params,
+                               encoding: JSONEncoding.default) { response, data  in
+            print(response)
+            self.showAlert(title: "Thành công", message: self.success, style: .alert) { (okAction) in
+                self.dismiss(animated: true, completion: nil)
             }
         }
     }

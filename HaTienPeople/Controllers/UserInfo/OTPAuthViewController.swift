@@ -45,9 +45,13 @@ class OTPAuthViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.addObserverForTextField()
-        self.showDismissButton(title: "Hủy")
-        self.verifyButton.isEnabled = false
+        self.toggleVerifyButton(isEnable: false)
         self.startTimer()
+        if let _ = phoneNumber {
+            self.showDismissButton(title: "Hủy")
+        } else {
+            self.showBackButton()
+        }
     }
     
     func addObserverForTextField() {
@@ -110,7 +114,9 @@ class OTPAuthViewController: BaseViewController {
                                         encoding: URLEncoding.queryString) {
             (response, jsondata, status) in
             if 200..<300 ~= status {
-
+                self.showAlert(title: "Thành công", message: "Đã gửi mã OTP đến số điện thoại \(phoneNumber)!", style: .alert) { _ in
+                    self.startTimer()
+                }
             } else {
                 self.showAlert(errorMessage: "\(response.value ?? Constant.AlertContent.serverError)")
             }
@@ -140,9 +146,12 @@ class OTPAuthViewController: BaseViewController {
                                                  "otp": otp],
                                         encoding: JSONEncoding.default) { res, data, status in
             if 200..<300 ~= status {
-                // move to otp auth
-                self.showAlert(title: "Thành công", message: "Xác thực số điện thoại thành công!", style: .alert, hasTwoButton: false, actionButtonTitle: "Tạo mật khẩu mới") { action in
-                    
+                guard let verifiedId = try? JSONDecoder().decode(VerifiedId.self, from: data)
+                else { return }
+                print("Verify Id", verifiedId.id)
+                self.showAlert(title: "Thành công", message: "Xác thực số điện thoại thành công!", style: .alert, hasTwoButton: false, actionButtonTitle: "Đặt lại mật khẩu") { action in
+                    // move to otp auth
+                    self.moveToResetNewPasswordVc(verifiedId.id, phone)
                 }
             } else if 400..<500 ~= status {
                 let error = res.value ?? "Lỗi, code \(status)"
@@ -151,6 +160,13 @@ class OTPAuthViewController: BaseViewController {
                 self.showAlert(errorMessage: Constant.AlertContent.serverError)
             }
         }
+    }
+    
+    func moveToResetNewPasswordVc(_ id : String, _ phone: String) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "RequestNewPasswordViewController") as! RequestNewPasswordViewController
+        vc.id = id
+        vc.phoneNumber = phone
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc func listeningToTextField(_: NotificationCenter) {
@@ -186,3 +202,6 @@ extension OTPAuthViewController: UITextFieldDelegate {
     }
 }
 
+struct VerifiedId: Codable {
+    var id = ""
+}
