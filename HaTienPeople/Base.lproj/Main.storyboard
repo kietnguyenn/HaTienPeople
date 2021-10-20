@@ -1401,7 +1401,7 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="74O-c7-zjt">
                                 <rect key="frame" x="20" y="109" width="374" height="753"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="1iK-Hu-34b">
                                 <rect key="frame" x="10" y="54" width="394" height="36"/>
@@ -1414,10 +1414,11 @@
                                     <segment title="Đang xử lý"/>
                                     <segment title="Đã hoàn thành"/>
                                 </segments>
+                                <color key="tintColor" name="AccentColor"/>
                             </segmentedControl>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ju2-BW-Vf9"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" systemColor="systemGray6Color"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="1iK-Hu-34b" secondAttribute="trailing" constant="10" id="2S2-Ih-Bd2"/>
                             <constraint firstItem="74O-c7-zjt" firstAttribute="top" secondItem="1iK-Hu-34b" secondAttribute="bottom" constant="20" id="Lt9-S3-Uvh"/>
@@ -2564,7 +2565,7 @@
         <image name="add-image-button-image" width="273" height="159.5"/>
         <image name="chevron.down" catalog="system" width="128" height="72"/>
         <image name="icon-account-avatar" width="80" height="80"/>
-        <image name="icon-calendar" width="24" height="24"/>
+        <image name="icon-calendar" width="23" height="22"/>
         <image name="icon-edit" width="24" height="24"/>
         <image name="icon-sun" width="24" height="24"/>
         <image name="icon-vn-flag" width="1280" height="853.5"/>

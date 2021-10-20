@@ -53,7 +53,8 @@ class NotiViewController: BaseViewController {
 //            "toDate" : to,
 //            "dateDescending": true,
             "pageIndex": 1,
-            "pageSize": 20]
+            "pageSize": 20
+        ]
         _newApiRequestWithErrorHandling(url: Api.notificationFilter,
                                         method: .get,
                                         param: param,
@@ -112,11 +113,11 @@ extension NotiViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let delAction = makeDeleteContextualAction(forRowAt: indexPath)
-        
-        return UISwipeActionsConfiguration(actions: [delAction])
-    }
+//    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+//        let delAction = makeDeleteContextualAction(forRowAt: indexPath)
+//
+//        return UISwipeActionsConfiguration(actions: [delAction])
+//    }
     
     //MARK: - Contextual Actions
 //    private func makeDeleteContextualAction(forRowAt indexPath: IndexPath) -> UIContextualAction {
